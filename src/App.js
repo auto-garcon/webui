@@ -9,12 +9,12 @@ import Landing from './Components/Landing'
 import Login from './Components/Login'
 import Home from './Components/Home'
 import Menus from './Components/Menus'
-import Tickets from './Components/Tickets'
+import Dashboard from './Components/Dashboard'
 import AddMenu from './Components/AddMenu'
 import SignUp from './Components/SignUp'
 //import ErrorPage from './Components/Errorpage'
 
-function App() {
+export default function App() {
   return (
     <Router>
      <Switch> 
@@ -22,13 +22,10 @@ function App() {
       <Route path ='/login' component={Login} />
       <Route path ='/home' component={Home} />
       <Route path ='/menus' component={Menus} />
-      <Route path ='/tickets' component={Tickets} />
+      <Route path ='/dashboard' component={Dashboard} />
       <Route path ='/addMenu' component={AddMenu} />
       <Route path ='/signup' component={SignUp} />
      </Switch>
     </Router>
   )
-  
 }
-
-export default App;
