@@ -1,0 +1,15 @@
+.ticket{
+    display: inline-block;
+    margin: 0 auto;
+    padding-left: 3px;
+    padding-right: 3px;
+    border: 2px solid black;
+    width: 20em;
+}
+.ticket-list{
+    list-style-type: none;
+    padding: 5px;
+}
+.ticket-list li{
+    padding: 2px;
+}
