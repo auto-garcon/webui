@@ -24,14 +24,14 @@ export default function TicketContainer() {
             customizations: 'no pickles'
           },
           {
-            itemName: 'Street Tacos',
+            itemName: 'Street Tacos Pork',
             price: 11.00,
             customizations: 'no onions'
           },
           {
-            itemName: 'Street Tacos',
+            itemName: 'Street Tacos Beef',
             price: 11.00,
-            customizations: 'no onions'
+            customizations: 'no onions, extra cilantro'
           }
         ]
       },
@@ -76,7 +76,7 @@ export default function TicketContainer() {
 
   return (
     <div className="tickercontainer-container">
-      <p>See tickets Below!</p>
+      <h1 className="tickets-title">Active Tickets</h1>
       {curTickets.map( (ticket, i) => (
         <Ticket ticket={ticket} key={i} />
       ))}
