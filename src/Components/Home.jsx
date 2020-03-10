@@ -11,8 +11,8 @@ function Home() {
         <p className="home">
           Tickets or Menu page
         </p>
-        <br></br><a href='/menus'><button>Menus</button></a>
-        <br></br><a href='/tickets'><button>Tickets</button></a>
+        <br></br><a href='/dashboard'><button>Menus</button></a>
+        <br></br><a href='/dashboard'><button>Tickets</button></a>
       </header>
     </div>
   );

@@ -25,7 +25,7 @@ export default function App() {
           <Route path ='/' component={Landing} exact />
           <Route path ='/login' component={Login} />
           <Route path ='/home' component={Home} />
-          <Route path ='/menus' component={Menus} />
+          <Route path ='/menus' component={Dashboard} />
           <Route path ='/dashboard' component={Dashboard} />
           <Route path ='/addMenu' component={AddMenu} />
           <Route path ='/signup' component={SignUp} />
