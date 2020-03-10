@@ -13,8 +13,9 @@ export default function TicketContainer() {
       {
         tableid: '1',
         customerid: '1234',
+        tableColor: "lightblue",
         chargeAmount: 37.50,
-        customerName: 'TB',
+        customerName: 'TBevs',
         numMenuItems: 2,
         status: 'open',
         items: [
@@ -38,6 +39,7 @@ export default function TicketContainer() {
       {
         tableid: '2',
         customerid: '5678',
+        tableColor: "grey",
         chargeAmount: 12.34,
         customerName: 'Mugdha D.',
         numMenuItems: 2,
@@ -53,6 +55,7 @@ export default function TicketContainer() {
       {
         tableid: '3',
         customerid: '0000',
+        tableColor: "green",
         customerName: 'Jason Sawin',
         numMenuItems: 2,
         status: 'open',
@@ -61,7 +64,59 @@ export default function TicketContainer() {
           {
             itemName: 'King Crab',
             price: 50.00,
-            customizations: 'extra butter sause'
+            customizations: 'extra butter sauce'
+          },
+          {
+            itemName: 'Lobster Tail',
+            price: 58.75,
+            customizations: ' '
+          }
+        ]
+      },
+      {
+        tableid: '4',
+        tableColor: "red",
+        customerid: '0000',
+        customerName: 'Summer A.',
+        numMenuItems: 4,
+        status: 'open',
+        chargeAmount: 67.75,
+        items: [
+          {
+            itemName: 'Stuffed Mushrooms',
+            price: 8.75,
+            customizations: 'extra garlic sauce'
+          },
+          {
+            itemName: 'Fried Fish',
+            price: 13.00,
+            customizations: 'extra crunch'
+          },
+          {
+            itemName: 'Garden Salad',
+            price: 29.00,
+            customizations: 'no tomatoes'
+          },
+          {
+            itemName: 'Ice Cream Sunday',
+            price: 23.00,
+            customizations: '8 scoops, no chocolate syrup'
+          }
+        ]
+      },
+      {
+        tableid: '5',
+        customerid: '0000',
+        tableColor: "orange",
+        customerName: 'Riley T.',
+        numMenuItems: 2,
+        status: 'open',
+        chargeAmount: 108.75,
+        items: [
+          {
+            itemName: 'Fried Chicken',
+            price: 50.00,
+            customizations: 'extra spicy'
           },
           {
             itemName: 'Lobster Tail',
@@ -76,16 +131,21 @@ export default function TicketContainer() {
 
   return (
     <div className="tickercontainer-container">
-      <h1 className="tickets-title">Active Tickets</h1>
-      {curTickets.map( (ticket, i) => (
-        <Ticket ticket={ticket} key={i} />
-      ))}
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="home">
-          Ticket Page
-        </p>
-      </header> */}
+    <h1 className="tickets-title" style={{textAlign:"center"}}>Active Tickets</h1>
+      <table style={{width:"50%", borderCollapse: "collapse"}}>
+        <tr>
+          {curTickets.map(ticket => (
+            <th style={{backgroundColor: ticket.tableColor}}><h1><strong>Table #</strong> {ticket.tableid}</h1></th>
+          ))}
+        </tr>
+        <tr>
+        {curTickets.map( (ticket, i) => (
+          <td>
+            <Ticket ticket={ticket} key={i}/>
+          </td>
+        ))}
+        </tr>
+      </table>      
     </div>
   );
 }
