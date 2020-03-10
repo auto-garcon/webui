@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
 		paddingLeft: "10px",
 		display: "inline-block",
 		wordWrap: "break-word",
-		textAlign: "center"
+		textAlign: "center",
+		
 	}
 }));
 
@@ -24,22 +25,22 @@ export default function Ticket(props) {
     return (
 		<Card className={classes.Card}>
 			<CardBody>
-				<h4>Name: {ticket.customerName}</h4>
-				<h6>Table: {ticket.customerid}</h6>
+				<h2>Name: {ticket.customerName}</h2>
+				<h4>Table: #{ticket.customerid}</h4>
 			</CardBody>
 			<CardBody>
 				<p><strong>Items</strong></p>
 				{ticket.items.map((item, index) =>(
 					<>
 					<p>
-						<strong>Item#{index+1}:</strong> {item.itemName}.......${item.price}
+						<strong>Item #{index+1}:</strong> {item.itemName}.......${item.price}
 					</p>
 					<p>
 						<strong>Addons:</strong> {item.customizations===" " ? "none" : item.customizations}
 					</p>					
 					</>
 				))}
-				<p><strong>Total:</strong>${ticket.chargeAmount}</p>
+				<p><strong>Total:</strong> ${ticket.chargeAmount}</p>
 			</CardBody>
 		</Card>
     )
