@@ -14,7 +14,7 @@ export default function TicketContainer() {
         tableid: '1',
         customerid: '1234',
         chargeAmount: 37.50,
-        customerName: 'TB',
+        customerName: 'TBevs',
         numMenuItems: 2,
         status: 'open',
         items: [
@@ -61,7 +61,7 @@ export default function TicketContainer() {
           {
             itemName: 'King Crab',
             price: 50.00,
-            customizations: 'extra butter sause'
+            customizations: 'extra butter sauce'
           },
           {
             itemName: 'Lobster Tail',

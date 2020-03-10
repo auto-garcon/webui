@@ -1,9 +1,7 @@
 .tickercontainer-container{
     width: 100%;
     border: 1px solid black;
-    text-align: center;
+    align-content: center;
+    text-align: center; 
+    justify-content: center;
 }
-
-/* .tickets-title{
-    text-align: center;
-} */
