@@ -14,6 +14,7 @@ import AddMenu from './Components/AddMenu'
 //import SignUp from './Components/SignUp'
 import About from './Components/About'
 import SignUp from './Components/SignUp'
+import Contact from './Components/Contact'
 //import ErrorPage from './Components/Errorpage'
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
       <Route path ='/addMenu' component={AddMenu} />
       <Route path ='/about' component={About} />
       <Route path ='/signup' component={SignUp} />
+      <Route path ='/contact' component={Contact} />
      </Switch>
     </Router>
   )

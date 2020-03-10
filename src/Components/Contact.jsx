@@ -3,13 +3,13 @@ import logo from './AUTO-GARCON-4.jpeg';
 
 import './CSS/About.css';
 //var Link = require('react-router-dom').Link
-function About() {
+function Contact() {
     return (
-    <div className="About">
-    <header className="About">
+    <div className="Contact">
+    <header className="Contact">
       <img src={logo} className="App-logo" alt="logo" />
-      <p className="about">
-        About Page
+      <p className="contact">
+        Contact Page
         
 
       </p>
@@ -19,4 +19,4 @@ function About() {
     );
 }
 
-export default About;
+export default Contact;
