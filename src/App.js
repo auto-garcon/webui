@@ -11,6 +11,8 @@ import Home from './Components/Home'
 import Menus from './Components/Menus'
 import Dashboard from './Components/Dashboard'
 import AddMenu from './Components/AddMenu'
+//import SignUp from './Components/SignUp'
+import About from './Components/About'
 import SignUp from './Components/SignUp'
 //import ErrorPage from './Components/Errorpage'
 
@@ -24,6 +26,7 @@ export default function App() {
       <Route path ='/menus' component={Menus} />
       <Route path ='/dashboard' component={Dashboard} />
       <Route path ='/addMenu' component={AddMenu} />
+      <Route path ='/about' component={About} />
       <Route path ='/signup' component={SignUp} />
      </Switch>
     </Router>
