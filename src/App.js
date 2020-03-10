@@ -11,6 +11,8 @@ import Home from './Components/Home'
 import Menus from './Components/Menus'
 import Dashboard from './Components/Dashboard'
 import AddMenu from './Components/AddMenu'
+//import SignUp from './Components/SignUp'
+import About from './Components/About'
 import SignUp from './Components/SignUp'
 import StickyFooter from './Components/StickyFooter';
 //import ErrorPage from './Components/Errorpage'
@@ -31,6 +33,5 @@ export default function App() {
       </Router>
       <StickyFooter></StickyFooter>
     </div>
-    
   )
 }
