@@ -15,10 +15,13 @@ import AddMenu from './Components/AddMenu'
 import About from './Components/About'
 import SignUp from './Components/SignUp'
 import Contact from './Components/Contact'
+import StickyFooter from './Components/StickyFooter';
+
 //import ErrorPage from './Components/Errorpage'
 
 export default function App() {
   return (
+
     <Router>
      <Switch> 
       <Route path ='/' component={Landing} exact />
@@ -32,5 +35,6 @@ export default function App() {
       <Route path ='/contact' component={Contact} />
      </Switch>
     </Router>
+
   )
 }
