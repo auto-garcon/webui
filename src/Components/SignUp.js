@@ -13,9 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import RestaurantOwnerInfo from './RestaurantOwnerInfo';
 import RestaurantInfo from './RestaurantInfo';
 import Review from './Review';
-import { black } from 'material-ui/styles/colors';
-import { blue } from '@material-ui/core/colors';
-import { white } from '@material-ui/core/colors';
+
 import './CSS/SignUp.css';
 function Copyright() {
   return (

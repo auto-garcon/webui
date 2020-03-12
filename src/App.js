@@ -14,24 +14,27 @@ import AddMenu from './Components/AddMenu'
 //import SignUp from './Components/SignUp'
 import About from './Components/About'
 import SignUp from './Components/SignUp'
+import Contact from './Components/Contact'
 import StickyFooter from './Components/StickyFooter';
+
 //import ErrorPage from './Components/Errorpage'
 
 export default function App() {
   return (
-    <div>
-      <Router>
-        <Switch> 
-          <Route path ='/' component={Landing} exact />
-          <Route path ='/login' component={Login} />
-          <Route path ='/home' component={Home} />
-          <Route path ='/menus' component={Dashboard} />
-          <Route path ='/dashboard' component={Dashboard} />
-          <Route path ='/addMenu' component={AddMenu} />
-          <Route path ='/signup' component={SignUp} />
-        </Switch>
-      </Router>
-      <StickyFooter></StickyFooter>
-    </div>
+
+    <Router>
+     <Switch> 
+      <Route path ='/' component={Landing} exact />
+      <Route path ='/login' component={Login} />
+      <Route path ='/home' component={Home} />
+      <Route path ='/menus' component={Menus} />
+      <Route path ='/dashboard' component={Dashboard} />
+      <Route path ='/addMenu' component={AddMenu} />
+      <Route path ='/about' component={About} />
+      <Route path ='/signup' component={SignUp} />
+      <Route path ='/contact' component={Contact} />
+     </Switch>
+    </Router>
+
   )
 }
