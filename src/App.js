@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+//import './App.css';
 import { 
   BrowserRouter as Router,
   Switch,
@@ -16,6 +16,7 @@ import About from './Components/About'
 import SignUp from './Components/SignUp'
 import Contact from './Components/Contact'
 import StickyFooter from './Components/StickyFooter';
+//import LoginGoogle from './Components/login-google';
 
 //import ErrorPage from './Components/Errorpage'
 
@@ -33,6 +34,7 @@ export default function App() {
       <Route path ='/about' component={About} />
       <Route path ='/signup' component={SignUp} />
       <Route path ='/contact' component={Contact} />
+      
      </Switch>
     </Router>
 
