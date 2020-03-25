@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-
-
+import ReactDOM from 'react-dom';
+import './CSS/LoginGoogle.css';
 import GoogleLogin from 'react-google-login';
 
 class googleLogin extends Component {
@@ -25,8 +24,10 @@ class googleLogin extends Component {
       />
 
       </div>
+     
     );
   }
 }
 
 export default googleLogin;
+
