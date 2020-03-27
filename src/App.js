@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Link
 } from 'react-router-dom';
 import Landing from './Components/Landing'
 import Login from './Components/Login'
@@ -19,19 +20,43 @@ import StickyFooter from './Components/StickyFooter';
 
 export default function App() {
   return (
-    <div>
+    <>
       <Router>
+         <div>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+
+          <hr />
+        </div>
         <Switch> 
-          <Route path ='/' component={Landing} exact />
-          <Route path ='/login' component={Login} />
+          <Route path ='/' exact >
+            <Landing />
+          </Route>
+          <Route path ='/login'>
+            <Login />
+          </Route>
           <Route path ='/home' component={Home} />
           <Route path ='/menus' component={Menus} />
-          <Route path ='/dashboard' component={Dashboard} />
+          <Route path ='/dashboard' >
+            <Dashboard />
+          </Route>
           <Route path ='/addMenu' component={AddMenu} />
           <Route path ='/signup' component={SignUp} />
         </Switch>
       </Router>
       <StickyFooter></StickyFooter>
-    </div>
+  </>
   )
 }
