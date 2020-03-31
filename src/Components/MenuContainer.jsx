@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import './CSS/MenuContainer.css'
-import Menu from './Menu'
+import { AgGridReact } from 'ag-grid-react';
+import Button from '@material-ui/core/Button';
+
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
 export default function MenuContainer() {
     const [ curMenus, setCurMenus ] = useState([]);
-
+    const tableHeaders = [  {headerName: "Menu Name", field: "menuName", sortable: true, filter: true},
+                            {headerName: "Status", field: "status", sortable: true, filter: true},
+                            {headerName: "Start Time", field: "timeRange.start", sortable: true},
+                            {headerName: "End Time", field: "timeRange.stop", sortable: true},
+                            {headerName: "Date Created", field: "dateCreated", sortable: true},
+                            {headerName: "Last Date Edited", field: "dateEdited", sortable: true}];
     useEffect( () => {
         // This is a useeffect that will pull all the menus from the API/DB once the page loads/mounts
         const menus = [
             {
                 menuID: 1,
+                menuName: "Breakfast",
                 status: "Active",
                 type: "Specials",
                 timeRange:{
@@ -17,6 +27,8 @@ export default function MenuContainer() {
                     stop: "22:00"
                 },
                 numItems: 5,
+                dateCreated: "03/29/2020",
+                dateEdited: "03/29/2020",
                 items: [
                     {
                         itemName: 'Fried Chicken',
@@ -54,6 +66,7 @@ export default function MenuContainer() {
             },
             {
                 menuID: 2,
+                menuName: "Lunch",
                 status: "Active",
                 type: "Lunch",
                 timeRange:{
@@ -75,6 +88,7 @@ export default function MenuContainer() {
             {
                 menuID: 3,
                 status: "Active",
+                menuName: "Dessert",
                 type: "Desert",
                 timeRange:{
                     start: "16:00",
@@ -98,15 +112,13 @@ export default function MenuContainer() {
     return (
         <div className="menu-container">
             <h1 className="tickets-title" style={{textAlign:"center"}}>Menus</h1>
-            <table>
-                <tr>
-                    {curMenus.map((menu, i) =>(
-                        <td>
-                            <Menu menu={menu} key={i} />
-                        </td>
-                    ))}
-                </tr>
-            </table>
+            <Button className="create-button" href="./CreateMenu">⊕ Create new menu</Button>
+            <div className="ag-theme-balham">
+                <AgGridReact
+                    columnDefs={tableHeaders}
+                    rowData={curMenus}>
+                </AgGridReact>
+            </div>
         </div>
     )
 }
