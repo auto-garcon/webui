@@ -8,3 +8,20 @@
     overflow-y: scroll;
     position: relative;
 }
+
+.create-button{
+    float: left;
+    width: 200px;
+    height: 40px;
+    clear: both;
+    font-size: medium;
+    color: #EDF2F4;
+    background-color: #457B9D;
+}
+
+.ag-theme-balham{
+    height: 200px;
+    width: auto;
+    clear: both;
+    padding-top: 10px;
+}

@@ -15,7 +15,7 @@ import AddMenu from './Components/AddMenu'
 import About from './Components/About'
 import SignUp from './Components/SignUp'
 import Contact from './Components/Contact'
-import StickyFooter from './Components/StickyFooter';
+import CreateMenu from './Components/CreateMenu';
 
 //import ErrorPage from './Components/Errorpage'
 
@@ -33,6 +33,7 @@ export default function App() {
       <Route path ='/about' component={About} />
       <Route path ='/signup' component={SignUp} />
       <Route path ='/contact' component={Contact} />
+      <Route path ='/createMenu' component={CreateMenu} />
      </Switch>
     </Router>
 
