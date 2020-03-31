@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Link
 } from 'react-router-dom';
 import Landing from './Components/Landing'
 import Login from './Components/Login'
@@ -22,8 +23,27 @@ import LoginGoogle from './Components/login-google';
 
 export default function App() {
   return (
-
+    <>
     <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/loginGoogle">Login</Link>
+            </li>
+          </ul>
+
+          <hr />
+        </div>
+    
      <Switch> 
       <Route path ='/' component={Landing} exact />
       <Route path ='/login' component={Login} />
@@ -34,9 +54,11 @@ export default function App() {
       <Route path ='/about' component={About} />
       <Route path ='/signup' component={SignUp} />
       <Route path ='/contact' component={Contact} />
-      <Route path ='/loginGoogle' component={LoginGoogle} />
+      <Route path ='/loginGoogle'>
+        <LoginGoogle/>
+      </Route>
      </Switch>
     </Router>
-
+    </>
   )
 }
