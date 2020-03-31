@@ -22,7 +22,7 @@ export default function NavBar() {
                     <Link href="#" onClick={preventDefault} color="inherit">
                         About
                     </Link>
-                    <Link href="#" onClick={preventDefault}  color="inherit" >
+                    <Link href="/contact" onClick={preventDefault}  color="inherit" >
                         Contact Us
                     </Link>
                 </Typography>
