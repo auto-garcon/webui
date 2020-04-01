@@ -50,7 +50,7 @@ export default function SimpleTabs() {
 
   return (
     <div className={classes.root}>
-      <NavBar />
+      {/* <NavBar /> */}
       <AppBar position="sticky" style={{ background: "#8d99ae"}}>
         <Tabs value={value} onChange={handleChange}  centered indicatorColor="primary" >
           <Tab label="Tickets" />

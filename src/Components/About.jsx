@@ -7,7 +7,7 @@ import './CSS/About.css';
 function About() {
     return (
 
-      <div class="about-section">
+      <div className="about-section">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>About Auto-Garcon</h1>
         <p>Auto-Garcon redefines dining by adding seemless technology into modern restaurants.</p>

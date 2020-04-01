@@ -46,20 +46,41 @@ export default function App() {
         </div>
     
      <Switch> 
-      <Route path ='/' component={Landing} exact />
-      <Route path ='/login' component={Login} />
-      <Route path ='/home' component={Home} />
-      <Route path ='/menus' component={Menus} />
-      <Route path ='/dashboard' component={Dashboard} />
-      <Route path ='/addMenu' component={AddMenu} />
-      <Route path ='/about' component={About} />
-      <Route path ='/signup' component={SignUp} />
-      <Route path ='/contact' component={Contact} />
-      <Route path ='/createMenu' component={CreateMenu} />
+      <Route path ='/' exact>
+        <Landing />
+      </Route>
+      <Route path ='/login'>
+        <Login />
+      </Route>
+      <Route path ='/home'>
+        <Home/>
+      </Route>
+      <Route path ='/menus'>
+        <Menus />
+      </Route>
+      <Route path ='/dashboard'>
+        <Dashboard />
+      </Route>
+      <Route path ='/addMenu'>
+        <AddMenu />
+      </Route>
+      <Route path ='/about'>
+        <About />
+      </Route>
+      <Route path ='/signup'>
+        <SignUp />
+      </Route>
+      <Route path ='/contact'>
+        <Contact />
+      </Route>
+      <Route path ='/createMenu'>
+        <CreateMenu />
+      </Route>
       <Route path ='/loginGoogle'>
         <LoginGoogle/>
       </Route>
      </Switch>
+     <StickyFooter />
     </Router>
     </>
   )
