@@ -9,9 +9,11 @@ import GoogleLogin from 'react-google-login'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LogoLarge from './Components/Images/AutoGarcon-Logo-Large.png';
 import Link from '@material-ui/core/Link'
-import { Router, Route } from 'react-router-dom';
-import { Switch } from '@material-ui/core';
-import NavBar from './Components/NavBar';
+import Settings from './Components/Settings'
+import CreateMenu from './Components/CreateMenu'
+import {BrowserRouter, Router, Route, Switch } from 'react-router-dom';
+
+
 
 
 const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
@@ -22,7 +24,7 @@ const DEVAPI = "http://localhost/api/users/newuser"
 
 export default function App() {
 
-  const [ loggedIn, setLoggedIn ] = useState(false);
+  const [ loggedIn, setLoggedIn ] = useState();
 
   useEffect(() => {
     console.log("LOGGED IN !")
@@ -49,81 +51,98 @@ export default function App() {
   }
   return (
     <>
-    {!loggedIn?
-      <>
+    <BrowserRouter>
+      <Switch>
+          <Route exact path='/'>
+          {!loggedIn?
+          <>
+      
+                <div className="Landing-Background">
+                  <div className="Login-Modal">
+                    <div className="Login-Header"> 
+                      <header className="App-header">
+                        <img src={LogoLarge} className="App-logo" alt="logo" />
+                        <h1>AUTO-GARCON</h1>
+                      </header>
+                      </div>
+                      <div className="Login-Container">
+                        <LockOutlinedIcon color="inherit" />
+                        <br></br>
+                        <GoogleLogin
+                          clientId={DEV} //CLIENTID NOT CREATED YET
+                          buttonText="Continue with Google"
+                          onSuccess={responseGoogle}
+                          onFailure={responseGoogle}
+                        />
+                    </div>
+                  </div>
+                </div>
+                <Typography variant="body2" color="textSecondary" className="Footer">
+                  {'Copyright © '}
+                  <Link color="inherit" href="https://material-ui.com/" >
+                    AUTO-GARÇON
+                  </Link>{' '}
+                  {new Date().getFullYear()}
+                  {'.'}
+                  <a href={"/contact"}>Contact us</a>
+                  <a href={"/about"}>About</a>
+                  
+                </Typography>
+              </>
+              :
+              <> 
+                <NavBar />
+                
+                  <Dashboard />
+                <Typography variant="body2" color="textSecondary" className="Footer">
+                  {'Copyright © '}
+                  <Link color="inherit" href="https://material-ui.com/">
+                    AUTO-GARÇON
+                  </Link>{' '}
+                  {new Date().getFullYear()}
+                  {'.'}
+                  <ul>
+                    <li>
+                      <Link to="/about" className="Link" >
+                        About
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/contact" className="Link">
+                        Contact Us
+                      </Link>
+                    </li>
+                  </ul>
+                </Typography>
+                
+                  <Switch>
+                    <Route path ='/about'>
+                      <About />
+                    </Route>
+                    <Route path ='/contact'>
+                      <Contact />
+                    </Route>
+                  </Switch>
+                
+              </>
+            }
+          </Route>
+          <Route path ='/about'>
+            <About />
+          </Route>
+          <Route path ='/contact'>
+            <Contact />
+          </Route>
+          <Route path ='/Settings'>
+            <Settings />
+          </Route>
+          <Route>
+            <CreateMenu />
+          </Route>
+        </Switch>
+      </BrowserRouter>
 
-        <div className="Landing-Background">
-          <div className="Login-Modal">
-            <div className="Login-Header"> 
-              <header className="App-header">
-                <img src={LogoLarge} className="App-logo" alt="logo" />
-                <h1>AUTO-GARCON</h1>
-              </header>
-              </div>
-              <div className="Login-Container">
-                <LockOutlinedIcon color="inherit" />
-                <br></br>
-                <GoogleLogin
-                  clientId={DEV} //CLIENTID NOT CREATED YET
-                  buttonText="Continue with Google"
-                  onSuccess={responseGoogle}
-                  onFailure={responseGoogle}
-                />
-            </div>
-          </div>
-        </div>
-        <Typography variant="body2" color="textSecondary" className="Footer">
-          {'Copyright © '}
-          <Link color="inherit" href="https://material-ui.com/" >
-            AUTO-GARÇON
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-          <Link to="/about" className="dad" style={{justifyContent:"right"}} >
-            About
-          </Link>
-          <Link to="/contact" className="dad" style={{textAlign:"right"}}>
-            Contact Us
-          </Link>
-        </Typography>
-      </>
-      :
-      <> 
-        <NavBar />
-        
-          <Dashboard />
-        <Typography variant="body2" color="textSecondary" className="Footer">
-          {'Copyright © '}
-          <Link color="inherit" href="https://material-ui.com/">
-            AUTO-GARÇON
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-          <ul>
-            <li>
-              <Link to="/about" className="Link" >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="Link">
-                Contact Us
-              </Link>
-            </li>
-          </ul>
-        </Typography>
-        
-          <Switch>
-            <Route path ='/about'>
-              <About />
-            </Route>
-            <Route path ='/contact'>
-              <Contact />
-            </Route>
-          </Switch>
-        
-      </>
-    }
+
     </> 
   )
 }
