@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Dashboard from './Components/Dashboard'
 import Contact from './Components/Contact'
 import About from './Components/About'
+import NavBar from './Components/NavBar'
 import GoogleLogin from 'react-google-login'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LogoLarge from './Components/Images/AutoGarcon-Logo-Large.png';
@@ -11,6 +12,7 @@ import Link from '@material-ui/core/Link'
 import { Router, Route } from 'react-router-dom';
 import { Switch } from '@material-ui/core';
 import NavBar from './Components/NavBar';
+
 
 const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
 const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
@@ -49,7 +51,7 @@ export default function App() {
     <>
     {!loggedIn?
       <>
-      <NavBar />
+
         <div className="Landing-Background">
           <div className="Login-Modal">
             <div className="Login-Header"> 
@@ -87,8 +89,9 @@ export default function App() {
       </>
       :
       <> 
-        <Dashboard />
+        <NavBar />
         
+          <Dashboard />
         <Typography variant="body2" color="textSecondary" className="Footer">
           {'Copyright © '}
           <Link color="inherit" href="https://material-ui.com/">
@@ -109,14 +112,16 @@ export default function App() {
             </li>
           </ul>
         </Typography>
-        <Switch>
-          <Route path ='/about'>
-            <About />
-          </Route>
-          <Route path ='/contact'>
-            <Contact />
-          </Route>
-        </Switch>
+        
+          <Switch>
+            <Route path ='/about'>
+              <About />
+            </Route>
+            <Route path ='/contact'>
+              <Contact />
+            </Route>
+          </Switch>
+        
       </>
     }
     </> 
