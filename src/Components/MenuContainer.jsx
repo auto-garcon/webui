@@ -112,7 +112,7 @@ export default function MenuContainer() {
     return (
         <div className="menu-container">
             <h1 className="tickets-title" style={{textAlign:"center"}}>Menus</h1>
-            <Button className="create-button" href="./CreateMenu">⊕ Create new menu</Button>
+            <Button className="create-button" href={"./CreateMenu"}>⊕ Create new menu</Button>
             <div className="ag-theme-balham">
                 <AgGridReact
                     columnDefs={tableHeaders}
