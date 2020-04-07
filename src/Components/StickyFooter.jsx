@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import About from './About';
 
 function Copyright() {
   return (
@@ -14,6 +15,8 @@ function Copyright() {
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
+      
+      <Link color="inherit" href="./About"> About and Contact</Link>
     </Typography>
   );
 }

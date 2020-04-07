@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Settings from './Settings';
 import { Button } from '@material-ui/core';
-import logo from './logo.jpeg';
+
 
 import { 
     BrowserRouter as Router,
@@ -35,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    textcolor: '#2E3B55',
-    
     
     
   },
@@ -67,11 +65,10 @@ export default function MenuAppBar() {
  
       <AppBar position="static" style={{ background: '#edf2f4' }}>
         <Toolbar> 
-  
-        <img src={logo} alt="logo" className={classes.logo} />
+
 
           <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
-            <strong>Auto-Garcon</strong>
+            <strong>Settings</strong>
           </Typography>
           {auth && (
             <div>
@@ -83,9 +80,7 @@ export default function MenuAppBar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                  <a href="/Settings">
-                <AccountCircle style={{backgroundColor: '#edf2f4', color: '2b2d42'}}/>
-                </a>
+          
               </IconButton >
               <Menu
               

@@ -1,5 +1,5 @@
 import React from 'react';
-//import './App.css';
+import './Components/CSS/Avatar.css';
 import { 
   BrowserRouter as Router,
   Switch,
@@ -14,17 +14,19 @@ import Dashboard from './Components/Dashboard'
 import AddMenu from './Components/AddMenu'
 //import SignUp from './Components/SignUp'
 import About from './Components/About'
-import SignUp from './Components/SignUp'
+import SignUp from './Components/AccountInfo'
 import Contact from './Components/Contact'
 import CreateMenu from './Components/CreateMenu';
 import StickyFooter from './Components/StickyFooter';
 import LoginGoogle from './Components/login-google';
-
+import Settings from './Components/Settings';
+import NavBar from './Components/NavBar';
 //import ErrorPage from './Components/Errorpage'
 
 export default function App() {
   return (
     <>
+    <NavBar />
     <Router>
         <div>
           <ul>
@@ -41,25 +43,50 @@ export default function App() {
               <Link to="/loginGoogle">Login</Link>
             </li>
           </ul>
-
+         
           <hr />
         </div>
     
      <Switch> 
-      <Route path ='/' component={Landing} exact />
-      <Route path ='/login' component={Login} />
-      <Route path ='/home' component={Home} />
-      <Route path ='/menus' component={Menus} />
-      <Route path ='/dashboard' component={Dashboard} />
-      <Route path ='/addMenu' component={AddMenu} />
-      <Route path ='/about' component={About} />
-      <Route path ='/signup' component={SignUp} />
-      <Route path ='/contact' component={Contact} />
-      <Route path ='/createMenu' component={CreateMenu} />
+      <Route path ='/' exact>
+        <Landing />
+      </Route>
+      <Route path ='/login'>
+        <Login />
+      </Route>
+      <Route path ='/home'>
+        <Home/>
+      </Route>
+      <Route path ='/menus'>
+        <Menus />
+      </Route>
+      <Route path ='/dashboard'>
+        <Dashboard />
+      </Route>
+      <Route path ='/addMenu'>
+        <AddMenu />
+      </Route>
+      <Route path ='/about'>
+        <About />
+      </Route>
+      <Route path ='/signup'>
+        <SignUp />
+      </Route>
+      <Route path ='/contact'>
+        <Contact />
+      </Route>
+      <Route path ='/createMenu'>
+        <CreateMenu />
+      </Route>
       <Route path ='/loginGoogle'>
         <LoginGoogle/>
       </Route>
+      <Route path ='/Settings'>
+        <Settings/>
+      </Route>
      </Switch>
+ 
+     <StickyFooter />
     </Router>
     </>
   )

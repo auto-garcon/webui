@@ -1,15 +1,15 @@
 import React from 'react';
-import logo from './AUTO-GARCON-4.jpeg';
+import logo from './logo.jpeg';
 
 import './CSS/Landing.css';
 //var Link = require('react-router-dom').Link
 function Landing() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="Landing">
+      <header className="Landing-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p className="landing">
-          AUTO-GARCON
+        <p className="Landing">
+          AUTO-GARCON   
           <br></br><a href="/login">Login</a>
         </p>
       </header>
