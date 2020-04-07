@@ -122,7 +122,7 @@ export default function Checkout() {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Create A Profile
+            Update Your Profile
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map(label => (
@@ -135,11 +135,11 @@ export default function Checkout() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for creating a profile. 
+                  Thank you for for updating your profile.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Click home to start creating menus and view active tickets.
-                  <br></br><a href='/home'><button>Home</button></a>
+                  Click dashboard to return to menus and view active tickets.
+                  <br></br><a href='/dashboard'><button>Dashboard</button></a>
                 </Typography>
               </React.Fragment>
             ) : (
@@ -158,7 +158,7 @@ export default function Checkout() {
                     className={classes.button}
                     
                   >
-                    {activeStep === steps.length - 1 ? 'Create Profile' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Update' : 'Next'}
                     
                   </Button>
                 </div>
