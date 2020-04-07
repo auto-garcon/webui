@@ -1,16 +1,16 @@
 import React from 'react';
-import logo from './AUTO-GARCON-4.jpeg';
+import LogoLarge from './Images/AutoGarcon-Logo-Large.png';
+import LogoSmall from './Images/AutoGarcon-Logo-Small.png'
 
 import './CSS/Landing.css';
 //var Link = require('react-router-dom').Link
 function Landing() {
   return (
-    <div className="App">
+    <div className="App"> 
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={LogoLarge} className="App-logo" alt="logo" />
         <p className="landing">
           AUTO-GARCON
-          <br></br><a href="/login">Login</a>
         </p>
       </header>
     </div>

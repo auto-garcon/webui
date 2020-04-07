@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './AUTO-GARCON-4.jpeg';
+import logo from './Images/AutoGarcon-Logo-Large.png';
 
 import './CSS/About.css';
 //var Link = require('react-router-dom').Link
