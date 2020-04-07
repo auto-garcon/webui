@@ -21,7 +21,7 @@ function Display() {
           <br></br>
           <div>
           <br></br>
-          Pick your restaurant colors
+          Pick yo restaurant colors
           </div>
           <br></br>
           <SketchPicker />
