@@ -7,13 +7,19 @@ import Link from '@material-ui/core/Link';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary">
+    <Typography variant="body2" color="textSecondary" style={{justifyContent:"left"}}>
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         AUTO-GARÇON
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
+      <Link href="/about" className="dad" style={{justifyContent:"right"}} >
+        About
+      </Link>
+      <Link href="/contact" className="dad" style={{textAlign:"right"}}>
+        Contact Us
+      </Link>
     </Typography>
   );
 }
