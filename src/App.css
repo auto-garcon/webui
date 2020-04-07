@@ -12,7 +12,7 @@ html,body {
 .Login-Modal {
   background-color: #edf2f4;
   text-align: center;
-  position: absolute;
+  position: relative;
   top: 40%;
   left: 40%;
   bottom: 50%;

@@ -139,6 +139,30 @@ export default function App() {
           <Route>
             <CreateMenu />
           </Route>
+          <Route path ='/dashboard'>
+              <NavBar />
+                <Dashboard />
+              <Typography variant="body2" color="textSecondary" className="Footer">
+                {'Copyright © '}
+                <Link color="inherit" href="https://material-ui.com/">
+                  AUTO-GARÇON
+                </Link>{' '}
+                {new Date().getFullYear()}
+                {'.'}
+                <ul>
+                  <li>
+                    <Link to="/about" className="Link" >
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/contact" className="Link">
+                      Contact Us
+                    </Link>
+                  </li>
+                </ul>
+              </Typography>
+          </Route>
         </Switch>
       </BrowserRouter>
 
