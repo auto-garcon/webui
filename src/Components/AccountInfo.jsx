@@ -139,7 +139,7 @@ export default function Checkout() {
                 </Typography>
                 <Typography variant="subtitle1">
                   Click dashboard to return to menus and view active tickets.
-                  <br></br><a href='/dashboard'><button>Dashboard</button></a>
+                  <br></br><a href={'/dashboard'}><button>Dashboard</button></a>
                 </Typography>
               </React.Fragment>
             ) : (
