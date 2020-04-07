@@ -10,7 +10,7 @@ import LogoLarge from './Components/Images/AutoGarcon-Logo-Large.png';
 import Link from '@material-ui/core/Link'
 import { Router, Route } from 'react-router-dom';
 import { Switch } from '@material-ui/core';
-
+import NavBar from './Components/NavBar';
 
 const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
 const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
@@ -49,6 +49,7 @@ export default function App() {
     <>
     {!loggedIn?
       <>
+      <NavBar />
         <div className="Landing-Background">
           <div className="Login-Modal">
             <div className="Login-Header"> 
