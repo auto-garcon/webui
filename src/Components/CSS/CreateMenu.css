@@ -1,14 +1,44 @@
 label  {
-    padding-right: 10px;
+    padding-bottom: 5px;
+    display: block;
 }
 
 form {
     margin: 1rem auto;
     padding: 1rem;
+    background-color: #8D99AE;
+}
+button {
+    display: block;
 }
 
-form div {
-    margin: 1rem;
+input {
+    width: 50%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555;
+}
+
+.time-range {
+    display: inline-block;
     padding: 1rem;
 }
+
+.createMenu {
+    margin-left: 1rem;
+    padding-bottom: 2rem;
+}
+
+#status {
+    width: auto;
+    padding: 16px 20px;
+    border-radius: 4px;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+
 

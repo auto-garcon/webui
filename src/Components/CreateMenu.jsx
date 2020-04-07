@@ -1,50 +1,83 @@
 import React from 'react';
-//import './CSS/CreateMenu.css';
-import TimePicker from 'react-time-picker';
+import TimeRangeInputs from "./TimeRangeInputs";
+import './CSS/CreateMenu.css';
+import CategoryInputs from './CategoryInputs';
 
 class CreateMenu extends React.Component {
   state = {
-      categories: [{name: "", menuItems: []}],
-      timeRanges: [{startTime: null, endTime: null}],
+    menuName: "",
+    status: "",
+    timeRanges: [{startTime: "", endTime: ""}],
+    categories: [{categoryName: ""}],
+    menutItems: [{itemName: "", description: "", category: "", allergens:[]}]
   }
+
+  handleChange = (e) => {
+    console.log(e.target.className);
+    if (["startTime", "endTime"].includes(e.target.className)) {
+      let timeRanges = [...this.state.timeRanges];
+      timeRanges[e.target.dataset.id][e.target.className] = e.target.value;
+      this.setState({ timeRanges }, () => console.log(this.state.timeRanges));
+    } 
+    else if (["categoryName"].includes(e.target.className)) {
+      let categories = [...this.state.categories];
+      categories[e.target.dataset.id][e.target.className] = e.target.value;
+      this.setState({ categories }, () => console.log(this.state.categories));
+    }
+    else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
+  }
+
+  addTimeRange = (e) => {
+    this.setState((prevState) => ({
+      timeRanges: [...prevState.timeRanges, {startTime: "", endTime: ""}]
+    }));
+    console.log(this.state);
+  }
+
+  addCategory = (e) => {
+    this.setState((prevState) => ({
+      categories: [...prevState.categories, {categoryName: ""}]
+    }));
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+  }
+  
   render() {
+    let {menuName, status, timeRanges, categories, menuItems} = this.state;
     return (
-    <div>
+    <div class="createMenu">
       <div>
-          <h1>Create Menu</h1>
+        <h1>Create Menu</h1>
       </div>
       <div>
-          <h2>Menu Information</h2>
+        <h2>Menu Information</h2>
       </div>
-      <form>
-        <label htmlFor="Menu Name">Menu Name</label>
-        <input type="text" name="menuName" id="menuName" />
-        <h3>Time Ranges</h3>
-        <button>Add new time range</button>
-        <br></br>
-        {
-            this.state.timeRanges.map((val, idx) => {
-                let startId = `startTime-${idx}`;
-                let endId = `endTime-${idx}`;
-                return (
-                    <div key = {idx}>
-                        <label>{`Time Range #${idx + 1}`}</label>
-                        <label htmlFor={startId}>Start Time</label>
-                        <TimePicker/>
-                        <br></br>
-                        <label htmlFor={endId}>End Time</label>
-                        <TimePicker/>
-                    </div>
-                )
-            })
-        }
-        <label htmlFor="status">Menu Status</label>
+      <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        <h3 htmlFor="name">Menu Name</h3>
+        <input type="text" name="menuName" id="menuName" value={menuName} />
+        <h3 htmlFor="status">Menu Status</h3>
         <select id="status" name="status">
             <option value="active">Active</option>
             <option value="draft">Draft</option>
         </select>
-        <br></br>
+        <h3>Time Ranges</h3>
+        <button onClick={this.addTimeRange}>Add new time range</button>
+        <TimeRangeInputs timeRanges={timeRanges} />
       </form>
+      <div>
+        <h2>Menu Categories</h2>
+        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+          <button onClick={this.addCategory}>Add new category</button>
+          <CategoryInputs categories={categories}/>
+          <br></br>
+          <br></br>
+          <br></br>
+        </form>
+      </div>
     </div>
       
     );
