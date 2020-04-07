@@ -83,7 +83,7 @@ export default function MenuAppBar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                  <a href="/Settings">
+                  <a href={'./Settings'}>
                 <AccountCircle style={{backgroundColor: '#edf2f4', color: '2b2d42'}}/>
                 </a>
               </IconButton >
