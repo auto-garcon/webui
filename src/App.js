@@ -19,7 +19,6 @@ const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercont
 const PRODAPI = "https://autogarcon.live/api/users/newuser"
 const DEVAPI = "http://localhost/api/users/newuser"
 
-
 export default class App extends React.Component {
 
   constructor(props) {
@@ -48,14 +47,7 @@ export default class App extends React.Component {
       }
     }
   }
-  // const [ loggedIn, setLoggedIn ] = useState(false);
-  // const [user, setUser] = useState(null);
  
-  // useEffect(() => {
-  //   if(LocalStorage.get('user') != null){
-  //     setUser(LocalStorage.get('user'));
-  //   }
-  // },[]);
   componentDidMount() {
     /**
      * IF LOGGED IN
@@ -110,153 +102,7 @@ export default class App extends React.Component {
             </Router>
         )}
       </div>
-      // <>
-      // <BrowserRouter>
-      //   <Switch>
-      //       <Route exact path='/'>
-      //       {!loggedIn?
-      //       <>
-        
-      //             <div className="Landing-Background">
-      //               <div className="Login-Modal">
-      //                 <div className="Login-Header"> 
-      //                   <header className="App-header">
-      //                     <img src={LogoLarge} className="App-logo" alt="logo" />
-      //                     <h1>AUTO-GARCON</h1>
-      //                   </header>
-      //                   </div>
-      //                   <div className="Login-Container">
-      //                     <LockOutlinedIcon color="inherit" />
-      //                     <br></br>
-      //                     <GoogleLogin
-      //                       clientId={DEV} //CLIENTID NOT CREATED YET
-      //                       buttonText="Continue with Google"
-      //                       onSuccess={responseGoogle}
-      //                       onFailure={responseGoogle}
-      //                     />
-      //                 </div>
-      //               </div>
-      //             </div>
-      //             <Typography variant="body2" color="textSecondary" className="Footer">
-      //               {'Copyright © '}
-      //               <Link color="inherit" href="https://material-ui.com/" >
-      //                 AUTO-GARÇON
-      //               </Link>{' '}
-      //               {new Date().getFullYear()}
-      //               {'.'}
-      //               <a href={"/contact"}>Contact us</a>
-      //               <a href={"/about"}>About</a>
-                    
-      //             </Typography>
-      //           </>
-      //           :
-      //           <> 
-      //             <NavBar />
-                  
-      //               <Dashboard />
-      //             <Typography variant="body2" color="textSecondary" className="Footer">
-      //               {'Copyright © '}
-      //               <Link color="inherit" href="https://material-ui.com/">
-      //                 AUTO-GARÇON
-      //               </Link>{' '}
-      //               {new Date().getFullYear()}
-      //               {'.'}
-      //               <ul>
-      //                 <li>
-      //                   <Link to="/about" className="Link" >
-      //                     About
-      //                   </Link>
-      //                 </li>
-      //                 <li>
-      //                   <Link to="/contact" className="Link">
-      //                     Contact Us
-      //                   </Link>
-      //                 </li>
-      //               </ul>
-      //             </Typography>
-                  
-      //               <Switch>
-      //                 <Route path ='/about'>
-      //                   <About />
-      //                 </Route>
-      //                 <Route path ='/contact'>
-      //                   <Contact />
-      //                 </Route>
-      //               </Switch>
-                  
-      //           </>
-      //         }
-      //       </Route>
-      //       <Route path ='/about'>
-      //         <About />
-      //       </Route>
-      //       <Route path ='/contact'>
-      //         <Contact />
-      //       </Route>
-      //       <Route path ='/Settings'>
-      //         <Settings />
-      //       </Route>
-      //       <Route>
-      //         <CreateMenu />
-      //       </Route>
-      //       <Route path ='/dashboard'>
-      //           <NavBar />
-      //             <Dashboard />
-      //           <Typography variant="body2" color="textSecondary" className="Footer">
-      //             {'Copyright © '}
-      //             <Link color="inherit" href="https://material-ui.com/">
-      //               AUTO-GARÇON
-      //             </Link>{' '}
-      //             {new Date().getFullYear()}
-      //             {'.'}
-      //             <ul>
-      //               <li>
-      //                 <Link to="/about" className="Link" >
-      //                   About
-      //                 </Link>
-      //               </li>
-      //               <li>
-      //                 <Link to="/contact" className="Link">
-      //                   Contact Us
-      //                 </Link>
-      //               </li>
-      //             </ul>
-      //           </Typography>
-      //       </Route>
-      //     </Switch>
-      //   </BrowserRouter>
-  
-  
-      // </> 
+      
     )
   } 
 }
-
-// const StickyFoote = () => {
-//   return (
-//     <div className="Footer">
-//       <nav>
-//         <ul>
-//           <li>
-//             {'Copyright © '}
-//             <Link color="inherit" href="https://material-ui.com/">
-//               AUTO-GARÇON
-//             </Link>{' '}
-//             {new Date().getFullYear()}
-//             {'.'}
-//           </li>
-//           <li>
-//             <Link color="inherit" to="/about">
-//               About
-//             </Link>
-//           </li>
-//           <li>
-//             <Link color="inherit" to="/contact">
-//               Contact Us
-//             </Link>
-//           </li>
-//         </ul>
-//       </nav>
-//     </div>
-//   )
-// }
