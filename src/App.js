@@ -96,7 +96,9 @@ export default class App extends React.Component {
               <Route exact={true} path="/" component={Dashboard}></Route>
               <Route path="/about" component={About}></Route>
               <Route path="/contact" component={Contact}></Route>
-              <Route path="/settings" component={Settings}></Route>
+              <Route path="/settings">
+                <Settings restid={1234} tables={5}/>
+              </Route>
               <Route path="/createmenu" component={CreateMenu}></Route>
               <Footer />
             </Router>

@@ -1,31 +1,35 @@
 import React from 'react';
-
+import { useState } from 'react';
 var QRCode = require('qrcode.react');
 
-//var Link = require('react-router-dom').Link
-function QR(props) {
-  const {QRImages} = props;
-  return (
-    <div className="QR">
-   
-    
+export default class QR extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      restid: 1234,
+      tables:5,
+      codes: []
+    }
+  }
+
+  render () {
+    for(var i = 0; i < 5; i++){
+      this.state.codes.push(`https://autogarcon.live/api/restaurant/${this.state.restid}/table/${i}/sitdown`)
+    }
+    console.log(this.state.codes);
+    return (
+      <div className="QR">
         <h1>Generate Table QR Codes</h1>
-      
-        <p>Enter the number of tables</p>
-        <input type="number" step="1" pattern="\d+" id="tables" />
-        <button type="button" onclick="getInputValue();">submit</button> 
-          
-
-    
-        <QRCode value="http://facebook.github.io/react/" />
-         
-
-    </div>
         
-
-    
+        <ul>
+          {this.state.codes.map(code => {
+            return (<li><QRCode value={code} /></li>)
+          })}
+        </ul>
+        
+    </div>
   );
+  }
+  
 }
-
-export default QR;

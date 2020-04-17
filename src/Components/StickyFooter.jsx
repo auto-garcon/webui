@@ -6,9 +6,9 @@ export default function StickyFooter() {
     <div className="Footer-Container">
       <div className="Footer-Link" id="CopyRight">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <a href="https://material-ui.com/">
           AUTO-GARÇON
-        </Link>{' '}
+        </a>{' '}
         {new Date().getFullYear()}
         {'.'}
       </div>
