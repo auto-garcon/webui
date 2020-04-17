@@ -1,10 +1,10 @@
 import React from 'react';
 import { 
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from 'react-router-dom';
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 import QR from './QR';
 import Account from './AccountInfo';
 import Display from './Display';

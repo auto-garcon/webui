@@ -3,7 +3,8 @@ import React from 'react';
 var QRCode = require('qrcode.react');
 
 //var Link = require('react-router-dom').Link
-function QR() {
+function QR(props) {
+  const {QRImages} = props;
   return (
     <div className="QR">
    

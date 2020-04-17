@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from './Images/AutoGarcon-Logo-Large.png';
-import {navBar} from './NavBar';
 import './CSS/About.css';
 //var Link = require('react-router-dom').Link
 
