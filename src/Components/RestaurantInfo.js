@@ -1,12 +1,34 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import Checkbox from '@material-ui/core/Checkbox';
-
-export default function RestaurantInfoForm() {
+function restaurantInfo(props){
+  const{
+    restaurantName,
+    restaurantAddress,
+    city,
+    state,
+    zip, 
+    country
+  } = props
   return (
+    <div>
+      <input type="string" className= "input" value={restaurantName ? restaurantName: ""} onChange={onChangerestaurantName}/>
+      <input type="string" className= "input" value={restaurantAddress? restaurantAddress: ""} onChange={onChangerestaurantAddress}/>
+      <input type="string" className= "input" value={city? city: ""} onChange={onChangecity}/>
+      <input type="string" className= "input" value={state?  state: ""} onChange={onChangestate}/>
+      <input type="string" className= "input" value={zip? zip: ""} onChange={onChangezip}/>
+      <input type="string" className= "input" value={country? city: ""} onChange={onChangecity}/>
+    </div>
+  )
+}
+export default function RestaurantInfoForm() {
+  const [ restaurantName, restaurantAddress, city, state, zip, country] = useState([]);
+  
+  return ( 
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Restaurant Information 
@@ -21,7 +43,7 @@ export default function RestaurantInfoForm() {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
+      {/*}  <Grid item xs={12}> This is not in API 
           <TextField
             required
             id="restaurantPhone"
@@ -38,21 +60,13 @@ export default function RestaurantInfoForm() {
             label="Restaurant Email"
             fullWidth
           />
-        </Grid>
+  </Grid>*/}
         <Grid item xs={12}>
           <TextField
             required
-            id="address1"
-            name="address1"
-            label="Address line 1"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
+            id="restaurantAddress"
+            name="restaurant Address"
+            label="Restaurant Address"
             fullWidth
           />
         </Grid>
@@ -88,6 +102,6 @@ export default function RestaurantInfoForm() {
         </Grid>
 
       </Grid>
-    </React.Fragment>
+    </React.Fragment> 
   );
 }

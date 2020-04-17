@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
+//Fetch from DB if restaurant owner info already there
+function restaurantOwnerInfo(props){
+  const{
+    firstName,
+    lastName,
+    email
+  } = props
+  return (
+    <div>
+      <input type="string" className= "input" value={firstName ? firstName: ""} onChange={onChangefirstName}/>
+      <input type="string" className= "input" value={lastName ? lastName: ""} onChange={onChangelastName}/>
+      <input type="string" className= "input" value={email? email: ""} onChange={onChangeemail}/>
+    </div>
+  )
+}
 export default function RestaurantOwnerInfoForm() {
+  const [firstName, lastName, email] = useState([]);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -39,7 +55,7 @@ export default function RestaurantOwnerInfoForm() {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
+       {/*<!-- <Grid item xs={12}> not in API 
           <TextField
             required
             id="phoneNumber"
@@ -107,9 +123,9 @@ export default function RestaurantOwnerInfoForm() {
             name="password"
             label="Password"
             fullWidth
-          />
-        </Grid>
-    
+          /> 
+        </Grid> -->
+  */}
       </Grid>
     </React.Fragment>
   );
