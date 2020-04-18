@@ -1,6 +1,6 @@
 import React from "react"
 
-const CategoryInputs = (props) => {
+function CategoryInputs(props) {
     return (
         props.categories.map( (val, idx) => {
             let categoryId = `category-${idx}`;
