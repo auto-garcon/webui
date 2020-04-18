@@ -1,6 +1,6 @@
 import React from "react"
 
-function MenuItemInputs(props) {
+const MenuItemInputs = (props) => {
     return (
         props.menuItems.map( (val, idx) => {
             let categoryId = `category-${idx}`;

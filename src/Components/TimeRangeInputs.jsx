@@ -1,7 +1,7 @@
 import React from "react";
 import TimePicker from 'react-time-picker';
 
-function TimeRangeInputs(props) {
+const TimeRangeInputs = (props) => {
     return (
         props.timeRanges.map((val, idx) => {
             let timeRangeId = `timeRange-${idx}`;
