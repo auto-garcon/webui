@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+const DEVAPI = "http://localhost/api/users/newuser"
+
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import Checkbox from '@material-ui/core/Checkbox';
 function restaurantInfo(props){
@@ -27,6 +29,21 @@ function restaurantInfo(props){
 }
 export default function RestaurantInfoForm() {
   const [ restaurantName, restaurantAddress, city, state, zip, country] = useState([]);
+ 
+    fetch(DEVAPI, {
+
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin' : '*'
+      },
+      body: JSON.stringify({restaurantName:restaurantName},{restaurantAddress:restaurantAddress})
+    })
+    .then(res => console.log(res))
+    .then(data => console.log(data))
+    .catch(err => console.log("FAILED", err));
   
   return ( 
     <React.Fragment>

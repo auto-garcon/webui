@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+const DEVAPI = "http://localhost/api/users/newuser"
 
 //Fetch from DB if restaurant owner info already there
 function restaurantOwnerInfo(props){
@@ -20,6 +21,22 @@ function restaurantOwnerInfo(props){
 }
 export default function RestaurantOwnerInfoForm() {
   const [firstName, lastName, email] = useState([]);
+
+  fetch(DEVAPI, {
+
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin' : '*'
+    },
+    body: JSON.stringify({firstName:firstName},{lastName:lastName},{email:email})
+  })
+  .then(res => console.log(res))
+  .then(data => console.log(data))
+  .catch(err => console.log("FAILED", err));
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
