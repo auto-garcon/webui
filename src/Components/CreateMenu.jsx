@@ -1,19 +1,54 @@
 import React from 'react';
-import TimeRangeInputs from "./TimeRangeInputs";
+import TimeRangeInputs from './TimeRangeInputs';
 import './CSS/CreateMenu.css';
 import CategoryInputs from './CategoryInputs';
+import MenuContent from './MenuContent';
 
 class CreateMenu extends React.Component {
-  state = {
-    menuName: "",
-    status: "",
-    timeRanges: [{startTime: "", endTime: ""}],
-    categories: [{categoryName: ""}],
-    menutItems: [{itemName: "", description: "", category: "", allergens:[]}]
+  constructor() {
+    super();
+
+    this.state = {
+      menuName: "",
+      status: "",
+      timeRanges: [{startTime: "", endTime: ""}],
+      categories: [{categoryName: ""}],
+      menuItems: {},
+    }
+
+    this.addMenuItem = this.addMenuItem.bind(this);
+    this.updateMenuItem = this.updateMenuItem.bind(this);
+    this.removeMenuItem = this.removeMenuItem.bind(this);
   }
 
+  addMenuItem(menuItem) {
+    const menuItems = {...this.state.menuItems};
+    const timestamp = Date.now();
+
+    menuItems['menuItem-' + timestamp] = menuItem;
+
+    this.setState({menuItems}, () => console.log(this.state.menuItems));
+  }
+
+  updateMenuItem(key, menuItem) {
+    const menuItems = {...this.state.menuItems};
+    menuItems[key] = menuItem;
+
+    this.setState({ menuItems });
+  }
+
+  removeMenuItem(key) {
+    const menuItems = {...this.state.menuItems};
+    menuItems[key] = null;
+
+    this.setState({ menuItems });
+  }
+  
+
   handleChange = (e) => {
+    console.log(e.target.dataset.id);
     console.log(e.target.className);
+    console.log(e.target.value);
     if (["startTime", "endTime"].includes(e.target.className)) {
       let timeRanges = [...this.state.timeRanges];
       timeRanges[e.target.dataset.id][e.target.className] = e.target.value;
@@ -27,6 +62,7 @@ class CreateMenu extends React.Component {
     else {
       this.setState({ [e.target.name]: e.target.value });
     }
+    console.log(this.state);
   }
 
   addTimeRange = (e) => {
@@ -49,7 +85,7 @@ class CreateMenu extends React.Component {
   render() {
     let {menuName, status, timeRanges, categories, menuItems} = this.state;
     return (
-    <div class="createMenu">
+    <div className="createMenu">
       <div>
         <h1>Create Menu</h1>
       </div>
@@ -58,26 +94,22 @@ class CreateMenu extends React.Component {
       </div>
       <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
         <h3 htmlFor="name">Menu Name</h3>
-        <input type="text" name="menuName" id="menuName" value={menuName} />
+        <input type="text" name="menuName" id="menuName" defaultValue={menuName} />
         <h3 htmlFor="status">Menu Status</h3>
-        <select id="status" name="status">
+        <select id="status" name="status" className="status">
+            <option disabled selected value> -- select an status -- </option>
             <option value="active">Active</option>
             <option value="draft">Draft</option>
         </select>
         <h3>Time Ranges</h3>
         <button onClick={this.addTimeRange}>Add new time range</button>
-        <TimeRangeInputs timeRanges={timeRanges} />
+        <TimeRangeInputs timeRanges={timeRanges}/>
       </form>
-      <div>
-        <h2>Menu Categories</h2>
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <button onClick={this.addCategory}>Add new category</button>
-          <CategoryInputs categories={categories}/>
-          <br></br>
-          <br></br>
-          <br></br>
-        </form>
-      </div>
+      <MenuContent
+        menuItems={this.state.menuItems}
+        addMenuItem={this.addMenuItem}
+        updateMenuItem={this.updateMenuItem}
+        removeMenuItem={this.removeMenuItem} />
     </div>
       
     );
