@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './CSS/MenuContainer.css'
 import { AgGridReact } from 'ag-grid-react';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
@@ -112,7 +113,9 @@ export default function MenuContainer() {
     return (
         <div className="menu-container">
             <h1 className="tickets-title" style={{textAlign:"center"}}>Menus</h1>
-            <Button className="create-button" href={"./CreateMenu"}>⊕ Create new menu</Button>
+            <Link to="/createmenu">
+                <Button className="create-button" >⊕ Create new menu</Button>
+            </Link>
             <div className="ag-theme-balham">
                 <AgGridReact
                     columnDefs={tableHeaders}

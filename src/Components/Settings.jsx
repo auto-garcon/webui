@@ -1,17 +1,18 @@
 import React from 'react';
 import { 
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from 'react-router-dom';
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 import QR from './QR';
 import Account from './AccountInfo';
 import Display from './Display';
 import StickyFooter from './StickyFooter';
 import SettingsNav from './SettingsNav';
 
-export default function Settings() {
+export default function Settings(props) {
+  const { restid, tables } = props;
     return (
       <>
       <SettingsNav/>
@@ -19,26 +20,28 @@ export default function Settings() {
           <div>
             <ul>
               <li>
-                <Link to="/qr">QR Code Generation</Link>
+                <Link to="/settings/qr">QR Code Generation</Link>
               </li>
               <li>
-                <Link to="/account">Account Information</Link>
+                <Link to="/settings/account">Account Information</Link>
               </li>
               <li>
-                <Link to="/display">Display</Link>
+                <Link to="/settings/display">Display</Link>
               </li>
-  
             </ul>
           </div>
       
        <Switch> 
-        <Route path ='/qr' exact>
-          <QR />
+        <Route path ='/settings/qr' exact>
+          <QR 
+            restid = {restid}
+            tables = {tables}
+          />
         </Route>
-        <Route path ='/account'>
+        <Route path ='/settings/account'>
           <Account />
         </Route>
-        <Route path ='/display'>
+        <Route path ='/settings/display'>
           <Display/>
         </Route>
         

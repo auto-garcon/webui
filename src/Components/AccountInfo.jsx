@@ -15,6 +15,41 @@ import RestaurantInfo from './RestaurantInfo';
 import Review from './Review';
 
 import './CSS/SignUp.css';
+
+function restaurantInfo(props){
+  const{
+    restaurantName,
+    restaurantAddress,
+    city,
+    state,
+    zip, 
+    country
+  } = props
+  return (
+    <div>
+      <input type="string" className= "input" value={restaurantName ? restaurantName: ""} onChange={onChangerestaurantName}/>
+      <input type="string" className= "input" value={restaurantAddress? restaurantAddress: ""} onChange={onChangerestaurantAddress}/>
+      <input type="string" className= "input" value={city? city: ""} onChange={onChangecity}/>
+      <input type="string" className= "input" value={state?  state: ""} onChange={onChangestate}/>
+      <input type="string" className= "input" value={zip? zip: ""} onChange={onChangezip}/>
+      <input type="string" className= "input" value={country? city: ""} onChange={onChangecity}/>
+    </div>
+  )
+}
+function restaurantOwnerInfo(props){
+  const{
+    firstName,
+    lastName,
+    email
+  } = props
+  return (
+    <div>
+      <input type="string" className= "input" value={firstName ? firstName: ""} onChange={onChangefirstName}/>
+      <input type="string" className= "input" value={lastName ? lastName: ""} onChange={onChangelastName}/>
+      <input type="string" className= "input" value={email? email: ""} onChange={onChangeemail}/>
+    </div>
+  )
+}
 function Copyright() {
   return (
     <Typography variant="body2" color="#edf2f4" align="center">
@@ -98,6 +133,23 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
+  function restaurantOwnerInfo(props){
+    const{
+      firstName,
+      lastName,
+      email
+    } = props
+    return (
+      <div>
+        <input type="string" className= "input" value={firstName ? firstName: ""} onChange={onChangefirstName}/>
+        <input type="string" className= "input" value={lastName ? lastName: ""} onChange={onChangelastName}/>
+        <input type="string" className= "input" value={email? email: ""} onChange={onChangeemail}/>
+      </div>
+    )
+  }
+  const [firstName, lastName, email] = useState([]);
+  const [ restaurantName, restaurantAddress, city, state, zip, country] = useState([]);
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 

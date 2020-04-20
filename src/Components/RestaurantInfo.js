@@ -7,44 +7,9 @@ const DEVAPI = "http://localhost/api/users/newuser"
 
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import Checkbox from '@material-ui/core/Checkbox';
-function restaurantInfo(props){
-  const{
-    restaurantName,
-    restaurantAddress,
-    city,
-    state,
-    zip, 
-    country
-  } = props
-  return (
-    <div>
-      <input type="string" className= "input" value={restaurantName ? restaurantName: ""} onChange={onChangerestaurantName}/>
-      <input type="string" className= "input" value={restaurantAddress? restaurantAddress: ""} onChange={onChangerestaurantAddress}/>
-      <input type="string" className= "input" value={city? city: ""} onChange={onChangecity}/>
-      <input type="string" className= "input" value={state?  state: ""} onChange={onChangestate}/>
-      <input type="string" className= "input" value={zip? zip: ""} onChange={onChangezip}/>
-      <input type="string" className= "input" value={country? city: ""} onChange={onChangecity}/>
-    </div>
-  )
-}
-export default function RestaurantInfoForm() {
-  const [ restaurantName, restaurantAddress, city, state, zip, country] = useState([]);
- 
-    fetch(DEVAPI, {
 
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Accept': '*/*',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin' : '*'
-      },
-      body: JSON.stringify({restaurantName:restaurantName},{restaurantAddress:restaurantAddress})
-    })
-    .then(res => console.log(res))
-    .then(data => console.log(data))
-    .catch(err => console.log("FAILED", err));
-  
+export default function RestaurantInfoForm() {
+
   return ( 
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

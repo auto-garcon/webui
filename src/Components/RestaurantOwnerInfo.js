@@ -5,37 +5,9 @@ import TextField from '@material-ui/core/TextField';
 const DEVAPI = "http://localhost/api/users/newuser"
 
 //Fetch from DB if restaurant owner info already there
-function restaurantOwnerInfo(props){
-  const{
-    firstName,
-    lastName,
-    email
-  } = props
-  return (
-    <div>
-      <input type="string" className= "input" value={firstName ? firstName: ""} onChange={onChangefirstName}/>
-      <input type="string" className= "input" value={lastName ? lastName: ""} onChange={onChangelastName}/>
-      <input type="string" className= "input" value={email? email: ""} onChange={onChangeemail}/>
-    </div>
-  )
-}
+
 export default function RestaurantOwnerInfoForm() {
-  const [firstName, lastName, email] = useState([]);
-
-  fetch(DEVAPI, {
-
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-      'Accept': '*/*',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin' : '*'
-    },
-    body: JSON.stringify({firstName:firstName},{lastName:lastName},{email:email})
-  })
-  .then(res => console.log(res))
-  .then(data => console.log(data))
-  .catch(err => console.log("FAILED", err));
+  
 
   return (
     <React.Fragment>
