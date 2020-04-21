@@ -5,7 +5,6 @@ import AddMenuItemForm from './AddMenuItemForm';
 class MenuContent extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.renderMenuContent = this.renderMenuContent.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -32,14 +31,9 @@ class MenuContent extends React.Component {
                     value={menuItem.itemName} onChange={(e) => this.handleChange(e, key)} />
                 <input type='text' placeholder='Menu Item Price' name='price'
                     value={menuItem.price} onChange={(e) => this.handleChange(e, key)} />
-                <select name='category' value={menuItem.category} onChange={(e) =>
-                    this.handleChange(e, key)} >
-                    <option value='category 1'>Category 1</option>
-                    <option value='category 2'>Category 2</option>
-                </select>
                 <textarea placeholder='Menu Item Description' name='description' value={menuItem.description}
                     onChange={(e) => this.handleChange(e, key)} />
-                <button onClick = {() => this.props.removeMenuItem(key)}>Remove Menu Item</button>
+                <button onClick = {() => this.props.removeMenuItem(key, menuItem)}>Remove Menu Item</button>
             </div>
         );
     }
@@ -47,10 +41,10 @@ class MenuContent extends React.Component {
     render() {
         return (
             <div>
-                <label>{this.props.category.categoryName}</label>
-                <input></input>
+                <label>Category Name</label>
+                <input className="categoryName" data-id = {this.props.idx} onChange={this.onChange}></input>
                 {Object.keys(this.props.menuItems).map(this.renderMenuContent)}
-                <AddMenuItemForm addMenuItem={this.props.addMenuItem} />
+                <AddMenuItemForm addMenuItem={this.props.addMenuItem} idx={this.props.idx} />
             </div>
         );
     }

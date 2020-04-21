@@ -13,10 +13,11 @@ import React from "react"
          event.preventDefault();
 
          //TODO: add allergen and image
+         //NOTE: Took category option out
          const menuItem = {
              itemName: this.itemName.value,
              description: this.description.value,
-             category: this.category.value,
+             idx: this.props.idx,
              price: this.price.value,
          }
 
@@ -39,10 +40,6 @@ import React from "react"
                     ref={(input) => { this.itemName = input}}/>
                 <input type="text" placeholder="Menu Item Price"
                     ref={(input) => { this.price = input }} />
-                <select ref={(input) => { this.category = input}}>
-                    <option value="category 1">Category 1</option>
-                    <option value="category 2">Create new category</option>
-                </select>
                 <textarea placeholder="Description"
                     ref={(input) => { this.description= input}}/>
                 <button type="submit">+ Add Item</button>

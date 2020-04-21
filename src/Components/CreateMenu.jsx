@@ -11,8 +11,7 @@ class CreateMenu extends React.Component {
       menuName: "",
       status: "",
       timeRanges: [{startTime: "", endTime: ""}],
-      categories: [{categoryName: "", menuItems: {}}],
-      menuItems: {},
+      categories: [{categoryName: "", menuItems: {}}]
     }
 
     this.addMenuItem = this.addMenuItem.bind(this);
@@ -22,26 +21,24 @@ class CreateMenu extends React.Component {
   }
 
   addMenuItem(menuItem) {
-    const menuItems = {...this.state.menuItems};
     const timestamp = Date.now();
 
-    menuItems['menuItem-' + timestamp] = menuItem;
+    this.state.categories[menuItem.idx].menuItems['menuItem-' + timestamp] = menuItem;
 
-    this.setState({menuItems}, () => console.log(this.state.menuItems));
+    this.setState({...this.state.categories[menuItem.idx].menuItems}, () => console.log(this.state));
   }
 
   updateMenuItem(key, menuItem) {
-    const menuItems = {...this.state.menuItems};
-    menuItems[key] = menuItem;
+    this.state.categories[menuItem.idx].menuItems[key] = menuItem;
 
-    this.setState({ menuItems });
+    this.setState({...this.state.categories[menuItem.idx].menuItems}, () => console.log(this.state));
   }
 
-  removeMenuItem(key) {
-    const menuItems = {...this.state.menuItems};
-    menuItems[key] = null;
+  removeMenuItem(key, menuItem) {
+    delete this.state.categories[menuItem.idx].menuItems[key];
+    console.log(this.state);
 
-    this.setState({ menuItems });
+    this.setState({ ...this.state.categories[menuItem.idx].menuItems });
   }
   
 
@@ -76,6 +73,7 @@ class CreateMenu extends React.Component {
     this.setState((prevState) => ({
       categories: [...prevState.categories, {categoryName: "", menuItems: {}}]
     }));
+    console.log(this.state);
   }
 
   handleSubmit = (e) => {
@@ -87,6 +85,7 @@ class CreateMenu extends React.Component {
       <MenuContent
         menuItems={this.state.categories[key].menuItems}
         category= {this.state.categories[key]}
+        idx={key}
         addMenuItem={this.addMenuItem}
         updateMenuItem={this.updateMenuItem}
         removeMenuItem={this.removeMenuItem} />
