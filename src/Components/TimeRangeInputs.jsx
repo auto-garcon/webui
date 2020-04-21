@@ -11,22 +11,20 @@ const TimeRangeInputs = (props) => {
                 <div key={idx} className="time-range">
                     <label htmlFor={timeRangeId}>{`Time Range #${idx+1}`}</label>
                     <label htmlFor={startId}>Start Time</label>
-                    <TimePicker
-                        name={startId}
+                    <input 
+                        type="time" 
                         data-id={idx}
-                        id={startId}
+                        name={startId}
                         value={props.timeRanges[idx].startTime} 
                         className="startTime"
-                        disableClock='true'
                     />
                     <label htmlFor={endId}>End Time</label>
-                    <TimePicker
-                        name={endId}
+                    <input 
+                        type="time" 
                         data-id={idx}
-                        id={endId}
+                        name={endId}
                         value={props.timeRanges[idx].endTime} 
                         className="endTime"
-                        disableClock='true'
                     />
                 </div>
             );
