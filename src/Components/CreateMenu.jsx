@@ -118,6 +118,9 @@ class CreateMenu extends React.Component {
         <h2>Menu Content</h2>
         <button onClick={this.addCategory}>Add new category</button>
         {Object.keys(this.state.categories).map(this.renderMenu)}
+        <button>Save</button>
+        <button>Save and close</button>
+        <button>Cancel</button>
       </form>
       
     </div>     
