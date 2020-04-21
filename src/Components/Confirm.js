@@ -53,13 +53,13 @@ export class Confirm extends Component {
               <ListItemText primary="Email" secondary={email} /> 
             </ListItem>
             <ListItem>
-              <ListItemText primary="Occupation" secondary={occupation} /> 
+              <ListItemText primary="restaurantName" secondary={occupation} /> 
             </ListItem>
             <ListItem>
-              <ListItemText primary="City" secondary={city} /> 
+              <ListItemText primary="restaurantAddress" secondary={city} /> 
             </ListItem>
             <ListItem>
-              <ListItemText primary="Bio" secondary={bio} /> 
+              <ListItemText primary="Number of tables" secondary={bio} /> 
             </ListItem>
           </List>
           <br />
