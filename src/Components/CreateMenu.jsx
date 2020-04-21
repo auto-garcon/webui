@@ -1,7 +1,6 @@
 import React from 'react';
 import TimeRangeInputs from './TimeRangeInputs';
 import './CSS/CreateMenu.css';
-import CategoryInputs from './CategoryInputs';
 import MenuContent from './MenuContent';
 
 class CreateMenu extends React.Component {
@@ -12,13 +11,14 @@ class CreateMenu extends React.Component {
       menuName: "",
       status: "",
       timeRanges: [{startTime: "", endTime: ""}],
-      categories: [{categoryName: ""}],
+      categories: [{categoryName: "", menuItems: {}}],
       menuItems: {},
     }
 
     this.addMenuItem = this.addMenuItem.bind(this);
     this.updateMenuItem = this.updateMenuItem.bind(this);
     this.removeMenuItem = this.removeMenuItem.bind(this);
+    this.renderMenu = this.renderMenu.bind(this);
   }
 
   addMenuItem(menuItem) {
@@ -74,12 +74,24 @@ class CreateMenu extends React.Component {
 
   addCategory = (e) => {
     this.setState((prevState) => ({
-      categories: [...prevState.categories, {categoryName: ""}]
+      categories: [...prevState.categories, {categoryName: "", menuItems: {}}]
     }));
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
+  }
+
+  renderMenu(key) {
+    return (
+      <MenuContent
+        menuItems={this.state.categories[key].menuItems}
+        category= {this.state.categories[key]}
+        addMenuItem={this.addMenuItem}
+        updateMenuItem={this.updateMenuItem}
+        removeMenuItem={this.removeMenuItem} />
+    );
+    
   }
   
   render() {
@@ -104,14 +116,12 @@ class CreateMenu extends React.Component {
         <h3>Time Ranges</h3>
         <button onClick={this.addTimeRange}>Add new time range</button>
         <TimeRangeInputs timeRanges={timeRanges}/>
+        <h2>Menu Content</h2>
+        <button onClick={this.addCategory}>Add new category</button>
+        {Object.keys(this.state.categories).map(this.renderMenu)}
       </form>
-      <MenuContent
-        menuItems={this.state.menuItems}
-        addMenuItem={this.addMenuItem}
-        updateMenuItem={this.updateMenuItem}
-        removeMenuItem={this.removeMenuItem} />
-    </div>
       
+    </div>     
     );
   }
 }

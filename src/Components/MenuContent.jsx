@@ -44,11 +44,11 @@ class MenuContent extends React.Component {
         );
     }
 
-    //TODO: set up categories here so that all appropriate menu items fit into a category
     render() {
         return (
             <div>
-                <h2>Menu Content</h2>
+                <label>{this.props.category.categoryName}</label>
+                <input></input>
                 {Object.keys(this.props.menuItems).map(this.renderMenuContent)}
                 <AddMenuItemForm addMenuItem={this.props.addMenuItem} />
             </div>
