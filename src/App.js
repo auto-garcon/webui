@@ -24,8 +24,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: LocalStorage.get('user'),
-      responseGoogle: (response) => {
+      user: null,
+      isAuthed: false,
+      responseGoogle: (response, e) => {
+        e.preventDefault();
         //console.log(response);
         // fetch(DEVAPI, {
         //   method: 'POST',
@@ -40,36 +42,21 @@ export default class App extends React.Component {
         // .then(res => console.log(res))
         // .then(data => console.log(data))
         // .catch(err => console.log("FAILED", err));
-        if(response) {
-          this.setState({user: response});
+        if(response != null) {
+          this.setState({
+            user: response,
+            isAuthed: true
+          });
           LocalStorage.set('user', response);
         }
-      }
-    }
-  }
- 
-  componentDidMount() {
-    /**
-     * IF LOGGED IN
-     * 
-     * - START LOADING ANIMATION
-     * - FETCH(API) FOR USER INFORMATION
-     * - LOAD DASHBOARD
-     * 
-     * OTHERWISE
-     * 
-     * - SEND TO LOGIN SCREEN 
-     */
-    if(this.state.user != null){
-      //ANIMATION
-      //FETCH(API)
+      },
     }
   }
 
   render() {
     return (
       <div className = "App">
-        { this.state.user == null ? (
+        { !this.state.isAuthed ? (
           <div className="Landing-Background">
             <div className="Login-Modal">
               <div className="Login-Header"> 
@@ -93,7 +80,8 @@ export default class App extends React.Component {
         ) : ( 
             <Router>
               <NavBar />
-              <Route exact={true} path="/" component={Dashboard}></Route>
+              <Route exact={true} path="/" component={Dashboard}>
+              </Route>
               <Route path="/about" component={About}></Route>
               <Route path="/contact" component={Contact}></Route>
               <Route path="/settings">
@@ -104,7 +92,6 @@ export default class App extends React.Component {
             </Router>
         )}
       </div>
-      
     )
   } 
 }
