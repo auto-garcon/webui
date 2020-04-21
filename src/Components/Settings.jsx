@@ -10,6 +10,7 @@ import Account from './AccountInfo';
 import Display from './Display';
 import StickyFooter from './StickyFooter';
 import SettingsNav from './SettingsNav';
+import UserForm from './UserForm';
 
 export default function Settings(props) {
   const { restid, tables } = props;
@@ -19,12 +20,13 @@ export default function Settings(props) {
       <Router>
           <div>
             <ul>
+            <li>
+                <Link to="/settings/userform">Account Information</Link>
+              </li>
               <li>
                 <Link to="/settings/qr">QR Code Generation</Link>
               </li>
-              <li>
-                <Link to="/settings/account">Account Information</Link>
-              </li>
+           
               <li>
                 <Link to="/settings/display">Display</Link>
               </li>
@@ -38,13 +40,12 @@ export default function Settings(props) {
             tables = {tables}
           />
         </Route>
-        <Route path ='/settings/account'>
-          <Account />
-        </Route>
         <Route path ='/settings/display'>
           <Display/>
         </Route>
-        
+        <Route path ='/settings/userform'>
+          <UserForm/>
+        </Route>
        </Switch>
        <StickyFooter />
       </Router>

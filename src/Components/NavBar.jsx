@@ -9,15 +9,6 @@ import Menu from '@material-ui/core/Menu';
 import logo from './logo.jpeg';
 import { Link } from 'react-router-dom';
 
-<<<<<<< HEAD
-import { 
-    BrowserRouter as Router,
-    Link,
-    Route
-  } from 'react-router-dom';
-  
-=======
->>>>>>> master
 const useStyles = makeStyles((theme) => ({
 
   logo: {

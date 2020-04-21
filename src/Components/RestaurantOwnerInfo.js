@@ -4,11 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 const DEVAPI = "http://localhost/api/users/newuser"
 
-//Fetch from DB if restaurant owner info already there
 
 export default function RestaurantOwnerInfoForm() {
   
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
