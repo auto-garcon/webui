@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,7 +14,35 @@ import RestaurantOwnerInfo from './RestaurantOwnerInfo';
 import RestaurantInfo from './RestaurantInfo';
 import Review from './Review';
 
+
 import './CSS/SignUp.css';
+
+/*function restaurantInfo(props){
+  const{
+    restaurantName,
+    restaurantAddress
+  } = props
+  return (
+    <div>
+      <input type="string" className= "input" value={restaurantName ? restaurantName: ""} onChange={onChangerestaurantName}/>
+      <input type="string" className= "input" value={restaurantAddress? restaurantAddress: ""} onChange={onChangerestaurantAddress}/>
+    </div>
+  )
+}
+function restaurantOwnerInfo(props){
+  const{
+    firstName,
+    lastName,
+    email
+  } = props
+  return (
+    <div>
+      <input type="string" className= "input" value={firstName ? firstName: ""} onChange={onChangefirstName}/>
+      <input type="string" className= "input" value={lastName ? lastName: ""} onChange={onChangelastName}/>
+      <input type="string" className= "input" value={email? email: ""} onChange={onChangeemail}/>
+    </div>
+  )
+}*/
 function Copyright() {
   return (
     <Typography variant="body2" color="#edf2f4" align="center">
@@ -98,6 +126,10 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
+  
+  const [firstName, lastName, email] = useState([]);
+  const [ restaurantName, restaurantAddress, city, state, zip, country] = useState([]);
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -139,7 +171,7 @@ export default function Checkout() {
                 </Typography>
                 <Typography variant="subtitle1">
                   Click dashboard to return to menus and view active tickets.
-                  <br></br><a href={'/dashboard'}><button>Dashboard</button></a>
+                  <br></br><a href={'/'}><button>Dashboard</button></a>
                 </Typography>
               </React.Fragment>
             ) : (
@@ -152,10 +184,12 @@ export default function Checkout() {
                     </Button>
                   )}
                   <Button
+                    type = "submit"
                     variant="contained"
                     color= "#edf2f4"
                     onClick={handleNext}
                     className={classes.button}
+                    primary = {true}
                     
                   >
                     {activeStep === steps.length - 1 ? 'Update' : 'Next'}

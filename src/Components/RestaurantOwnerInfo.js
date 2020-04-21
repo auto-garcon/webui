@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+const DEVAPI = "http://localhost/api/users/newuser"
+
 
 export default function RestaurantOwnerInfoForm() {
+  
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -39,7 +42,7 @@ export default function RestaurantOwnerInfoForm() {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
+       {/*<!-- <Grid item xs={12}> not in API 
           <TextField
             required
             id="phoneNumber"
@@ -107,9 +110,9 @@ export default function RestaurantOwnerInfoForm() {
             name="password"
             label="Password"
             fullWidth
-          />
-        </Grid>
-    
+          /> 
+        </Grid> -->
+  */}
       </Grid>
     </React.Fragment>
   );

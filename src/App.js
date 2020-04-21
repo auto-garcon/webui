@@ -8,11 +8,13 @@ import GoogleLogin from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import LogoLarge from './Components/Images/AutoGarcon-Logo-Large.png';
+
 import Settings from './Components/Settings';
 import Footer from './Components/StickyFooter'
 import CreateMenu from './Components/CreateMenu';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import LocalStorage from 'local-storage';
+
 
 const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
 const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
@@ -46,6 +48,37 @@ export default class App extends React.Component {
         }
       }
     }
+    //restaurant owner
+   //fetch(DEVAPI, {
+
+   //  method: 'POST',
+    //  mode: 'no-cors',
+    //  headers: {
+    //    'Accept': '*/*',
+    //    'Content-Type': 'application/json',
+    //    'Access-Control-Allow-Origin' : '*'
+    //  },
+    //  body: JSON.stringify({firstName:firstName},{lastName:lastName},{email:email})
+    //})
+    //.then(res => console.log(res))
+    //.then(data => console.log(data))
+    //.catch(err => console.log("FAILED", err));
+ 
+    ////restaurant info
+    //fetch(DEVAPI, {
+    //  method: 'POST',
+    //  mode: 'no-cors',
+    //  headers: {
+    //    'Accept': '*/*',
+    //    'Content-Type': 'application/json',
+    //    'Access-Control-Allow-Origin' : '*'
+    //  },
+    //  body: JSON.stringify({restaurantName:restaurantName},{restaurantAddress:restaurantAddress})
+    //})
+    //.then(res => console.log(res))
+    //.then(data => console.log(data))
+    //.catch(err => console.log("FAILED", err));
+  //
   }
  
   componentDidMount() {
