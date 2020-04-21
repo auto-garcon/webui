@@ -56,7 +56,15 @@ export class FormPersonalDetails extends Component {
 							fullWidth="true"
             />
             <br />
-        
+            <TextField
+              placeholder="Enter the Number of Tables "
+              label="Number of Tables"
+              onChange={handleChange('numTables')}
+              defaultValue={values.numTables}
+              margin="normal"
+							fullWidth="true"
+            />
+            <br />
             <Button
               color="#EDF2F4"
               variant="contained"

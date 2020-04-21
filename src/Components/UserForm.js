@@ -11,9 +11,9 @@ export class UserForm extends Component {
     firstName: '',
     lastName: '',
     email: '',
-    occupation: '',
-    city: '',
-    bio: ''
+    restaurantName: '',
+    restaurantAddress: ''
+  
   };
 
   // Proceed to next step
