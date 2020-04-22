@@ -33,6 +33,8 @@ class MenuContent extends React.Component {
                     value={menuItem.price} onChange={(e) => this.handleChange(e, key)} />
                 <textarea placeholder='Menu Item Description' name='description' value={menuItem.description}
                     onChange={(e) => this.handleChange(e, key)} />
+                <input type='text' placeholder='Calories' name='calories'
+                    value={menuItem.calories} onChange={(e) => this.handleChange(e, key)} />
                 <button onClick = {() => this.props.removeMenuItem(key, menuItem)}>Remove Menu Item</button>
             </div>
         );

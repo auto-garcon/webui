@@ -19,6 +19,7 @@ import React from "react"
              description: this.description.value,
              idx: this.props.idx,
              price: this.price.value,
+             calories: this.calories.value,
          }
 
          this.props.addMenuItem(menuItem);
@@ -42,6 +43,8 @@ import React from "react"
                     ref={(input) => { this.price = input }} />
                 <textarea placeholder="Description"
                     ref={(input) => { this.description= input}}/>
+                <input type="text" placeholder="Calories"
+                    ref={(input) => { this.calories = input}}/>
                 <button type="submit">+ Add Item</button>
             </form>
          )

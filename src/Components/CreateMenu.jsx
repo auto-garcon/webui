@@ -18,27 +18,28 @@ class CreateMenu extends React.Component {
     this.updateMenuItem = this.updateMenuItem.bind(this);
     this.removeMenuItem = this.removeMenuItem.bind(this);
     this.renderMenu = this.renderMenu.bind(this);
+    this.removeTimeRange = this.removeTimeRange.bind(this);
+  }
+
+  removeTimeRange(key) {
+    this.state.timeRanges.splice(key, 1);
+    this.setState([...this.state.timeRanges], () => console.log(this.state));
   }
 
   addMenuItem(menuItem) {
     const timestamp = Date.now();
-
     this.state.categories[menuItem.idx].menuItems['menuItem-' + timestamp] = menuItem;
-
     this.setState({...this.state.categories[menuItem.idx].menuItems}, () => console.log(this.state));
   }
 
   updateMenuItem(key, menuItem) {
     this.state.categories[menuItem.idx].menuItems[key] = menuItem;
-
     this.setState({...this.state.categories[menuItem.idx].menuItems}, () => console.log(this.state));
   }
 
   removeMenuItem(key, menuItem) {
     delete this.state.categories[menuItem.idx].menuItems[key];
-    console.log(this.state);
-
-    this.setState({ ...this.state.categories[menuItem.idx].menuItems });
+    this.setState({ ...this.state.categories[menuItem.idx].menuItems }, () => console.log(this.state));
   }
   
 
@@ -84,7 +85,6 @@ class CreateMenu extends React.Component {
     return (
       <MenuContent
         menuItems={this.state.categories[key].menuItems}
-        category= {this.state.categories[key]}
         idx={key}
         addMenuItem={this.addMenuItem}
         updateMenuItem={this.updateMenuItem}
@@ -114,7 +114,7 @@ class CreateMenu extends React.Component {
         </select>
         <h3>Time Ranges</h3>
         <button onClick={this.addTimeRange}>Add new time range</button>
-        <TimeRangeInputs timeRanges={timeRanges}/>
+        <TimeRangeInputs timeRanges={timeRanges} removeTimeRange={this.removeTimeRange}/>
         <h2>Menu Content</h2>
         <button onClick={this.addCategory}>Add new category</button>
         {Object.keys(this.state.categories).map(this.renderMenu)}
