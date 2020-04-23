@@ -1,3 +1,8 @@
+/*
+  CreateMenu Component: This component is the base for the create menu page.
+  It is split up in displaying the Menu Information (name, time ranges, status) 
+  and the Menu Content (categories with menu items).
+*/
 import React from 'react';
 import TimeRangeInputs from './TimeRangeInputs';
 import './CSS/CreateMenu.css';
@@ -6,7 +11,7 @@ import MenuContent from './MenuContent';
 class CreateMenu extends React.Component {
   constructor() {
     super();
-
+    //this state will be passed to the backend after some manipulation
     this.state = {
       menuName: "",
       status: "",
@@ -19,34 +24,59 @@ class CreateMenu extends React.Component {
     this.removeMenuItem = this.removeMenuItem.bind(this);
     this.renderMenu = this.renderMenu.bind(this);
     this.removeTimeRange = this.removeTimeRange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.addTimeRange = this.addTimeRange.bind(this);
+    this.addCategory = this.addCategory.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  removeTimeRange(key) {
-    this.state.timeRanges.splice(key, 1);
-    this.setState([...this.state.timeRanges], () => console.log(this.state));
-  }
-
+  /*
+    Function: addMenuItem
+      This function is called when the user clicks the 'add item' after creating a menu item.
+      A time stamp is created and the menuItem is created under it's designated category.
+    Parameters:
+      menuItem: the menu item being added
+  */
   addMenuItem(menuItem) {
     const timestamp = Date.now();
-    this.state.categories[menuItem.idx].menuItems['menuItem-' + timestamp] = menuItem;
-    this.setState({...this.state.categories[menuItem.idx].menuItems}, () => console.log(this.state));
+    var menuItems =  this.state.categories[menuItem.idx].menuItems;
+    menuItems['menuItem-' + timestamp] = menuItem;
+    this.setState({ menuItems }, () => console.log(this.state));
   }
 
+  /*
+    Function: updateMenuItem
+      This function is called when the user changes any of the inputs to a menu item that has already been added by the user.
+    Parameters:
+      key: the index of the menu item in the menuItems object
+      menuItem: the menuItem to be updated
+  */
   updateMenuItem(key, menuItem) {
-    this.state.categories[menuItem.idx].menuItems[key] = menuItem;
-    this.setState({...this.state.categories[menuItem.idx].menuItems}, () => console.log(this.state));
+    var category = this.state.categories[menuItem.idx].menuItems;
+    category[key] = menuItem;
+    this.setState({ category }, () => console.log(this.state));
   }
 
+  /*
+    Function: removeMenuItem
+      This function is called when the user clicks the 'remove item' button.
+      The menu item will be removed from the view and the state
+    Parameters:
+      key: the index of the menu item in the menuItems object
+      menuItem: the menuItem to be deleted
+  */
   removeMenuItem(key, menuItem) {
     delete this.state.categories[menuItem.idx].menuItems[key];
     this.setState({ ...this.state.categories[menuItem.idx].menuItems }, () => console.log(this.state));
   }
-  
 
-  handleChange = (e) => {
-    console.log(e.target.dataset.id);
-    console.log(e.target.className);
-    console.log(e.target.value);
+  /*
+    Function: handleChange
+      This function is called when a change has been made to any of the inputs in the form.
+    Parameters:
+      event: the event object
+  */
+  handleChange(e) {
     if (["startTime", "endTime"].includes(e.target.className)) {
       let timeRanges = [...this.state.timeRanges];
       timeRanges[e.target.dataset.id][e.target.className] = e.target.value;
@@ -60,27 +90,66 @@ class CreateMenu extends React.Component {
     else {
       this.setState({ [e.target.name]: e.target.value });
     }
-    console.log(this.state);
   }
 
-  addTimeRange = (e) => {
+  /*
+    Function: addTimeRange
+      This function is called when the user clicks the 'add time range' button.
+      Another time range will be added to the view and the state.
+    Parameters:
+      event: event object from the onClick function
+  */
+  addTimeRange(e) {
     this.setState((prevState) => ({
       timeRanges: [...prevState.timeRanges, {startTime: "", endTime: ""}]
     }));
     console.log(this.state);
   }
 
-  addCategory = (e) => {
+  /*
+    Function: addCategory
+      This function is called when the user clicks the 'add category' button.
+      A category with an empty category name and an add menu item object will appear.
+    Parameters:
+      event: event object from the onClick function
+  */
+  addCategory(e) {
     this.setState((prevState) => ({
       categories: [...prevState.categories, {categoryName: "", menuItems: {}}]
     }));
     console.log(this.state);
   }
 
-  handleSubmit = (e) => {
+   /*
+    Function: handleSubmit
+      This function is called when the user clicks the save button. (STILL IN PROGRESS)
+    Parameters:
+      event: event object from the onClick function
+  */
+  handleSubmit(e) {
+    //TODO FUNCTIONALITY
     e.preventDefault();
   }
 
+  /*
+    Function: removeTimeRange
+      When the user clicks the 'remove time range' button, this function will remove the time range from the
+      state.
+    Parameters:
+      key: the index of the timeRange object in the timeRange array that the user would like to remove
+  */
+ removeTimeRange(key) {
+  var timeRanges = this.state.timeRanges;
+  timeRanges.splice(key, 1);
+  this.setState([...this.state.timeRanges], () => console.log(this.state));
+  }
+
+  /*
+    Function: renderMenu
+      This function is called for each category and will render the menu items for that category
+    Parameters:
+      key: the index of the current category being rendered
+  */
   renderMenu(key) {
     return (
       <MenuContent
@@ -93,8 +162,12 @@ class CreateMenu extends React.Component {
     
   }
   
+  /*
+    Function: render
+      This function renders the menu info and menu content to the page.
+  */
   render() {
-    let {menuName, status, timeRanges, categories, menuItems} = this.state;
+    let {menuName, status, timeRanges, categories} = this.state;
     return (
     <div className="createMenu">
       <div>
@@ -107,22 +180,22 @@ class CreateMenu extends React.Component {
         <h3 htmlFor="name">Menu Name</h3>
         <input type="text" name="menuName" id="menuName" defaultValue={menuName} />
         <h3 htmlFor="status">Menu Status</h3>
-        <select id="status" name="status" className="status">
+        <select id="status" name="status" className="status" defaultValue={status}>
             <option disabled selected value> -- select an status -- </option>
             <option value="active">Active</option>
             <option value="draft">Draft</option>
         </select>
         <h3>Time Ranges</h3>
         <button onClick={this.addTimeRange}>Add new time range</button>
-        <TimeRangeInputs timeRanges={timeRanges} removeTimeRange={this.removeTimeRange}/>
+        <TimeRangeInputs timeRanges={timeRanges} removeTimeRange={this.removeTimeRange} />
         <h2>Menu Content</h2>
         <button onClick={this.addCategory}>Add new category</button>
-        {Object.keys(this.state.categories).map(this.renderMenu)}
+        {Object.keys(categories).map(this.renderMenu)}
+        {/*TODO: FUNCTIONALITY FOR BUTTONS */}
         <button>Save</button>
         <button>Save and close</button>
         <button>Cancel</button>
       </form>
-      
     </div>     
     );
   }

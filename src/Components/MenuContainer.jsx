@@ -1,3 +1,9 @@
+/*
+    MenuContainer Component: This component renders the menu homepage. 
+    The user will see the menus previously created that they will be able to click on to edit.
+    The user will have the option to create a new menu.
+*/
+
 import React, { useState, useEffect } from 'react'
 import './CSS/MenuContainer.css'
 import { AgGridReact } from 'ag-grid-react';
@@ -9,12 +15,10 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
 export default function MenuContainer() {
     const [ curMenus, setCurMenus ] = useState([]);
-    const tableHeaders = [  {headerName: "Menu Name", field: "menuName", sortable: true, filter: true},
-                            {headerName: "Status", field: "status", sortable: true, filter: true},
-                            {headerName: "Start Time", field: "timeRange.start", sortable: true},
-                            {headerName: "End Time", field: "timeRange.stop", sortable: true},
-                            {headerName: "Date Created", field: "dateCreated", sortable: true},
-                            {headerName: "Last Date Edited", field: "dateEdited", sortable: true}];
+    const tableHeaders = [{headerName: "Menu Name", field: "menuName", sortable: true, filter: true},
+                            {headerName: "Status", field: "status", sortable: true, filter: true}];
+
+    //TODO: This is where I will make my get calls to retrieve previously made menus. This is just dummy data for now.
     useEffect( () => {
         // This is a useeffect that will pull all the menus from the API/DB once the page loads/mounts
         const menus = [
@@ -109,7 +113,10 @@ export default function MenuContainer() {
             }
         ]
         setCurMenus(menus);
-    }, [])
+    }, []);
+
+    //this renders the AgGrid containing the menus and it renders the create new menu button
+    //THIS IS A WIP
     return (
         <div className="menu-container">
             <h1 className="tickets-title" style={{textAlign:"center"}}>Menus</h1>

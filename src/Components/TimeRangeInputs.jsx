@@ -1,5 +1,9 @@
+/*
+    TimeRangeInputs Component: This component defines how a time range input is rendered.
+    This includes a start time, stop time, and an option to remove the time range.
+    The user is required to have at least one time range per menu.
+*/
 import React from "react";
-import TimePicker from 'react-time-picker';
 
 const TimeRangeInputs = (props) => {
     return (
@@ -27,6 +31,7 @@ const TimeRangeInputs = (props) => {
                         value={props.timeRanges[idx].endTime} 
                         className="endTime"
                     />
+                    {/*Only show remove button when there is more than one time range*/}
                     { props.timeRanges.length > 1 &&
                         <button onClick={() => props.removeTimeRange(idx)}>Remove Time Range</button>
                     }
