@@ -25,6 +25,7 @@ import React from 'react';
              description: this.description.value,
              idx: this.props.idx,
              price: this.price.value,
+             image: this.image.value,
              calories: this.calories.value,
          }
 
@@ -50,12 +51,14 @@ import React from 'react';
                     ref={(input) => { this.itemName = input}} />
                 <input type="text" placeholder="Menu Item Price"
                     ref={(input) => { this.price = input }} />
-                <textarea placeholder="Description"
-                    ref={(input) => { this.description= input}} />
                 <input type="text" placeholder="Calories"
                     ref={(input) => { this.calories = input}} />
+                <textarea placeholder="Description"
+                    ref={(input) => { this.description= input}} />
                 {/*ADD ALLERGENS HERE */}
                 {/*ADD FILE UPLOADER HERE */}
+                <input type='file' name='uploaded_file' accept='.png' 
+                    ref={(input) => {this.image = input}}/>
                 {/* This button will call createMenuItem */}
                 <button type="submit"> + Add Item </button>
             </form>

@@ -4,6 +4,7 @@
 
 import React from 'react';
 
+
 import AddMenuItemForm from './AddMenuItemForm';
 
 class MenuContent extends React.Component {
@@ -46,12 +47,15 @@ class MenuContent extends React.Component {
                     value={menuItem.itemName} onChange={(e) => this.handleChange(e, key)} />
                 <input type='text' placeholder='Menu Item Price' name='price'
                     value={menuItem.price} onChange={(e) => this.handleChange(e, key)} />
-                <textarea placeholder='Menu Item Description' name='description' value={menuItem.description}
-                    onChange={(e) => this.handleChange(e, key)} />
                 <input type='text' placeholder='Calories' name='calories'
                     value={menuItem.calories} onChange={(e) => this.handleChange(e, key)} />
+                <br></br>
+                <textarea placeholder='Menu Item Description' name='description' value={menuItem.description}
+                    onChange={(e) => this.handleChange(e, key)} />
                 {/*TODO: ADD ALLERGENS*/}
                 {/*TODO: ADD FILE UPLOADER*/}
+                <input type='file' name='uploaded_file' accept='.png' 
+                    onChange={(e) => this.handleChange(e, key)}/>
                 <button onClick = {() => this.props.removeMenuItem(key, menuItem)}>Remove Menu Item</button>
             </div>
         );
@@ -66,7 +70,7 @@ class MenuContent extends React.Component {
             <div>
                 <label>Category Name</label>
                 {/*TODO: CREATE A REMOVE CATEGORY BUTTON*/}
-                <input className="categoryName" data-id = {this.props.idx} onChange={this.onChange}></input>
+                <input className="categoryName" id="category-name" data-id = {this.props.idx} onChange={this.onChange}></input>
                 {Object.keys(this.props.menuItems).map(this.renderMenuContent)}
                 <AddMenuItemForm addMenuItem={this.props.addMenuItem} idx={this.props.idx} />
             </div>

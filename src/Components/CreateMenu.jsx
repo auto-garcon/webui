@@ -7,6 +7,7 @@ import React from 'react';
 import TimeRangeInputs from './TimeRangeInputs';
 import './CSS/CreateMenu.css';
 import MenuContent from './MenuContent';
+import { Link } from 'react-router-dom';
 
 class CreateMenu extends React.Component {
   constructor() {
@@ -174,9 +175,10 @@ class CreateMenu extends React.Component {
         <h1>Create Menu</h1>
       </div>
       <div>
-        <h2>Menu Information</h2>
+        
       </div>
       <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        <h2>Menu Information</h2>
         <h3 htmlFor="name">Menu Name</h3>
         <input type="text" name="menuName" id="menuName" defaultValue={menuName} />
         <h3 htmlFor="status">Menu Status</h3>
@@ -186,15 +188,19 @@ class CreateMenu extends React.Component {
             <option value="draft">Draft</option>
         </select>
         <h3>Time Ranges</h3>
-        <button onClick={this.addTimeRange}>Add new time range</button>
+        <button id="add-button" onClick={this.addTimeRange}>Add new time range</button>
         <TimeRangeInputs timeRanges={timeRanges} removeTimeRange={this.removeTimeRange} />
         <h2>Menu Content</h2>
-        <button onClick={this.addCategory}>Add new category</button>
+        <button id="add-button" onClick={this.addCategory}>Add new category</button>
         {Object.keys(categories).map(this.renderMenu)}
         {/*TODO: FUNCTIONALITY FOR BUTTONS */}
-        <button>Save</button>
-        <button>Save and close</button>
-        <button>Cancel</button>
+        <div className="save-buttons">
+          <button id="save-button">Save</button>
+          <Link to="/">
+            <button id="save-close-button">Save and close</button>
+          </Link>
+          <button id="cancel-button">Cancel</button>
+        </div>
       </form>
     </div>     
     );

@@ -25,7 +25,7 @@ export default function MenuContainer() {
             {
                 menuID: 1,
                 menuName: "Breakfast",
-                status: "Active",
+                status: "Draft",
                 type: "Specials",
                 timeRange:{
                     start: "07:00",
