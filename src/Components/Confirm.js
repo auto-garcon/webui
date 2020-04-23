@@ -47,27 +47,27 @@ export class Confirm extends Component {
     //.catch(err => console.log("FAILED", err));
 //
     //Restaurant infromation post 
-    fetch ('https://autogarcon.live/api/restaurant/add', {
-      method:"POST",
-      mode: 'no-cors',
-      headers: {
-        'Accept': '*/*',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin' : '*'
-      },
-      body: JSON.stringify({
-        restaurantName : this.props.values.restaurantName,
-        description : this.props.values.description,
-        address : this.props.values.address,
-        city : this.props.values.city,
-        zipcode : this.props.values.zipcode,
-        state : this.props.values.state,
-        country : this.props.values.country
-      })
-    })
-    .then(res => console.log(res))
-    .then(data => console.log(data))
-    .catch(err => console.log("FAILED", err));
+    //fetch ('https://autogarcon.live/api/restaurant/add', {
+    //  method:"POST",
+    //  mode: 'no-cors',
+    //  headers: {
+    //    'Accept': '*/*',
+    //    'Content-Type': 'application/json',
+    //    'Access-Control-Allow-Origin' : '*'
+    //  },
+    //  body: JSON.stringify({
+    //    restaurantName : this.props.values.restaurantName,
+    //    description : this.props.values.description,
+    //    address : this.props.values.address,
+    //    city : this.props.values.city,
+    //    zipcode : this.props.values.zipcode,
+    //    state : this.props.values.state,
+    //    country : this.props.values.country
+    //  })
+    //})
+    //.then(res => console.log(res))
+    //.then(data => console.log(data))
+    //.catch(err => console.log("FAILED", err));
   }
   back = e => {
     e.preventDefault();
@@ -75,7 +75,7 @@ export class Confirm extends Component {
   };
   render() {
     const {
-      values: { firstName, lastName, email, restaurantName, description, address, city, zipcode, state, country, /*numTables*/}
+      values: { firstName, lastName, email, restaurantName, description, address, city, zipcode, state, country, numTables}
     } = this.props;
 
     return (
@@ -121,9 +121,9 @@ export class Confirm extends Component {
             <ListItem>
               <ListItemText primary="Country" secondary={country} /> 
             </ListItem>
-           {/* <ListItem>
+           { <ListItem>
               <ListItemText primary="Number of tables" secondary={numTables} /> 
-           </ListItem>*/}
+           </ListItem>}
           </List>
           <br />
         
@@ -136,7 +136,7 @@ export class Confirm extends Component {
           <Button
             color="primary"
             variant="contained"
-            onClick={/*this.continue && */this.submit}
+            onClick={this.continue /*&& this.submit*/}
           >Confirm & Continue</Button>
             <Link to="/settings">
             <MDBCloseIcon style={{
