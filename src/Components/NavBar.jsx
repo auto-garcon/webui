@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button'
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import logo from './logo.jpeg';
@@ -29,8 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar(props) {
-  const {logout} = props;
+export default function MenuAppBar() {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -61,9 +59,6 @@ export default function MenuAppBar(props) {
           </Typography>
           {auth && (
             <div>
-              <Button variant="contained" color="inherit" onClick={logout} disableElevation>
-                <Typography>LOGOUT</Typography>
-              </Button>
               <Link to="/settings">
                 <IconButton
                   style={{ background: '#edf2f4' }}
