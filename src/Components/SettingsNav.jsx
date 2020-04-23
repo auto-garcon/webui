@@ -1,3 +1,6 @@
+/*This component is the app bar for the settings page. It is just a bar displayed on the settings page with three links.
+one for the account information page, another for qr generation and lastly one for display. 
+*/
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -5,6 +8,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
+import Settings from './Settings';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -24,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     
     
   },
+  
  
 
 }));
@@ -49,25 +55,23 @@ export default function MenuAppBar() {
   return (
     <div className={classes.root}  >
  
-      <AppBar position="static" style={{ background: '#edf2f4' }}>
+      <AppBar position="static" style={{ background: '#457b9d' }}>
         <Toolbar> 
-
-
-          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
+          <Typography variant="h6" className={classes.title} style={{ color: '#edf2f4' }}>
             <strong>Settings</strong>
+          </Typography>
+          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
+          <Link style={{ color: '#2b2d42' }} href="/settings/userform" >Account Information</Link>
+          </Typography>
+          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
+          <Link style={{ color: '#2b2d42' }} href="/settings/qr" >QR Generation</Link>
+          </Typography>
+          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
+          <Link style={{ color: '#2b2d42' }} href="/settings/display" >Display</Link>
           </Typography>
           {auth && (
             <div>
-              <IconButton
-              style={{ background: '#edf2f4' }}
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-          
-              </IconButton >
+           
               <Menu
               
                 id="menu-appbar"

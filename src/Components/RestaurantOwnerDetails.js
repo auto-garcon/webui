@@ -1,3 +1,6 @@
+/*This component holds a form that updates the account with restaurant owner information. 
+it handles input fields such as the the owners first and last name, email, and address.
+*/
 import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
@@ -6,6 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core/styles';
+import { MDBCloseIcon } from "mdbreact";
+import { Link } from 'react-router-dom';
+
 
 const theme = createMuiTheme({
     palette: {
@@ -13,8 +19,12 @@ const theme = createMuiTheme({
       secondary: { main: "#03a9f4", contrastText: "#fff" }
     }
   });
-
-export class FormUserDetails extends Component {
+  const CloseIconPage = () => {
+    return (
+      <MDBCloseIcon />
+    );
+  }
+export class RestaurantOwnerDetails extends Component {
   continue = e => {
     e.preventDefault();
     this.props.nextStep();
@@ -67,6 +77,15 @@ export class FormUserDetails extends Component {
               variant="contained"
               onClick={this.continue}
             >Continue</Button>
+            <Link to="/settings">
+            <MDBCloseIcon style={{
+              color: "primary",
+              position: 'absolute',
+              right: 5,
+              top: 5,
+              
+            }}/>
+            </Link>
           </Dialog>
         </React.Fragment>
       </MuiThemeProvider>
@@ -74,4 +93,4 @@ export class FormUserDetails extends Component {
   }
 }
 
-export default FormUserDetails;
+export default  RestaurantOwnerDetails ;

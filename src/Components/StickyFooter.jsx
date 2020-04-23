@@ -1,3 +1,6 @@
+/*This is the static sticky footer with the auto-garcon copy right sign and the about and contact links. 
+This is standard and loaded on to every page. 
+*/
 import React from 'react';
 import {Link} from 'react-router-dom';
 
@@ -12,8 +15,7 @@ export default function StickyFooter() {
         {new Date().getFullYear()}
         {'.'}
       </div>
-      <Link className="Footer-Link" id="Footer-Nav-Link" to="/about">About</Link>
-      <Link className="Footer-Link" id="Footer-Nav-Link" to="/contact"> Contact Us </Link>
+      <Link className="Footer-Link" id="Footer-Nav-Link" to="/about">About & Contact</Link>
     </div>
   );
 }

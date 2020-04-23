@@ -1,9 +1,13 @@
+/* This is the parent component for updating the accound information. this contains the module design where there is a 
+multistep form process to fill out the information.
+*/
 import React, { Component } from 'react';
-import FormUserDetails from './FormUserDetails';
-import FormPersonalDetails from './FormPersonalDetails';
+import RestaurantInfo from './RestaurantInfo';
+import RestaurantOwnerInfo from './RestaurantOwnerDetails';
 import Confirm from './Confirm';
 import Success from './Success';
 import AppBar from '@material-ui/core/AppBar';
+
 
 export class UserForm extends Component {
   state = {
@@ -12,8 +16,13 @@ export class UserForm extends Component {
     lastName: '',
     email: '',
     restaurantName: '',
-    restaurantAddress: ''
-  
+    description: '',
+    address: '',
+    city:'',
+    zipcode: '',
+    state: '',
+    country:'',
+    numTables: ''
   };
 
   // Proceed to next step
@@ -39,14 +48,14 @@ export class UserForm extends Component {
 
   render() {
     const { step } = this.state;
-    const { firstName, lastName, email, restaurantName, restaurantAddress } = this.state;
-    const values = { firstName, lastName, email, restaurantName, restaurantAddress };
+    const { firstName, lastName, email, restaurantName, description, address, city, zipcode, state, country, numTables} = this.state;
+    const values = { firstName, lastName, email, restaurantName, description, address, city, zipcode, state, country, numTables };
 
     switch (step) {
       case 1:
         return (
             
-          <FormUserDetails
+          <RestaurantOwnerInfo
             nextStep={this.nextStep}
             handleChange={this.handleChange}
             values={values}
@@ -54,7 +63,7 @@ export class UserForm extends Component {
         );
       case 2:
         return (
-          <FormPersonalDetails
+          <RestaurantInfo
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
