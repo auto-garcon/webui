@@ -1,3 +1,7 @@
+/* This is the standard nav bar component seen from all pages besides the login. From this page, the main logo is shown and the user can click
+on the logo at any point to return to the dash board. The nav bar also has the settings icon where the user can click on the avatar
+and be directed to the settings page. 
+*/
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';

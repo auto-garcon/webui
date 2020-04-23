@@ -1,7 +1,12 @@
+/* This is the main app js component. this is where we have all components
+that are featured on every page stored. this includes login and logout functionality,
+routing and sign in authentication.
+ */
+
 import React from 'react';
 import './App.css';
 import Dashboard from './Components/Dashboard';
-import Contact from './Components/Contact';
+//import Contact from './Components/Contact';
 import About from './Components/About';
 import NavBar from './Components/NavBar';
 import GoogleLogin from 'react-google-login';
@@ -128,7 +133,7 @@ export default class App extends React.Component {
               <NavBar />
               <Route exact={true} path="/" component={Dashboard}></Route>
               <Route path="/about" component={About}></Route>
-              <Route path="/contact" component={Contact}></Route>
+    
               <Route path="/settings">
                 <Settings restid={1234} tables={5}/>
               </Route>

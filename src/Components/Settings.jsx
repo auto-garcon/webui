@@ -1,3 +1,6 @@
+/*This component is for the settings. this provides all of the routing for the three settings pages
+which are QR generation, account information and display page. 
+*/
 import React from 'react';
 import { 
   BrowserRouter as Router,
@@ -6,7 +9,6 @@ import {
   Link
 } from 'react-router-dom';
 import QR from './QR';
-import Account from './AccountInfo';
 import Display from './Display';
 import StickyFooter from './StickyFooter';
 import SettingsNav from './SettingsNav';
@@ -18,7 +20,7 @@ export default function Settings(props) {
       <>
       <SettingsNav/>
       <Router>
-          <div>
+        {/*}  <div>
             <ul>
             <li>
                 <Link to="/settings/userform">Account Information</Link>
@@ -32,7 +34,7 @@ export default function Settings(props) {
               </li>
             </ul>
           </div>
-      
+    */}
        <Switch> 
         <Route path ='/settings/qr' exact>
           <QR 
