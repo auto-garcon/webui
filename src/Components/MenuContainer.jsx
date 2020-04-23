@@ -16,7 +16,11 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 export default function MenuContainer() {
     const [ curMenus, setCurMenus ] = useState([]);
     const tableHeaders = [{headerName: "Menu Name", field: "menuName", sortable: true, filter: true},
-                            {headerName: "Status", field: "status", sortable: true, filter: true}];
+                            {headerName: "Status", field: "status", sortable: true, filter: true},
+                            {headerName: "Start Time", field: "timeRange.start", sortable: true},
+                            {headerName: "End Time", field: "timeRange.stop", sortable: true},
+                            {headerName: "Date Created", field: "dateCreated", sortable: true},
+                            {headerName: "Last Date Edited", field: "dateEdited", sortable: true}];
 
     //TODO: This is where I will make my get calls to retrieve previously made menus. This is just dummy data for now.
     useEffect( () => {

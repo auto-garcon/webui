@@ -158,6 +158,8 @@ html, body{
   width: 50%;
   padding: 12px 20px;
   box-sizing: border-box;
+  font-size: 1rem;
+  border: 0;
 }
 
 #save-button,
