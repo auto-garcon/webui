@@ -6,10 +6,8 @@ label  {
 form {
     margin: 1rem auto;
     padding: 1rem;
-    background-color: #8D99AE;
-}
-button {
-    display: block;
+    width: 75%;
+    background-color: #edf2f4;
 }
 
 .createMenu input {
@@ -41,6 +39,7 @@ input[type=text]:focus {
     display: block;
     margin-bottom: 1rem;
 }
+
 
 
 

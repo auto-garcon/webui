@@ -1,25 +1,30 @@
-html, body{
-  margin: auto;
+html{
+  
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
-  background-color:#8d99ae;
+  background-color: black;
 }
 
-.App {
-  height: 100%;
-  width: 100%;
+.Login-Modal-Container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .Login-Modal {
-  min-width: 250px;
+  position: absolute;;
+  max-width: 300px;
   background-color: #edf2f4;
   text-align: center;
-  border-radius: 3em;
+  border-radius: 1em;
   border: 2px solid #2b2d42;
-  padding: 25px;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 250px;
+  padding: 20px;
+  opacity: .8;
 }
 
 .Login-Header {
@@ -69,4 +74,114 @@ html, body{
 	100% {
 		transform: translatey(0px);
 	}
+}
+
+.menuItem-edit button {
+  width: 625px;
+  border: 0;
+  padding: 10px;
+  line-height: 1;
+  font-size: 1rem;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+  background: #fff;
+}
+
+.menuItem-edit input:last-of-type {
+  width: 625px;
+}
+.menuItem-edit textarea {
+  display: block;
+  height: 3rem;
+  width: 603px;
+  overflow: auto;
+  padding: 10px;
+  line-height: 1;
+  font-size: 1rem;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+  background: #fff;
+}
+
+.menuItem-edit input:focus,
+.menuItem-edit textarea:focus,
+.menuItem-edit select:focus {
+  outline: 0;
+  background: #edf2f4;
+}
+
+.menuItem-edit input,
+.menuItem-edit select
+{
+  width: 33.33%;
+  padding: 10px;
+  line-height: 1;
+  font-size: 1rem;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+  background: #fff;
+}
+
+.menuItem-edit {
+  margin: 20px;
+}
+
+#add-button {
+  width: 25%;
+  margin-bottom: 10px;
+  padding: 10px;
+  line-height: 1;
+  font-size: 1rem;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+  background: #fff;
+  display: block;
+}
+
+#menuName,
+#category-name {
+  width: 50%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border: 0;
+}
+
+#save-button,
+#save-close-button,
+#cancel-button {
+  width: 25%;
+  margin: 10px;
+  padding: 10px;
+  line-height: 1;
+  font-size: 1rem;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+  background: #fff;
+  display: inline-block;
 }
