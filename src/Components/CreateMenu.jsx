@@ -172,7 +172,7 @@ class CreateMenu extends React.Component {
     return (
     <div className="createMenu">
       <div>
-        <h1>Create Menu</h1>
+        <h1 style= {{color: "#edf2f4"}}>Create Menu</h1>
       </div>
       <div>
         

@@ -29,7 +29,7 @@ function Display() {
 
     return (
       <div >
-        <h1>Display</h1>
+        <h1 style= {{color: "#edf2f4"}}>Display</h1>
         <p style= {{color: "#edf2f4"}}> Choose the Restaurant Logo</p>
         <MyComponent/>
         <p>Pick your two restaurant colors</p>

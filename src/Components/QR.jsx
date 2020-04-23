@@ -23,7 +23,7 @@ export default class QR extends React.Component {
     console.log(this.state.codes);
     return (
       <div className="QR">
-        <h1>Generated QR Codes</h1>
+        <h1 style= {{color: "#edf2f4"}}>Generated QR Codes</h1>
         
         <ul>
           {this.state.codes.map(code => {
