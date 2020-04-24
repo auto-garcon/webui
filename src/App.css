@@ -5,6 +5,13 @@ html{
   background-color: black;
 }
 
+.App {
+  padding: 0;
+  margin: auto 0;
+  top: 0;
+  left: 0;
+}
+
 .Login-Modal-Container {
   position: relative;
   height: 100vh;
@@ -15,6 +22,12 @@ html{
   overflow: hidden;
   overflow-y: hidden;
 }
+
+.Ticket-List-Container {
+  display: flex;
+  list-style-type: none;  
+}
+
 
 .Login-Modal {
   position: absolute;;

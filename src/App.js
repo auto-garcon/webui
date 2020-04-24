@@ -15,11 +15,18 @@ import LoginVid from './Components/Images/Login-VID.mp4';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
-// const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
+/** Test Google login keys and API links */
+//const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
+const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
 // const PRODAPI = "https://autogarcon.live/api/users/newuser"
 // const DEVAPI = "http://localhost/api/users/newuser"
 
+/**
+ * The App class component is the root of this application.
+ * Here we handle authentication state and routing to 
+ * every other part of the application once authentication 
+ * can be confirmed.
+ */
 export default class App extends React.Component {
 
   constructor(props) {
@@ -64,7 +71,7 @@ export default class App extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount() { // Checks for auth when the page loads
     authenticate().then(isAuthenticated => {
       this.setState({ isAuthed: isAuthenticated })
     })
@@ -89,7 +96,7 @@ export default class App extends React.Component {
                   <LockOutlinedIcon color="inherit" />
                   <br></br>
                   <GoogleLogin
-                    clientId={DEV}
+                    clientId={PROD}
                     buttonText="Continue with Google"
                     onSuccess={this.state.responseGoogle}
                     onFailure={this.state.responseGoogle}
