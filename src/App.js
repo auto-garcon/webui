@@ -22,11 +22,18 @@ import {BrowserRouter as Router, Route } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 
+/** Test Google login keys and API links */
 const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
 // const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
 // const PRODAPI = "https://autogarcon.live/api/users/newuser"
 // const DEVAPI = "http://localhost/api/users/newuser"
 
+/**
+ * The App class component is the root of this application.
+ * Here we handle authentication state and routing to
+ * every other part of the application once authentication
+ * can be confirmed.
+ */
 export default class App extends React.Component {
 
   constructor(props) {
@@ -67,7 +74,7 @@ export default class App extends React.Component {
             this.setState({ isAuthed: isAuthenticated})
           })
         }
-      } 
+      }
     }
     //restaurant owner
    //fetch(DEVAPI, {
@@ -84,7 +91,7 @@ export default class App extends React.Component {
     //.then(res => console.log(res))
     //.then(data => console.log(data))
     //.catch(err => console.log("FAILED", err));
- 
+
     ////restaurant info
     //fetch(DEVAPI, {
     //  method: 'POST',
@@ -102,7 +109,7 @@ export default class App extends React.Component {
   //
   }
 
-  componentDidMount() {
+  componentDidMount() { // Checks for auth when the page loads
     authenticate().then(isAuthenticated => {
       this.setState({ isAuthed: isAuthenticated })
     })
@@ -112,46 +119,46 @@ export default class App extends React.Component {
     return (
       <div className = "App">
         { !this.state.isAuthed ? (
-          <div className="Login-Modal-Container">
-            <video className="Login-Vid" autoPlay loop mute="true">
-              <source src={LoginVid}></source>
-            </video>
-              <div className="Login-Modal">
-                <div className="Login-Header"> 
+          <section className="Login-Container-Wrapper">
+            <div className="video-container">
+              <video src={LoginVid} autoPlay={true} muted={true} loop={true}/>
+            </div>
+            <div className="Login-Modal-Container">
+              <div className={"Login-Modal"}>
+                <div className={"Login-Header"}>
                   <header className="App-header">
-                    <img src={LogoLarge} className="App-logo" alt="logo" />
-                    <h1>AUTO-GARCON</h1>
-                  </header>
+                     <img src={LogoLarge} className="App-logo" alt="logo" />
+                     <h1>AUTO-GARCON</h1>
+                   </header>
                 </div>
-                <div className="Login-Container">
+                <div className={"Login-Container"}>
                   <LockOutlinedIcon color="inherit" />
-                  <br></br>
+                  <br/>
                   <GoogleLogin
-                    clientId={DEV}
-                    buttonText="Continue with Google"
-                    onSuccess={this.state.responseGoogle}
-                    onFailure={this.state.responseGoogle}
+                      buttonText="Continue with Google"
+                      onSuccess={this.state.responseGoogle}
+                      onFailure={this.state.responseGoogle}
+                      clientId={DEV}
                   />
                 </div>
               </div>
-          </div>
-        ) : ( 
+            </div>
+          </section>
+        ) : (
             <Router>
               <NavBar logout={this.state.logout} />
-              <Route exact={true} path="/" component={Dashboard}>
-              </Route>
-              <Route path="/about" component={About}></Route>
-    
+              <Route exact={true} path="/" component={Dashboard}/>
+              <Route path="/about" component={About}/>
               <Route path="/settings">
                 <Settings restid={1234} tables={5}/>
               </Route>
-              <Route path="/createmenu" component={CreateMenu}></Route>
+              <Route path="/createmenu" component={CreateMenu}/>
               <Footer />
             </Router>
         )}
       </div>
     )
-  } 
+  }
 }
 
 /**
@@ -162,6 +169,5 @@ export const getAccessToken = () => Cookies.get('access_token_autog');
 export const isAuthenticated = () => !!getAccessToken();
 export const authenticate = async (response) => {
   console.log(getAccessToken());
-  if (typeof getAccessToken() !== 'undefined') { return true; }
-  return false;
+  return typeof getAccessToken() !== 'undefined';
 }

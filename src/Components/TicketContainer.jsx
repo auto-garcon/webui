@@ -131,7 +131,24 @@ export default function TicketContainer() {
 
   return (
     <div className="tickercontainer-container">
-    <h1 className="tickets-title" style={{textAlign:"center"}}>Active Tickets</h1>
+      <ul className="Ticket-List-Container">
+        <li>
+          <div id="Active-Ticket-Container" className="Ticket-Container">
+            <h1>ACTIVE TICKETS</h1>
+          </div>
+        </li>
+        <li>
+          <div id="Resolved-Ticket-Container" className="Ticket-Container">
+            <h1>RESOLVED TICKETS</h1>
+          </div>
+        </li>
+        <li>
+          <div id="Serice-Ticket-Container" className="Ticket-Container">
+            <h1>SERVICE TICKETS</h1>
+          </div>
+        </li>
+      </ul>
+    {/* <h1 className="tickets-title" style={{textAlign:"center"}}>Active Tickets</h1>
       <table style={{width:"50%", borderCollapse: "collapse"}}>
         <tr>
           {curTickets.map(ticket => (
@@ -145,7 +162,7 @@ export default function TicketContainer() {
           </td>
         ))}
         </tr>
-      </table>      
+      </table> */}
     </div>
   );
 }
