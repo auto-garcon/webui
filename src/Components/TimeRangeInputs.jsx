@@ -1,5 +1,9 @@
+/*
+    TimeRangeInputs Component: This component defines how a time range input is rendered.
+    This includes a start time, stop time, and an option to remove the time range.
+    The user is required to have at least one time range per menu.
+*/
 import React from "react";
-import TimePicker from 'react-time-picker';
 
 const TimeRangeInputs = (props) => {
     return (
@@ -7,27 +11,31 @@ const TimeRangeInputs = (props) => {
             let timeRangeId = `timeRange-${idx}`;
             let startId = `start-${idx}`;
             let endId = `end-${idx}`;
+
             return (
                 <div key={idx} className="time-range">
-                    <label htmlFor={timeRangeId}>{`Time Range #${idx+1}`}</label>
+                    <label htmlFor={timeRangeId}>Time Range</label>
                     <label htmlFor={startId}>Start Time</label>
-                    <TimePicker
-                        name={startId}
+                    <input 
+                        type="time" 
                         data-id={idx}
-                        id={startId}
+                        name={startId}
                         value={props.timeRanges[idx].startTime} 
                         className="startTime"
-                        disableClock='true'
                     />
                     <label htmlFor={endId}>End Time</label>
-                    <TimePicker
-                        name={endId}
+                    <input 
+                        type="time" 
                         data-id={idx}
-                        id={endId}
+                        name={endId}
                         value={props.timeRanges[idx].endTime} 
                         className="endTime"
-                        disableClock='true'
                     />
+                    {/*Only show remove button when there is more than one time range*/}
+                    { props.timeRanges.length > 1 &&
+                        <button onClick={() => props.removeTimeRange(idx)}>Remove Time Range</button>
+                    }
+                    
                 </div>
             );
         })

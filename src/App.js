@@ -1,13 +1,19 @@
+/* This is the main app js component. this is where we have all components
+that are featured on every page stored. this includes login and logout functionality,
+routing and sign in authentication.
+ */
+
 import React from 'react';
 import './App.css';
 import Dashboard from './Components/Dashboard';
-import Contact from './Components/Contact';
+//import Contact from './Components/Contact';
 import About from './Components/About';
 import NavBar from './Components/NavBar';
 import GoogleLogin from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 //import LinearProgress from '@material-ui/core/LinearProgress';
 import LogoLarge from './Components/Images/AutoGarcon-Logo-Large.png';
+
 import Settings from './Components/Settings';
 import Footer from './Components/StickyFooter'
 import CreateMenu from './Components/CreateMenu';
@@ -15,9 +21,10 @@ import LoginVid from './Components/Images/Login-VID.mp4';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+
 /** Test Google login keys and API links */
-//const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
-const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
+const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
+//const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
 // const PRODAPI = "https://autogarcon.live/api/users/newuser"
 // const DEVAPI = "http://localhost/api/users/newuser"
 
@@ -69,6 +76,37 @@ export default class App extends React.Component {
         }
       }
     }
+    //restaurant owner
+   //fetch(DEVAPI, {
+
+   //  method: 'POST',
+    //  mode: 'no-cors',
+    //  headers: {
+    //    'Accept': '*/*',
+    //    'Content-Type': 'application/json',
+    //    'Access-Control-Allow-Origin' : '*'
+    //  },
+    //  body: JSON.stringify({firstName:firstName},{lastName:lastName},{email:email})
+    //})
+    //.then(res => console.log(res))
+    //.then(data => console.log(data))
+    //.catch(err => console.log("FAILED", err));
+ 
+    ////restaurant info
+    //fetch(DEVAPI, {
+    //  method: 'POST',
+    //  mode: 'no-cors',
+    //  headers: {
+    //    'Accept': '*/*',
+    //    'Content-Type': 'application/json',
+    //    'Access-Control-Allow-Origin' : '*'
+    //  },
+    //  body: JSON.stringify({restaurantName:restaurantName},{restaurantAddress:restaurantAddress})
+    //})
+    //.then(res => console.log(res))
+    //.then(data => console.log(data))
+    //.catch(err => console.log("FAILED", err));
+  //
   }
 
   componentDidMount() { // Checks for auth when the page loads
@@ -110,6 +148,7 @@ export default class App extends React.Component {
               <Route exact={true} path="/" component={Dashboard}/>
               <Route path="/about" component={About}/>
               <Route path="/contact" component={Contact}/>
+
               <Route path="/settings">
                 <Settings restid={1234} tables={5}/>
               </Route>
