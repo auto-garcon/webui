@@ -23,8 +23,8 @@ const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercont
 
 /**
  * The App class component is the root of this application.
- * Here we handle authentication state and routing to 
- * every other part of the application once authentication 
+ * Here we handle authentication state and routing to
+ * every other part of the application once authentication
  * can be confirmed.
  */
 export default class App extends React.Component {
@@ -67,7 +67,7 @@ export default class App extends React.Component {
             this.setState({ isAuthed: isAuthenticated})
           })
         }
-      } 
+      }
     }
   }
 
@@ -83,10 +83,10 @@ export default class App extends React.Component {
         { !this.state.isAuthed ? (
           <div className="Login-Modal-Container">
             <video className="Login-Vid" autoPlay loop mute="true">
-              <source src={LoginVid}></source>
+              <source src={LoginVid}/>
             </video>
               <div className="Login-Modal">
-                <div className="Login-Header"> 
+                <div className="Login-Header">
                   <header className="App-header">
                     <img src={LogoLarge} className="App-logo" alt="logo" />
                     <h1>AUTO-GARCON</h1>
@@ -104,23 +104,22 @@ export default class App extends React.Component {
                 </div>
               </div>
           </div>
-        ) : ( 
+        ) : (
             <Router>
               <NavBar logout={this.state.logout} />
-              <Route exact={true} path="/" component={Dashboard}>
-              </Route>
-              <Route path="/about" component={About}></Route>
-              <Route path="/contact" component={Contact}></Route>
+              <Route exact={true} path="/" component={Dashboard}/>
+              <Route path="/about" component={About}/>
+              <Route path="/contact" component={Contact}/>
               <Route path="/settings">
                 <Settings restid={1234} tables={5}/>
               </Route>
-              <Route path="/createmenu" component={CreateMenu}></Route>
+              <Route path="/createmenu" component={CreateMenu}/>
               <Footer />
             </Router>
         )}
       </div>
     )
-  } 
+  }
 }
 
 /**
