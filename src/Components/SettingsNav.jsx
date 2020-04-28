@@ -60,15 +60,7 @@ export default function MenuAppBar() {
           <Typography variant="h6" className={classes.title} style={{ color: '#edf2f4' }}>
             <strong>Settings</strong>
           </Typography>
-          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
-          <Link style={{ color: '#2b2d42' }} href="/settings/userform" >Account Information</Link>
-          </Typography>
-          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
-          <Link style={{ color: '#2b2d42' }} href="/settings/qr" >QR Generation</Link>
-          </Typography>
-          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
-          <Link style={{ color: '#2b2d42' }} href="/settings/display" >Display</Link>
-          </Typography>
+         
           {auth && (
             <div>
            

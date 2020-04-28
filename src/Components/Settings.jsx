@@ -13,6 +13,8 @@ import Display from './Display';
 import StickyFooter from './StickyFooter';
 import SettingsNav from './SettingsNav';
 import UserForm from './UserForm';
+import Typography from '@material-ui/core/Typography';
+
 
 export default function Settings(props) {
   const { restid, tables } = props;
@@ -20,21 +22,22 @@ export default function Settings(props) {
       <>
       <SettingsNav/>
       <Router>
-        {/*}  <div>
+          <div>
             <ul>
             <li>
-                <Link to="/settings/userform">Account Information</Link>
+                
+                <Link style= {{color: "#edf2f4"}}to="/settings/userform">Account Information</Link>
               </li>
               <li>
-                <Link to="/settings/qr">QR Code Generation</Link>
+                <Link style= {{color: "#edf2f4"}}to="/settings/qr">QR Code Generation</Link>
               </li>
            
               <li>
-                <Link to="/settings/display">Display</Link>
+                <Link style= {{color: "#edf2f4"}}to="/settings/display">Display</Link>
               </li>
             </ul>
           </div>
-    */}
+    
        <Switch> 
         <Route path ='/settings/qr' exact>
           <QR 
