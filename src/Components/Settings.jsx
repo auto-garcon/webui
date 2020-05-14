@@ -31,10 +31,6 @@ export default function Settings(props) {
               <li>
                 <Link style= {{color: "#edf2f4"}}to="/settings/qr">QR Code Generation</Link>
               </li>
-           
-              <li>
-                <Link style= {{color: "#edf2f4"}}to="/settings/display">Display</Link>
-              </li>
             </ul>
           </div>
     

@@ -12,9 +12,6 @@ import AppBar from '@material-ui/core/AppBar';
 export class UserForm extends Component {
   state = {
     step: 1,
-    firstName: '',
-    lastName: '',
-    email: '',
     restaurantName: '',
     description: '',
     address: '',
@@ -22,7 +19,9 @@ export class UserForm extends Component {
     zipcode: '',
     state: '',
     country:'',
-    numTables: ''
+    numTables: '',
+    primaryColor: '',
+    secondaryColor: ''
   };
 
   // Proceed to next step
@@ -48,8 +47,8 @@ export class UserForm extends Component {
 
   render() {
     const { step } = this.state;
-    const { firstName, lastName, email, restaurantName, description, address, city, zipcode, state, country, numTables} = this.state;
-    const values = { firstName, lastName, email, restaurantName, description, address, city, zipcode, state, country, numTables };
+    const { restaurantName, description, address, city, zipcode, state, country, numTables, primaryColor, secondaryColor} = this.state;
+    const values = {restaurantName, description, address, city, zipcode, state, country, numTables, primaryColor, secondaryColor};
 
     switch (step) {
       case 1:
