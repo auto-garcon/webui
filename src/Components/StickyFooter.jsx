@@ -1,5 +1,5 @@
-/*This is the static sticky footer with the auto-garcon copy right sign and the about and contact links. 
-This is standard and loaded on to every page. 
+/*This is the static sticky footer with the auto-garcon copy right sign and the about and contact links.
+This is standard and loaded on to every page.
 */
 import React from 'react';
 import {Link} from 'react-router-dom';

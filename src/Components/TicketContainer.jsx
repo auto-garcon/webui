@@ -1,168 +1,98 @@
 import React, { useEffect, useState } from 'react';
-//import logo from './AUTO-GARCON-4.jpeg';
 import './CSS/TicketContainer.css';
-import Ticket from './Ticket'
-//var Link = require('react-router-dom').Link
+import TicketList from './TicketList';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import {useGoogleLogin} from "react-google-login";
 
-export default function TicketContainer() {
-  const [ curTickets, setCurTickets ] = useState([]); // Holds the state of the number of tickets we current'y have
-
-  useEffect( () => {
-    // This is a useeffect that will pull all the tickets from the API/DB once the page loads/mounts
-    const tickets = [
-      {
-        tableid: '1',
-        customerid: '1234',
-        tableColor: "lightblue",
-        chargeAmount: 37.50,
-        customerName: 'TBevs',
-        numMenuItems: 2,
-        status: 'open',
-        items: [
-          {
-            itemName: 'Cowboy Burger',
-            price: 15.50, // This item object could expand to more stuff
-            customizations: 'no pickles'
-          },
-          {
-            itemName: 'Street Tacos Pork',
-            price: 11.00,
-            customizations: 'no onions'
-          },
-          {
-            itemName: 'Street Tacos Beef',
-            price: 11.00,
-            customizations: 'no onions, extra cilantro'
-          }
-        ]
-      },
-      {
-        tableid: '2',
-        customerid: '5678',
-        tableColor: "grey",
-        chargeAmount: 12.34,
-        customerName: 'Mugdha D.',
-        numMenuItems: 2,
-        status: 'open',
-        items: [
-          {
-            itemName: "Sausage Pizza",
-            price: 12.34,
-            customizations: 'add bacon, extra chese, light sauce'
-          }
-        ]
-      },
-      {
-        tableid: '3',
-        customerid: '0000',
-        tableColor: "green",
-        customerName: 'Jason Sawin',
-        numMenuItems: 2,
-        status: 'open',
-        chargeAmount: 108.75,
-        items: [
-          {
-            itemName: 'King Crab',
-            price: 50.00,
-            customizations: 'extra butter sauce'
-          },
-          {
-            itemName: 'Lobster Tail',
-            price: 58.75,
-            customizations: ' '
-          }
-        ]
-      },
-      {
-        tableid: '4',
-        tableColor: "red",
-        customerid: '0000',
-        customerName: 'Summer A.',
-        numMenuItems: 4,
-        status: 'open',
-        chargeAmount: 67.75,
-        items: [
-          {
-            itemName: 'Stuffed Mushrooms',
-            price: 8.75,
-            customizations: 'extra garlic sauce'
-          },
-          {
-            itemName: 'Fried Fish',
-            price: 13.00,
-            customizations: 'extra crunch'
-          },
-          {
-            itemName: 'Garden Salad',
-            price: 29.00,
-            customizations: 'no tomatoes'
-          },
-          {
-            itemName: 'Ice Cream Sunday',
-            price: 23.00,
-            customizations: '8 scoops, no chocolate syrup'
-          }
-        ]
-      },
-      {
-        tableid: '5',
-        customerid: '0000',
-        tableColor: "orange",
-        customerName: 'Riley T.',
-        numMenuItems: 2,
-        status: 'open',
-        chargeAmount: 108.75,
-        items: [
-          {
-            itemName: 'Fried Chicken',
-            price: 50.00,
-            customizations: 'extra spicy'
-          },
-          {
-            itemName: 'Lobster Tail',
-            price: 58.75,
-            customizations: ' '
-          }
-        ]
-      }
-    ]
-    setCurTickets(tickets);
-  }, []); 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <div className="tickercontainer-container">
-      <ul className="Ticket-List-Container">
-        <li>
-          <div id="Active-Ticket-Container" className="Ticket-Container">
-            <h1>ACTIVE TICKETS</h1>
-          </div>
-        </li>
-        <li>
-          <div id="Resolved-Ticket-Container" className="Ticket-Container">
-            <h1>RESOLVED TICKETS</h1>
-          </div>
-        </li>
-        <li>
-          <div id="Serice-Ticket-Container" className="Ticket-Container">
-            <h1>SERVICE TICKETS</h1>
-          </div>
-        </li>
-      </ul>
-    {/* <h1 className="tickets-title" style={{textAlign:"center"}}>Active Tickets</h1>
-      <table style={{width:"50%", borderCollapse: "collapse"}}>
-        <tr>
-          {curTickets.map(ticket => (
-            <th style={{backgroundColor: ticket.tableColor}}><h1><strong>Table #</strong> {ticket.tableid}</h1></th>
-          ))}
-        </tr>
-        <tr>
-        {curTickets.map( (ticket, i) => (
-          <td>
-            <Ticket ticket={ticket} key={i}/>
-          </td>
-        ))}
-        </tr>
-      </table> */}
-    </div>
+      <Typography
+          component="div"
+          role="tabpanel"
+          id={`simple-tabpanel-${index}`}
+          aria-labelledby={`simple-tab-${index}`}
+          {...other}
+      >
+        {value === index && <Box p={3}>{children}</Box>}
+      </Typography>
   );
 }
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+export default function TicketContainer() {
+  const [curTickets, setCurTickets] = useState([]);
+  const [activeTickets, setActiveTickets] = useState([1,2,3,4,5]);
+  const [resolvedTickets, setResolvedTickets] = useState([]);
+  const [serviceTickets, setServiceTickets] = useState([1,2]);
+  const [value, setValue] = React.useState(0);
+  const classes = useStyles();
+  const proxy_url = "https://agile-reef-08348.herokuapp.com/";
+
+  useEffect( () => {
+    // // This is a useeffect that will pull all the tickets from the API/DB once the page loads/mounts
+    // fetch(proxy_url + "https://autogarcon.live/api/restaurant/5/order", {
+    //   method: 'GET',
+    //   mode: "cors",
+    //   headers: {
+    //     'Accept': '*/*',
+    //     'Access-Control-Allow-Origin' : '*',
+    //   }
+    // }).then(res => res.json())
+    //   .then(data => setCurTickets(curTickets => [...curTickets, data]))
+    //   .catch(err => console.log(err));
+}, );
+
+  const resolveActiveTicket = (event, ticket) => {
+    setResolvedTickets(resolvedTickets => [...resolvedTickets,1])
+  }
+
+  const resolveServiceTicket = (event, ticket) => {
+    setResolvedTickets(resolvedTickets => [...resolvedTickets,1])
+  }
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+      <div className={classes.root}>
+        <AppBar position="sticky" style={{ background: "#8d99ae"}}>
+          <Tabs value={value} onChange={handleChange}  centered indicatorColor="primary" >
+            <Tab label="Active" />
+            <Tab label="Resolved" />
+            <Tab label="Service"/>
+          </Tabs>
+        </AppBar>
+
+        <TabPanel value={value} index={0}>
+          <TicketList tickets={activeTickets} onResolve={resolveActiveTicket}/>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <TicketList tickets={resolvedTickets} />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <TicketList tickets={serviceTickets} onResolve={resolveServiceTicket}/>
+        </TabPanel>
+      </div>
+  );
+}
+

@@ -29,6 +29,9 @@ class CreateMenu extends React.Component {
     this.addTimeRange = this.addTimeRange.bind(this);
     this.addCategory = this.addCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getMenuItems = this.getMenuItems.bind(this);
+    this.findAllergens = this.findAllergens.bind(this);
+    this.formatTimeRanges = this.formatTimeRanges.bind(this);
   }
 
   /*
@@ -129,7 +132,68 @@ class CreateMenu extends React.Component {
   */
   handleSubmit(e) {
     //TODO FUNCTIONALITY
-    e.preventDefault();
+      e.preventDefault();
+      var menuItems = this.getMenuItems();
+      var formattedTimeRanges = this.formatTimeRanges();
+      //
+      //make post call for menu items and images
+      const menu = {
+        timeRanges: formattedTimeRanges,
+        menuStatus: this.state.menuStatus,
+        menuName: this.state.menuName,
+        menuItems: menuItems,
+      }
+      //TODO: need to get the restaurant ID to send menu
+      fetch('/restaurant/:restaurantid/menu/add', {
+        method: 'POST',
+        body: menu,
+      });
+    
+  }
+
+  getMenuItems() {
+    var menuItems = [];
+    console.log(this.state.categories);
+    this.state.categories.forEach((category) => {
+      console.log(category, "this is the category");
+      for(let [key, value] of Object.entries(category.menuItems)) {
+          let allergensOnMenuItem = this.findAllergens(value);
+          let item = {
+            itemName: value.itemName,
+            description: value.description,
+            category: category.categoryName,
+            price: parseFloat(value.price),
+            allergens: allergensOnMenuItem,
+            calories: parseInt(value.calories),
+            imagePath: value.uploaded_file,
+          };
+          menuItems.push(item);
+      }
+    });
+    console.log(menuItems);
+  }
+
+  formatTimeRanges() {
+    var timeRanges = [];
+    this.state.timeRanges.forEach((timeRange) => {
+      var tr = {
+        startTime: parseInt(timeRange.startTime),
+        endTime: parseInt(timeRange.endTime)
+      }
+      timeRanges.push(tr);
+    });
+    return timeRanges;
+  }
+
+  findAllergens(menuItem) {
+    var allergens = [];
+    const allAllergens = ["meat", "dairy", "nuts", "gluten", "soy", "other"];
+    allAllergens.forEach((allergenName) => {
+      if(menuItem[allergenName]) {
+        allergens.push(allergenName.toUpperCase());
+      }
+    });
+    return allergens;
   }
 
   /*
@@ -180,9 +244,9 @@ class CreateMenu extends React.Component {
       <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
         <h2>Menu Information</h2>
         <h3 htmlFor="name">Menu Name</h3>
-        <input type="text" name="menuName" id="menuName" defaultValue={menuName} />
+        <input type="text" name="menuName" id="menuName" defaultValue={menuName} required/>
         <h3 htmlFor="status">Menu Status</h3>
-        <select id="status" name="status" className="status" defaultValue={status}>
+        <select id="status" name="status" className="status" defaultValue={status} required>
             <option disabled selected value> -- select an status -- </option>
             <option value="active">Active</option>
             <option value="draft">Draft</option>
@@ -195,7 +259,7 @@ class CreateMenu extends React.Component {
         {Object.keys(categories).map(this.renderMenu)}
         {/*TODO: FUNCTIONALITY FOR BUTTONS */}
         <div className="save-buttons">
-          <button id="save-button">Save</button>
+          <button id="save-button" type="submit">Save</button>
           <Link to="/">
             <button id="save-close-button">Save and close</button>
           </Link>

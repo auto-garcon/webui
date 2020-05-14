@@ -22,6 +22,7 @@ const TimeRangeInputs = (props) => {
                         name={startId}
                         value={props.timeRanges[idx].startTime} 
                         className="startTime"
+                        required
                     />
                     <label htmlFor={endId}>End Time</label>
                     <input 
@@ -30,6 +31,7 @@ const TimeRangeInputs = (props) => {
                         name={endId}
                         value={props.timeRanges[idx].endTime} 
                         className="endTime"
+                        required
                     />
                     {/*Only show remove button when there is more than one time range*/}
                     { props.timeRanges.length > 1 &&
