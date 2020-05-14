@@ -2,20 +2,23 @@
 that are featured on every page stored. this includes login and logout functionality,
 routing and sign in authentication.
  */
+
 import React from 'react';
 import './App.css';
 import Dashboard from './Components/Dashboard';
+//import Contact from './Components/Contact';
 import About from './Components/About';
 import NavBar from './Components/NavBar';
 import GoogleLogin from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+//import LinearProgress from '@material-ui/core/LinearProgress';
 import LogoLarge from './Components/Images/AutoGarcon-Logo-Large.png';
+
 import Settings from './Components/Settings';
 import Footer from './Components/StickyFooter'
 import CreateMenu from './Components/CreateMenu';
-import Loader from './Components/Loader';
 import LoginVid from './Components/Images/Login-VID.mp4';
-import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import {BrowserRouter as Router, Route } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 
@@ -32,10 +35,10 @@ const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleuserconte
  * can be confirmed.
  */
 export default class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
-
       isAuthed: false,
       responseGoogle: (response, e) => {
         // fetch(DEVAPI, {
@@ -63,17 +66,15 @@ export default class App extends React.Component {
       },
       logout: (e) => {
         e.preventDefault();
-        this.setState({isAuthed: false});
-        console.log(this.state.isAuthed);
-        Cookies.set('access_token_autog', undefined);
+        this.setState({isAuthed: !this.state.isAuthed})
       },
       handleGoogleRespone: response => {
         if(!response.error){
           authenticate(response).then(isAuthenticated => {
-            this.setState({ isAuthed: isAuthenticated, loading: true});
+            this.setState({ isAuthed: isAuthenticated})
           })
         }
-      },
+      }
     }
     //restaurant owner
    //fetch(DEVAPI, {
@@ -91,7 +92,7 @@ export default class App extends React.Component {
     //.then(data => console.log(data))
     //.catch(err => console.log("FAILED", err));
 
-    //restaurant info
+    ////restaurant info
     //fetch(DEVAPI, {
     //  method: 'POST',
     //  mode: 'no-cors',
@@ -117,12 +118,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className = "App">
-
         { !this.state.isAuthed ? (
-        <>
-          <Router>
-            <Redirect to={{pathname: "/"}}/>
-          </Router>
           <section className="Login-Container-Wrapper">
             <div className="video-container">
               <video src={LoginVid} autoPlay={true} muted={true} loop={true}/>
@@ -148,13 +144,10 @@ export default class App extends React.Component {
               </div>
             </div>
           </section>
-        </>
         ) : (
             <Router>
               <NavBar logout={this.state.logout} />
-              <Route exact={true} path="/">
-                <Dashboard />
-              </Route>
+              <Route exact={true} path="/" component={Dashboard}/>
               <Route path="/about" component={About}/>
               <Route path="/settings">
                 <Settings restid={1234} tables={5}/>
@@ -175,5 +168,6 @@ export default class App extends React.Component {
 export const getAccessToken = () => Cookies.get('access_token_autog');
 export const isAuthenticated = () => !!getAccessToken();
 export const authenticate = async (response) => {
+  console.log(getAccessToken());
   return typeof getAccessToken() !== 'undefined';
 }
