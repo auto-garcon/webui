@@ -124,7 +124,7 @@ export default function MenuContainer() {
     return (
         <div className="menu-container">
             <h1 className="tickets-title" style={{textAlign:"center"}}>Menus</h1>
-            <Link to="/dashboard/createmenu">
+            <Link to="/createmenu">
                 <Button className="create-button" >⊕ Create new menu</Button>
             </Link>
             <div className="ag-theme-balham">

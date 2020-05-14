@@ -15,7 +15,7 @@ export default function StickyFooter() {
         {new Date().getFullYear()}
         {'.'}
       </div>
-      <Link className="Footer-Link" id="Footer-Nav-Link" to="/dashboard/about">About & Contact</Link>
+      <Link className="Footer-Link" id="Footer-Nav-Link" to="/about">About & Contact</Link>
     </div>
   );
 }
