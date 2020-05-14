@@ -1,8 +1,8 @@
 /*This component is for the settings. this provides all of the routing for the three settings pages
-which are QR generation, account information and display page. 
+which are QR generation, account information and display page.
 */
 import React from 'react';
-import { 
+import {
   BrowserRouter as Router,
   Switch,
   Route,
@@ -18,8 +18,9 @@ export default function Settings(props) {
   const { restid, tables } = props;
     return (
       <>
-      <SettingsNav/>
+
       <Router>
+          <SettingsNav/>
         {/*}  <div>
             <ul>
             <li>
@@ -28,16 +29,16 @@ export default function Settings(props) {
               <li>
                 <Link to="/settings/qr">QR Code Generation</Link>
               </li>
-           
+
               <li>
                 <Link to="/settings/display">Display</Link>
               </li>
             </ul>
           </div>
     */}
-       <Switch> 
+       <Switch>
         <Route path ='/settings/qr' exact>
-          <QR 
+          <QR
             restid = {restid}
             tables = {tables}
           />
