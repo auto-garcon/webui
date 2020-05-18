@@ -15,6 +15,7 @@ import { MDBCloseIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 import Display from './Display';
 import axios from 'axios'
+import {ChromePicker} from 'react-color'
 //import {primaryColor} from './Display';
 
 
@@ -81,20 +82,22 @@ export class RestaurantInfo extends Component {
                 <b>Restaurant Display Information</b>
             </Typography>
             <div>
-            <p style = {{color: "#2B2d42"}}>Upload Restaurant Logo Image</p>
+            <b style = {{color: "#2B2d42"}}>Upload Restaurant Logo Image</b>
+            <div>
              <input encType = "multipart/form-data" type = "file" onChange = {this.fileChangedHandler}/>
             <button style ={{background: "#edf2f4"}} onClick = {this.uploadHandler} >Upload</button>
-
             </div>
+            </div>
+            <br></br>
             <div>
             
             <Display/>
 
             </div>
-            <p style = {{color: "#2B2d42"}}>Enter Colors Selected</p>
-            <br />
+            <b style = {{color: "#2B2d42"}}>Enter Colors Selected</b>
+     
           <TextField
-            placeholder="Primary Color (example: #fffff)"
+            placeholder="Primary Color (example: fffff)"
             label="Primary Color"
             onChange={handleChange('primaryColor')}
             defaultValue={values.primaryColor}
@@ -104,10 +107,10 @@ export class RestaurantInfo extends Component {
               maxLength : "30",
             }}
           />
-          <br />
-          <br />
+    
+   
           <TextField
-            placeholder="Secondary Color (example: #fffff)"
+            placeholder="Secondary Color (example: fffff)"
             label="Secondary Color"
             onChange={handleChange('secondaryColor')}
             defaultValue={values.secondaryColor}
@@ -117,7 +120,7 @@ export class RestaurantInfo extends Component {
               maxLength : "30",
             }}
           />
-          <br />
+  
             <Button
               color="#EDF2F4"
               variant="contained"

@@ -89,6 +89,11 @@ export class Confirm extends Component {
     });
   };
 
+  replace = () =>{
+    if (this.props.values.primaryColor.includes("#")){
+      this.props.values.primaryColor.replace("#","");
+    }
+  }
 
   render() {
     const {

@@ -4,8 +4,8 @@ including adding their own logo, colors, and fonts*/
 
 
 import React, {useState} from 'react'
-import {ChromePicker} from 'react-color'
-
+import {SketchPicker} from 'react-color'
+import Button from '@material-ui/core/Button';
 
 function Display() {
     const [primaryColor, setColor] = useState('#fff')
@@ -17,17 +17,18 @@ function Display() {
   
     return (
       <div >
-        <p style = {{color: "#2B2d42"}}> Pick Two Restaurant Colors</p>
+        <b style = {{color: "#2B2d42"}}> Pick Two Restaurant Colors</b>
         <div>
-          <p>Find Primary Color:</p>
+          <p style = {{color: "#2B2d42"}}>Find Primary Color:</p>
         </div>
-          <button 
+          <button
+            style ={{background: "#edf2f4"}}
             onClick = {() => setShowColorPicker(showColorPicker =>!showColorPicker)}
             >
               {showColorPicker ? 'Close color picker': 'Open Primary Color Picker'}
           </button>
           {showColorPicker && ( 
-            <ChromePicker 
+            <SketchPicker
               color ={primaryColor} 
               onChange={updatedColor => setColor(updatedColor.hex)}
             />
@@ -35,15 +36,16 @@ function Display() {
           <p style= {{color: primaryColor}}> Primary Color: {primaryColor}</p>
           <div>
           <div>
-          <p>Find Secondary Color: </p>
+          <p style = {{color: "#2B2d42"}}>Find Secondary Color: </p>
         </div>
-          <button 
+          <button
+            style ={{background: "#edf2f4"}}
             onClick = {() => setShowColorPicker1(showColorPicker1 =>!showColorPicker1)}
             >
               {showColorPicker1 ? 'Close color picker': 'Open Secondary Color Picker'}
           </button>
           {showColorPicker1 && ( 
-            <ChromePicker 
+            <SketchPicker
               color ={secondaryColor} 
               onChange={updatedColor => setColor1(updatedColor.hex)}
             />
