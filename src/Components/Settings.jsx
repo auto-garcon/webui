@@ -15,7 +15,7 @@ import SettingsNav from './SettingsNav';
 import UserForm from './UserForm';
 
 export default function Settings(props) {
-  const { restid, tables } = props;
+  const {user, tables} = props;
     return (
       <>
 
@@ -39,15 +39,15 @@ export default function Settings(props) {
        <Switch>
         <Route path ='/settings/qr' exact>
           <QR
-            restid = {restid}
-            tables = {tables}
+            user={user}
+            tables={tables}
           />
         </Route>
         <Route path ='/settings/display'>
-          <Display/>
+          <Display user={user}/>
         </Route>
         <Route path ='/settings/userform'>
-          <UserForm/>
+          <UserForm user={user}/>
         </Route>
        </Switch>
        <StickyFooter />

@@ -45,7 +45,7 @@ export default function TicketContainer() {
   const [serviceTickets, setServiceTickets] = useState([1,2]);
   const [value, setValue] = React.useState(0);
   const classes = useStyles();
-  const proxy_url = "https://agile-reef-08348.herokuapp.com/";
+  const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
 
   useEffect( () => {
     // // This is a useeffect that will pull all the tickets from the API/DB once the page loads/mounts
@@ -61,8 +61,11 @@ export default function TicketContainer() {
     //   .catch(err => console.log(err));
 }, );
 
-  const resolveActiveTicket = (event, ticket) => {
-    setResolvedTickets(resolvedTickets => [...resolvedTickets,1])
+
+  const resolveActiveTicket = (event, index) => {
+      console.log(event.target.name)
+      //setActiveTickets(activeTickets.filter(event => event !== ticket))
+      //setResolvedTickets(resolvedTickets.filter(e=> e !== ticket))
   }
 
   const resolveServiceTicket = (event, ticket) => {
