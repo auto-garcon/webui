@@ -37,6 +37,10 @@ export default class App extends React.Component {
     this.state = {
 
       isAuthed: false,
+      isManager: false,
+      user: {},
+      tables: 0,
+      proxy_url: "https://fierce-tundra-17132.herokuapp.com/",
       responseGoogle: (response, e) => {
         // fetch(DEVAPI, {
         //   method: 'POST',
@@ -64,48 +68,85 @@ export default class App extends React.Component {
       logout: (e) => {
         e.preventDefault();
         this.setState({isAuthed: false});
-        console.log(this.state.isAuthed);
+        console.log(this.state.isAuthed)
         Cookies.set('access_token_autog', undefined);
       },
       handleGoogleRespone: response => {
         if(!response.error){
           authenticate(response).then(isAuthenticated => {
-            this.setState({ isAuthed: isAuthenticated, loading: true});
+            this.setState({ isAuthed: isAuthenticated});
+          })
+          let firstName = response.profileObj.givenName
+          let lastName = response.profileObj.familyName
+          let email = response.profileObj.email
+          
+          this.state.signin({
+            firstName: firstName,
+            lastName: lastName,
+            email: email
           })
         }
       },
+      signin: (response) => {
+        fetch(this.state.proxy_url+"https://autogarcon.live/api/users/signin",{
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Accept": "*/*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: "Bob",
+            lastName: "Jones",
+            email: "bob@jones.com"
+          })
+        })
+        .then(data => {
+          // TRIGGER GET TABLES -> SETTINGS
+          /** GET TABLES FETCH */
+          data.json().then(res => this.state.updateUser({
+              firstName: res.firstName,
+              lastName: res.lastName,
+              email: res.email,
+              userID: res.userID,
+              restaurantID: res.restaurantID
+          }))
+          // let restaurantID = this.state.user.restaurantID
+          console.log(this.state.user)
+          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/${5}/tables`, {
+            method: "GET",
+            mode: "cors",
+            headers: {
+              "Accept": "*/*"
+            }
+          })
+          .then(res => {
+            res.json().then(data => {
+              this.state.updateTables(data.numtables)
+            })
+          })
+          .catch(err => console.error(err))
+        })
+        .catch(err => console.error(err))
+      },
+      updateUser: (user) => {
+        if(user.restaurantID) {
+          console.log(!!this.state.isManager)
+          this.setState({user: user})
+          this.state.updateManager(user)
+          console.log(!!this.state.user)
+        }
+      },
+      updateManager: (user) => {
+        if(user.restaurantID) return this.setState({isManager: true})
+      },
+      updateTables: (tables) => {
+        if(!tables == undefined) {
+          this.setState({tables: tables})
+        }
+        return false
+      }
     }
-    //restaurant owner
-   //fetch(DEVAPI, {
-
-   //  method: 'POST',
-    //  mode: 'no-cors',
-    //  headers: {
-    //    'Accept': '*/*',
-    //    'Content-Type': 'application/json',
-    //    'Access-Control-Allow-Origin' : '*'
-    //  },
-    //  body: JSON.stringify({firstName:firstName},{lastName:lastName},{email:email})
-    //})
-    //.then(res => console.log(res))
-    //.then(data => console.log(data))
-    //.catch(err => console.log("FAILED", err));
-
-    //restaurant info
-    //fetch(DEVAPI, {
-    //  method: 'POST',
-    //  mode: 'no-cors',
-    //  headers: {
-    //    'Accept': '*/*',
-    //    'Content-Type': 'application/json',
-    //    'Access-Control-Allow-Origin' : '*'
-    //  },
-    //  body: JSON.stringify({restaurantName:restaurantName},{restaurantAddress:restaurantAddress})
-    //})
-    //.then(res => console.log(res))
-    //.then(data => console.log(data))
-    //.catch(err => console.log("FAILED", err));
-  //
   }
 
   componentDidMount() { // Checks for auth when the page loads
@@ -117,8 +158,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className = "App">
-
-        { !this.state.isAuthed ? (
+        { !this.state.isAuthed  ? (
         <>
           <Router>
             <Redirect to={{pathname: "/"}}/>
@@ -150,18 +190,30 @@ export default class App extends React.Component {
           </section>
         </>
         ) : (
+          !!this.state.isManager ? (
             <Router>
+              <Redirect to={{pathname:"/"}} />
               <NavBar logout={this.state.logout} />
               <Route exact={true} path="/">
-                <Dashboard />
+                <Dashboard user={this.state.user}/>
               </Route>
               <Route path="/about" component={About}/>
               <Route path="/settings">
-                <Settings restid={1234} tables={5}/>
+                <Settings user={this.state.user} tables={this.state.tables}/>
               </Route>
               <Route path="/createmenu" component={CreateMenu}/>
               <Footer />
             </Router>
+          ) : (
+            <Router>
+              <Redirect to={{pathname:"/settings/userform"}} />
+              <NavBar logout={this.state.logout}/>
+              <Route path="/settings">
+                <Settings user={null} tables={0}/>
+              </Route>
+              <Footer />
+            </Router>
+          )
         )}
       </div>
     )
@@ -173,7 +225,8 @@ export default class App extends React.Component {
  * https://stackoverflow.com/questions/49819183/react-what-is-the-best-way-to-handle-login-and-authentication
  */
 export const getAccessToken = () => Cookies.get('access_token_autog');
+export const getManagerFlag = () => Cookies.get('is_manager');
 export const isAuthenticated = () => !!getAccessToken();
 export const authenticate = async (response) => {
-  return typeof getAccessToken() !== 'undefined';
+  return typeof getAccessToken() !== 'undefined' //&& typeof getManagerFlag() !== 'undefined';
 }

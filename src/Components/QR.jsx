@@ -10,17 +10,18 @@ export default class QR extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restid: 1234,
-      tables:5,
+      user:this.props.user,
+      tables: this.props.tables,
       codes: []
     }
   }
 
   render () {
-    for(var i = 0; i < 5; i++){
-      this.state.codes.push(`https://autogarcon.live/api/restaurant/${this.state.restid}/table/${i}/sitdown`)
+    console.log("hello")
+    for(var i = 0; i < this.state.tables; i++){
+      this.state.codes.push(`https://autogarcon.live/api/restaurant/${this.state.user.restaurantID}/table/${i}/sitdown`)
     }
-    console.log(this.state.codes);
+    
     return (
       <div className="QR">
         <h1 style= {{color: "#edf2f4"}}>Generated QR Codes</h1>
@@ -31,8 +32,8 @@ export default class QR extends React.Component {
           })}
         </ul>
         
-    </div>
-  );
+      </div>
+    );
   }
   
 }
