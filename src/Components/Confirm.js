@@ -13,6 +13,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { MDBCloseIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 import Popup from './Popup';
+import Cookies from 'js-cookie';
+
 
 const theme = createMuiTheme({
     palette: {
@@ -26,6 +28,7 @@ export class Confirm extends Component {
     // PROCESS FORM //
     console.log(this.props.numTables)
     this.props.nextStep();
+    storeManagerCookie();
   };
   
   submit = e => {
@@ -181,3 +184,8 @@ export class Confirm extends Component {
 }
 
 export default Confirm;
+/** Trying to store some cookies about the manager so that managers logging in again don't have to logout and then log back in just to get authenticated. */
+export const storeManagerCookie = () => {
+  Cookies.set('is_manager', true)
+  window.location.reload(false)
+}
