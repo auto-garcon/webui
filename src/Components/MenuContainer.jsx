@@ -6,10 +6,9 @@
 
 import React, { useState, useEffect } from 'react'
 import './CSS/MenuContainer.css'
+import { AgGridReact } from 'ag-grid-react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
-import CardDeck from 'react-bootstrap/CardDeck';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
@@ -23,14 +22,14 @@ export default function MenuContainer(props) {
     //TODO: This is where I will make my get calls to retrieve previously made menus. This is just dummy data for now.
     useEffect( () => {
         console.log(user);
-        fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/withmenus`, {
+        fetch(proxy_url + `https://autogarcon.live/api/restaurant/${user.restaurantID}/withmenus`, {
         method: 'GET',
         mode: "cors",
         headers: {
          'Accept': '*/*',
         'Access-Control-Allow-Origin' : '*',
        }
-     }).then(res => res.json())
+     }).then(res => console.log(res.json()))
        .then(data => setCurMenus(data.menus))
        .catch(err => console.log(err));
      console.log(curMenus);  
@@ -44,19 +43,11 @@ export default function MenuContainer(props) {
             <Link to="/createmenu">
                 <Button className="create-button" >⊕ Create new menu</Button>
             </Link>
-            <div>
-                <CardDeck>
-                    {curMenus.map((curMenu) => {
-                        return(
-                            <div>
-                                {/*<Card.Img variant="top" src="holder.js/100px160" />*/}
-                                <Card.Body>
-                                    <Card.Title>{curMenu.menuName}</Card.Title>
-                                </Card.Body>
-                            </div>
-                        );
-                    })}
-                </CardDeck>
+            <div className="ag-theme-balham">
+                <AgGridReact
+                    columnDefs={tableHeaders}
+                    rowData={curMenus}>
+                </AgGridReact>
             </div>
         </div>
     )
