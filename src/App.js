@@ -68,7 +68,6 @@ export default class App extends React.Component {
       logout: (e) => {
         e.preventDefault();
         this.setState({isAuthed: false});
-        console.log(this.state.isAuthed)
         Cookies.set('access_token_autog', undefined);
       },
       handleGoogleRespone: response => {
@@ -111,8 +110,7 @@ export default class App extends React.Component {
               userID: res.userID,
               restaurantID: res.restaurantID
           }))
-          // let restaurantID = this.state.user.restaurantID
-          console.log(this.state.user)
+
           fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/${5}/tables`, {
             method: "GET",
             mode: "cors",
@@ -122,7 +120,9 @@ export default class App extends React.Component {
           })
           .then(res => {
             res.json().then(data => {
-              this.state.updateTables(data.numtables)
+              console.log(data.numTables)
+              let tables = data.numTables
+              this.state.updateTables(tables)
             })
           })
           .catch(err => console.error(err))
@@ -131,25 +131,30 @@ export default class App extends React.Component {
       },
       updateUser: (user) => {
         if(user.restaurantID) {
-          console.log(!!this.state.isManager)
           this.setState({user: user})
           this.state.updateManager(user)
-          console.log(!!this.state.user)
         }
       },
       updateManager: (user) => {
-        if(user.restaurantID) return this.setState({isManager: true})
+        if(user.restaurantID) {
+          this.setState({isManager: true})
+          Cookies.set('is_manager', true);
+          this.setState({isManager: !!Cookies.get('is_manager')})
+          return true
+        }
       },
       updateTables: (tables) => {
         if(!tables == undefined) {
           this.setState({tables: tables})
+          console.log(this.state.tables)
         }
+        console.log(this.state.tables)
         return false
       }
     }
   }
 
-  componentDidMount() { // Checks for auth when the page loads
+  componentWillMount() { // Checks for auth when the page loads
     authenticate().then(isAuthenticated => {
       this.setState({ isAuthed: isAuthenticated })
     })
@@ -190,7 +195,7 @@ export default class App extends React.Component {
           </section>
         </>
         ) : (
-          !!this.state.isManager ? (
+          !!Cookies.get('is_manager') ? (
             <Router>
               <Redirect to={{pathname:"/"}} />
               <NavBar logout={this.state.logout} />
