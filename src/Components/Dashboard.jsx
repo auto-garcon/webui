@@ -20,7 +20,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      
+
       {value === index && <Box p={3}>{children}</Box>}
     </Typography>
   );
@@ -39,29 +39,29 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  
+  const {user} = props;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
+
     <div className={classes.root}>
-      {/* <NavBar /> */}
       <AppBar position="sticky" style={{ background: "#8d99ae"}}>
         <Tabs value={value} onChange={handleChange}  centered indicatorColor="primary" >
           <Tab label="Tickets" />
           <Tab label="Menu" />
         </Tabs>
       </AppBar>
-      
+
       <TabPanel value={value}  index={0}>
-        <TicketContainer />
+        <TicketContainer user={user} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <MenuContainer />
+        <MenuContainer user={user} />
       </TabPanel>
     </div>
   );

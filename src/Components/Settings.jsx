@@ -1,8 +1,8 @@
 /*This component is for the settings. this provides all of the routing for the three settings pages
-which are QR generation, account information and display page. 
+which are QR generation, account information and display page.
 */
 import React from 'react';
-import { 
+import {
   BrowserRouter as Router,
   Switch,
   Route,
@@ -17,11 +17,12 @@ import Typography from '@material-ui/core/Typography';
 
 
 export default function Settings(props) {
-  const { restid, tables } = props;
+  const {user, tables} = props;
     return (
       <>
-      <SettingsNav/>
+
       <Router>
+          <SettingsNav/>
           <div>
             <ul>
             <li>
@@ -34,18 +35,18 @@ export default function Settings(props) {
             </ul>
           </div>
     
-       <Switch> 
+       <Switch>
         <Route path ='/settings/qr' exact>
-          <QR 
-            restid = {restid}
-            tables = {tables}
+          <QR
+            user={user}
+            tables={tables}
           />
         </Route>
         <Route path ='/settings/display'>
-          <Display/>
+          <Display user={user}/>
         </Route>
         <Route path ='/settings/userform'>
-          <UserForm/>
+          <UserForm user={user}/>
         </Route>
        </Switch>
        <StickyFooter />
