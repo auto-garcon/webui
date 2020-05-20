@@ -144,11 +144,18 @@ class CreateMenu extends React.Component {
         menuItems: menuItems,
       }
       //TODO: need to get the restaurant ID to send menu
+      /*
       fetch('/restaurant/:restaurantid/menu/add', {
         method: 'POST',
         body: menu,
       });
-    
+
+      //call for sending images to the backend
+      loop to go through each of the images
+        fetch('/api/image/:filename', {
+          method: 'POST'
+        });
+      */
   }
 
   getMenuItems() {
@@ -263,9 +270,12 @@ class CreateMenu extends React.Component {
           <Link to="/">
             <button id="save-close-button">Save and close</button>
           </Link>
-          <button id="cancel-button">Cancel</button>
         </div>
       </form>
+      <Link to="/">
+        <button id="cancel-button">Cancel</button>
+      </Link>
+      
     </div>     
     );
   }
