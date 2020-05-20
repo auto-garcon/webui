@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { MDBCloseIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
+import Popup from './Popup';
 
 const theme = createMuiTheme({
     palette: {
@@ -21,12 +22,14 @@ const theme = createMuiTheme({
   });
 export class Confirm extends Component {
   continue = e => {
-    e.preventDefault();
+  //  e.preventDefault();
     // PROCESS FORM //
+    console.log(this.props.numTables)
     this.props.nextStep();
   };
   
   submit = e => {
+ 
     e.preventDefault();
     //User information post 
     //fetch ('https://autogarcon.live/api/users/newuser', {
@@ -46,36 +49,50 @@ export class Confirm extends Component {
     //.then(data => console.log(data))
     //.catch(err => console.log("FAILED", err));
 //
-    //Restaurant infromation post 
-    //fetch ('https://autogarcon.live/api/restaurant/add', {
-    //  method:"POST",
-    //  mode: 'no-cors',
-    //  headers: {
-    //    'Accept': '*/*',
-    //    'Content-Type': 'application/json',
-    //    'Access-Control-Allow-Origin' : '*'
-    //  },
-    //  body: JSON.stringify({
-    //    restaurantName : this.props.values.restaurantName,
-    //    description : this.props.values.description,
-    //    address : this.props.values.address,
-    //    city : this.props.values.city,
-    //    zipcode : this.props.values.zipcode,
-    //    state : this.props.values.state,
-    //    country : this.props.values.country
-    //  })
-    //})
-    //.then(res => console.log(res))
-    //.then(data => console.log(data))
-    //.catch(err => console.log("FAILED", err));
+   // Restaurant infromation post 
+    fetch ('https://autogarcon.live/api/restaurant/add', {
+      method:"POST",
+      mode: 'no-cors',
+      headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        restaurantName : this.props.values.restaurantName,
+        description : this.props.values.description,
+        address : this.props.values.address,
+        city : this.props.values.city,
+        zipCode : this.props.values.zipcode,
+        state : this.props.values.state,
+        country : this.props.values.country,
+        numTables : this.props.values.numTables,
+        primaryColor : this.props.values.primaryColor,
+        secondaryColor : this.props.values.secondaryColor
+      })
+    })
+    .then(res => console.log(res))
+    .then(data => console.log(data))
+    .catch(err => console.log("FAILED", err));
+    this.continue();
   }
   back = e => {
     e.preventDefault();
     this.props.prevStep();
   };
+  state = {
+    seen: false
+  };
+
+  togglePop = () => {
+    this.setState({
+      seen: !this.state.seen
+    });
+  };
+
+
   render() {
     const {
-      values: { firstName, lastName, email, restaurantName, description, address, city, zipcode, state, country, numTables}
+      values: { restaurantName, description, address, city, zipcode, state, country, numTables, primaryColor, secondaryColor,}
     } = this.props;
 
     return (
@@ -91,15 +108,6 @@ export class Confirm extends Component {
                 Update Profile- Review Account Information
             </Typography>
           <List>
-            <ListItem>
-              <ListItemText primary="First Name" secondary={firstName} /> 
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Last Name" secondary={lastName} /> 
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Email" secondary={email} /> 
-            </ListItem>
             <ListItem>
               <ListItemText primary="Restaurant Name" secondary={restaurantName} /> 
             </ListItem>
@@ -121,9 +129,15 @@ export class Confirm extends Component {
             <ListItem>
               <ListItemText primary="Country" secondary={country} /> 
             </ListItem>
-           { <ListItem>
-              <ListItemText primary="Number of tables" secondary={numTables} /> 
-           </ListItem>}
+            <ListItem>
+              <ListItemText primary="Number of Tables" secondary={numTables} /> 
+           </ListItem>
+           <ListItem>
+              <ListItemText primary="Primary Color" secondary={primaryColor} /> 
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="Secondary Color" secondary={secondaryColor} /> 
+            </ListItem>
           </List>
           <br />
         
@@ -136,8 +150,19 @@ export class Confirm extends Component {
           <Button
             color="primary"
             variant="contained"
-            onClick={this.continue /*&& this.submit*/}
-          >Confirm & Continue</Button>
+            onClick= {this.submit}
+            
+            
+          >Submit & continue</Button>
+           <div
+            style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+            }}
+          >
+  
+          </div>
             <Link to="/settings">
             <MDBCloseIcon style={{
               background: "primary",
@@ -147,6 +172,7 @@ export class Confirm extends Component {
               
             }}/>
             </Link>
+         
           </Dialog>
         </React.Fragment>
       </MuiThemeProvider>

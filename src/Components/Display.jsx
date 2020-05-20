@@ -5,63 +5,57 @@ including adding their own logo, colors, and fonts*/
 
 import React, {useState} from 'react'
 import {ChromePicker} from 'react-color'
-import { ImagePicker } from 'react-file-picker'
 
 
 function Display() {
-    const [color, setColor] = useState('#fff')
+    const [primaryColor, setColor] = useState('#fff')
     const [showColorPicker,setShowColorPicker]= useState(false)
 
-    const [color1, setColor1] = useState('#fff')
+    const [secondaryColor, setColor1] = useState('#fff')
     const [showColorPicker1,setShowColorPicker1]= useState(false)
-    const MyComponent = () => (
-      <ImagePicker
-        extensions={['jpg', 'jpeg', 'png']}
-        dims={{minWidth: 100, maxWidth: 500, minHeight: 100, maxHeight: 500}}
     
-      >
-        <button>
-          Click to upload image
-        </button>
-      </ImagePicker>
-    )
-
-
+  
     return (
       <div >
-        <h1 style= {{color: "#edf2f4"}}>Display</h1>
-        <p style= {{color: "#edf2f4"}}> Choose the Restaurant Logo</p>
-        <MyComponent/>
-        <p>Pick your two restaurant colors</p>
+        <p style = {{color: "#2B2d42"}}> Pick Two Restaurant Colors</p>
+        <div>
+          <p>Find Primary Color:</p>
+        </div>
           <button 
             onClick = {() => setShowColorPicker(showColorPicker =>!showColorPicker)}
             >
-              {showColorPicker ? 'Close color picker': 'Pick a color'}
+              {showColorPicker ? 'Close color picker': 'Open Primary Color Picker'}
           </button>
           {showColorPicker && ( 
             <ChromePicker 
-              color ={color} 
+              color ={primaryColor} 
               onChange={updatedColor => setColor(updatedColor.hex)}
             />
           )}
-          <p style= {{color: "#edf2f4"}}> You picked color {color}</p>
+          <p style= {{color: primaryColor}}> Primary Color: {primaryColor}</p>
           <div>
+          <div>
+          <p>Find Secondary Color: </p>
+        </div>
           <button 
             onClick = {() => setShowColorPicker1(showColorPicker1 =>!showColorPicker1)}
             >
-              {showColorPicker1 ? 'Close color picker': 'Pick a color'}
+              {showColorPicker1 ? 'Close color picker': 'Open Secondary Color Picker'}
           </button>
           {showColorPicker1 && ( 
             <ChromePicker 
-              color ={color1} 
+              color ={secondaryColor} 
               onChange={updatedColor => setColor1(updatedColor.hex)}
             />
           )}
-          <p style= {{color: "#edf2f4"}}> You picked color {color1}</p>
+          <p style= {{color: secondaryColor}}> Secondary Color: {secondaryColor}</p>
           </div>
         </div>
 
       
     );
+
   }
   export default Display;
+  
+  

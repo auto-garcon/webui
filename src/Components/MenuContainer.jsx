@@ -1,5 +1,5 @@
 /*
-    MenuContainer Component: This component renders the menu homepage. 
+    MenuContainer Component: This component renders the menu homepage.
     The user will see the menus previously created that they will be able to click on to edit.
     The user will have the option to create a new menu.
 */

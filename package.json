@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^7.2.1",
     "ag-grid-community": "^23.0.2",
     "ag-grid-react": "^23.0.2",
+    "axios": "^0.19.2",
     "dhx-suite": "^6.4.2",
     "js-cookie": "^2.2.1",
     "material-ui": "^0.20.2",

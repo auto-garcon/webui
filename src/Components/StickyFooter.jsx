@@ -1,5 +1,5 @@
-/*This is the static sticky footer with the auto-garcon copy right sign and the about and contact links. 
-This is standard and loaded on to every page. 
+/*This is the static sticky footer with the auto-garcon copy right sign and the about and contact links.
+This is standard and loaded on to every page.
 */
 import React from 'react';
 import {Link} from 'react-router-dom';
@@ -9,7 +9,7 @@ export default function StickyFooter() {
     <div className="Footer-Container">
       <div className="Footer-Link" id="CopyRight">
         {'Copyright © '}
-        <a href="https://material-ui.com/">
+        <a href="/">
           AUTO-GARÇON
         </a>{' '}
         {new Date().getFullYear()}

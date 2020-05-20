@@ -14,7 +14,7 @@ function About() {
         <h1>About Auto-Garcon</h1>
         <p>Auto-Garcon redefines dining by adding seemless technology into modern restaurants.</p>
         <h2>Contact Us</h2>
-        <p>Phone: 952.828.1909 Email: autogarcon@autogarcon.com</p>
+        <p>Phone: 000.000.0000 Email: autogarcon@autogarcon.com</p>
     </div>
     
   );

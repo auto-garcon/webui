@@ -1,5 +1,5 @@
 /*This component is the app bar for the settings page. It is just a bar displayed on the settings page with three links.
-one for the account information page, another for qr generation and lastly one for display. 
+one for the account information page, another for qr generation and lastly one for display.
 */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -26,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    
-    
+
+
   },
-  
- 
+
+
 
 }));
 
@@ -54,26 +54,18 @@ export default function MenuAppBar() {
 
   return (
     <div className={classes.root}  >
- 
+
       <AppBar position="static" style={{ background: '#457b9d' }}>
-        <Toolbar> 
+        <Toolbar>
           <Typography variant="h6" className={classes.title} style={{ color: '#edf2f4' }}>
             <strong>Settings</strong>
           </Typography>
-          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
-          <Link style={{ color: '#2b2d42' }} href="/settings/userform" >Account Information</Link>
-          </Typography>
-          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
-          <Link style={{ color: '#2b2d42' }} href="/settings/qr" >QR Generation</Link>
-          </Typography>
-          <Typography variant="h6" className={classes.title} style={{ color: '#2b2d42' }}>
-          <Link style={{ color: '#2b2d42' }} href="/settings/display" >Display</Link>
-          </Typography>
+         
           {auth && (
             <div>
-           
+
               <Menu
-              
+
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -85,7 +77,7 @@ export default function MenuAppBar() {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-             
+
               >
               </Menu>
             </div>
