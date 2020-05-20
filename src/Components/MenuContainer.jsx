@@ -29,7 +29,7 @@ export default function MenuContainer(props) {
          'Accept': '*/*',
         'Access-Control-Allow-Origin' : '*',
        }
-     }).then(res => console.log(res.json()))
+     }).then(res => res.json())
        .then(data => setCurMenus(data.menus))
        .catch(err => console.log(err));
      console.log(curMenus);  
