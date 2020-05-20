@@ -28,6 +28,13 @@ export class Confirm extends Component {
     this.props.nextStep();
   };
   
+  constructor(props){
+    super(props)
+    this.state = {
+      restid: this.props.user.restid,
+      email: this.props.user.email,
+    }
+  }
   submit = e => {
  
     e.preventDefault();
