@@ -166,7 +166,7 @@ class CreateMenu extends React.Component {
       for(let [key, value] of Object.entries(category.menuItems)) {
           let allergensOnMenuItem = this.findAllergens(value);
           let item = {
-            itemName: value.itemName,
+            name: value.name,
             description: value.description,
             category: category.categoryName,
             price: parseFloat(value.price),

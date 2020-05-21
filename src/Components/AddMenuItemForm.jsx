@@ -26,7 +26,7 @@ import Checkbox from "./Checkbox";
          //TODO: add allergen and image
          //NOTE: Took category option out
          const menuItem = {
-            itemName: this.itemName.value,
+            name: this.name.value,
             description: this.description.value,
             idx: this.props.idx,
             price: this.price.value,
@@ -61,7 +61,7 @@ import Checkbox from "./Checkbox";
              <form className="menuItem-edit" onSubmit={this.createMenuItem}
                 ref={(input) => {this.menuItemForm = input}}>
                 <input type="text" placeholder="Menu Item Name"
-                    ref={(input) => { this.itemName = input}} />
+                    ref={(input) => { this.name = input}} />
                 <input type="text" placeholder="Menu Item Price"
                     ref={(input) => { this.price = input }} />
                 <input type="text" placeholder="Calories"

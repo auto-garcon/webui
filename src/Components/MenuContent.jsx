@@ -45,8 +45,8 @@ class MenuContent extends React.Component {
         
         return (
             <div className='menuItem-edit' key={key}>
-                <input type='text' placeholder='Menu Item Name' name='itemName'
-                    value={menuItem.itemName} onChange={(e) => this.handleChange(e, key)} required/>
+                <input type='text' placeholder='Menu Item Name' name='name'
+                    value={menuItem.name} onChange={(e) => this.handleChange(e, key)} required/>
                 <input type='text' placeholder='Menu Item Price' name='price'
                     value={menuItem.price} onChange={(e) => this.handleChange(e, key)} required/>
                 <input type='text' placeholder='Calories' name='calories'
