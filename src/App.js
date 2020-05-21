@@ -100,18 +100,16 @@ export default class App extends React.Component {
             email: "bob@jones.com"
           })
         })
-        .then(data => {
-          // TRIGGER GET TABLES -> SETTINGS
-          /** GET TABLES FETCH */
-          data.json().then(res => this.state.updateUser({
-              firstName: res.firstName,
-              lastName: res.lastName,
-              email: res.email,
-              userID: res.userID,
-              restaurantID: res.restaurantID
+        .then(res => {
+          res.json().then(data => this.state.updateUser({
+              firstName: data.firstName,
+              lastName: data.lastName,
+              email: data.email,
+              userID: data.userID,
+              restaurantID: data.restaurantID
           }))
 
-          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/${5}/tables`, {
+          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/5/tables`, {
             method: "GET",
             mode: "cors",
             headers: {
@@ -132,6 +130,7 @@ export default class App extends React.Component {
       updateUser: (user) => {
         if(user.restaurantID) {
           this.setState({user: user})
+          console.log(this.state.user.restaurantID)
           this.state.updateManager(user)
         }
       },

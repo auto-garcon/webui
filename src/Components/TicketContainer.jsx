@@ -38,28 +38,39 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
-export default function TicketContainer() {
+export default function TicketContainer(props) {
   const [curTickets, setCurTickets] = useState([]);
-  const [activeTickets, setActiveTickets] = useState([1,2,3,4,5]);
+  const [activeTickets, setActiveTickets] = useState([]);
   const [resolvedTickets, setResolvedTickets] = useState([]);
-  const [serviceTickets, setServiceTickets] = useState([1,2]);
+  const [serviceTickets, setServiceTickets] = useState([]);
   const [value, setValue] = React.useState(0);
   const classes = useStyles();
   const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
+  const {user} = props;
+  const restaurantID = user.restaurantID
 
   useEffect( () => {
-    // // This is a useeffect that will pull all the tickets from the API/DB once the page loads/mounts
-    // fetch(proxy_url + "https://autogarcon.live/api/restaurant/5/order", {
-    //   method: 'GET',
-    //   mode: "cors",
-    //   headers: {
-    //     'Accept': '*/*',
-    //     'Access-Control-Allow-Origin' : '*',
-    //   }
-    // }).then(res => res.json())
-    //   .then(data => setCurTickets(curTickets => [...curTickets, data]))
-    //   .catch(err => console.log(err));
-}, );
+    // This is a useeffect that will pull all the tickets from the API/DB once the page loads/mounts
+    fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/order`, {
+      method: 'GET',
+      mode: "cors",
+      headers: {
+        'Accept': '*/*',
+        'Access-Control-Allow-Origin' : '*',
+      }
+    }).then(res => res.json().then(data => {
+      curTickets.push(data)
+      console.log(curTickets)
+      curTickets[0].map((ticket, index) => {
+        if(ticket.orderStatus == "OPEN") {
+          activeTickets.push(ticket)
+        } else {
+          resolvedTickets.push(ticket)
+        }
+      })
+    }).catch(err => console.error(err)))
+      .catch(err => console.log(err));
+  }, []);
 
 
   const resolveActiveTicket = (event, index) => {

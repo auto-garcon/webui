@@ -68,6 +68,34 @@ html{
   pointer-events: none;
 }
 
+.TicketList-Container {
+  padding: 20px;
+  display: flex;
+}
+
+.TableList-Container {
+  max-width: 100%;
+  overflow: scroll;
+  top: 0;
+}
+
+.Ticket-Container {
+  padding: 50px;
+  margin: 2px;
+  border-radius: 1em;
+  border: 2px solid #2b2d42;
+  max-height: 200px;
+}
+
+.Table-Data {
+  display: flex;
+  position: sticky;
+}
+
+.Empty-List {
+  text-align: center;
+}
+
 #CopyRight {
   float: left;
 }
