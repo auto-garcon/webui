@@ -1,20 +1,40 @@
-import React, {useEffect, useState} from 'react'
-import Ticket from './Ticket';
+import React, {useEffect, useState} from 'react';
+import TableRow from './TableRow'
 
-export default function TicketList(props) {
-const {tickets, onResolve} = props;
-const [curTickets, updateCurTickets] = useState([]);
 
-    return (
-        <div className="TicketList-Container">
-            {tickets.length > 0 ? (tickets.map((ticket, index) => (
-                <li key={index}>
-                    <Ticket onResolve={onResolve} name={index}/>
-                </li>
+export default class TicketList extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            tickets: this.props.tickets,
+            onResolve: this.props.onResolve,
+            tableIDs: [],
+            sortTables: () => {
+                let curID
+                this.state.tickets.map((ticket, index) => {
+                    curID = ticket.tableID
+                    if(!this.state.tableIDs.includes(curID)) {
+                        this.state.tableIDs.push(curID)
+                    }
+                    console.log(!!this.state.tableIDs.length)
+                })
+            }
+        }
+    }
 
-            ))) : (
-                <h1>No tickets to see here</h1>
-            )}
-        </div>
-    );
+    componentWillMount() {
+        this.state.sortTables()
+    }
+
+    render(){
+        return (
+            <div className="TicketList-Container">
+                {this.state.tableIDs.length > 0 ? (this.state.tableIDs.map(ID =>(
+                    <TableRow tableID={ID} tickets={this.state.tickets} onResolve={this.state.onResolve}/>
+                ))) : (
+                    <h1 className="Empty-List">No orders placed</h1>
+                )}
+            </div>
+        );
+    }
 }
