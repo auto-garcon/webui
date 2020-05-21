@@ -42,24 +42,6 @@ export default class App extends React.Component {
       tables: 0,
       proxy_url: "https://fierce-tundra-17132.herokuapp.com/",
       responseGoogle: (response, e) => {
-        // fetch(DEVAPI, {
-        //   method: 'POST',
-        //   mode: 'no-cors',
-        //   headers: {
-        //     'Accept': '*/*',
-        //     'Content-Type': 'application/json',
-        //     'Access-Control-Allow-Origin' : '*'
-        //   },
-        //   body: JSON.stringify(response)
-        // })
-        // .then(res => console.log(res))
-        //  .then(data => {
-        //   console.log(data)
-        //   const expires = ( 60 * 60) * 1000
-        //   const inOneHour = new Date(new Date().getTime() + expires)
-        //   Cookies.set('access_token_autog', response.tokenObj.access_token, { expires: inOneHour });
-        // })
-        // .catch(err => console.log("FAILED", err));
         const expires = ( 60 * 60) * 1000
         const inOneHour = new Date(new Date().getTime() + expires)
         Cookies.set('access_token_autog', response.tokenObj.access_token, { expires: inOneHour });
@@ -118,7 +100,6 @@ export default class App extends React.Component {
           })
           .then(res => {
             res.json().then(data => {
-              console.log(data.numTables)
               let tables = data.numTables
               this.state.updateTables(tables)
             })
@@ -143,17 +124,17 @@ export default class App extends React.Component {
         }
       },
       updateTables: (tables) => {
-        if(!tables == undefined) {
+        if(tables >= 0) {
           this.setState({tables: tables})
-          console.log(this.state.tables)
+          return true
         }
-        console.log(this.state.tables)
+        console.log("TABLES",this.state.tables)
         return false
       }
     }
   }
 
-  componentWillMount() { // Checks for auth when the page loads
+  componentDidMount() { // Checks for auth when the page loads
     authenticate().then(isAuthenticated => {
       this.setState({ isAuthed: isAuthenticated })
     })

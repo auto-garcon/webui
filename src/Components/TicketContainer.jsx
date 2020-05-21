@@ -8,7 +8,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import {useGoogleLogin} from "react-google-login";
+import RefreshIcon from '@material-ui/icons/Refresh';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button'
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -38,20 +41,25 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
-export default function TicketContainer(props) {
-  const [curTickets, setCurTickets] = useState([]);
-  const [activeTickets, setActiveTickets] = useState([]);
-  const [resolvedTickets, setResolvedTickets] = useState([]);
-  const [serviceTickets, setServiceTickets] = useState([]);
-  const [value, setValue] = React.useState(0);
-  const classes = useStyles();
-  const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
-  const {user} = props;
-  const restaurantID = user.restaurantID
 
-  useEffect( () => {
-    // This is a useeffect that will pull all the tickets from the API/DB once the page loads/mounts
-    fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/order`, {
+export default class TicketContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      curTickets: [],
+      activeTickets: [],
+      resolvedTickets: [],
+      serviceTickets: [],
+      value: 0,
+      user: this.props.user,
+      proxy_url: "https://fierce-tundra-17132.herokuapp.com/",
+      //classes: useStyles()
+    }
+    this.resolveActiveTicket = this.resolveActiveTicket.bind(this)
+  }
+
+  pullTickets() {
+    fetch(this.state.proxy_url + `https://autogarcon.live/api/restaurant/5/order`, {
       method: 'GET',
       mode: "cors",
       headers: {
@@ -59,54 +67,157 @@ export default function TicketContainer(props) {
         'Access-Control-Allow-Origin' : '*',
       }
     }).then(res => res.json().then(data => {
-      curTickets.push(data)
-      console.log(curTickets)
-      curTickets[0].map((ticket, index) => {
+      this.setState({
+        curTickets: [],
+        activeTickets: [],
+        resolvedTickets: [],
+        serviceTickets: []
+      })
+      data.map((ticket, index) => {
+        this.state.curTickets.push(ticket)
+      })
+      console.log(this.state.curTickets)
+      this.state.curTickets.map((ticket, index) => {
         if(ticket.orderStatus == "OPEN") {
-          activeTickets.push(ticket)
+          this.state.activeTickets.push(ticket)
         } else {
-          resolvedTickets.push(ticket)
+          this.state.resolvedTickets.push(ticket)
         }
       })
     }).catch(err => console.error(err)))
       .catch(err => console.log(err));
-  }, []);
+  }
 
+  resolveActiveTicket (index) {
+      console.log(index)
+      this.setState({
+        activeTickets: this.state.activeTickets.filter((ticket) => {
+          if(ticket != index) this.state.resolvedTickets.push(ticket)
+        })
+      })
+      let orderID = index.orderID
 
-  const resolveActiveTicket = (event, index) => {
-      console.log(event.target.name)
+      fetch(this.state.proxy_url+ `https://autogarcon.live/api/restaurant/5/order/${orderID}/complete`, {
+        method: 'GET',
+        mode: "cors",
+        headers: {
+          'Accept': '*/*',
+          'Access-Control-Allow-Origin' : '*',
+        }
+      })
       //setActiveTickets(activeTickets.filter(event => event !== ticket))
       //setResolvedTickets(resolvedTickets.filter(e=> e !== ticket))
   }
 
-  const resolveServiceTicket = (event, ticket) => {
-    setResolvedTickets(resolvedTickets => [...resolvedTickets,1])
+  resolveServiceTicket = (event, ticket) => {
+    //setResolvedTickets(resolvedTickets => [...resolvedTickets,1])
   }
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  handleChange = (event, newValue) => {
+    this.setState({value: newValue})
   };
 
-  return (
-      <div className={classes.root}>
+  onRefresh = () => {
+    this.pullTickets()
+  }
+
+  componentWillMount() {
+    this.pullTickets()
+  }
+/*
+  // const [curTickets, setCurTickets] = useState([]);
+  // const [activeTickets, setActiveTickets] = useState([]);
+  // const [resolvedTickets, setResolvedTickets] = useState([]);
+  // const [serviceTickets, setServiceTickets] = useState([]);
+  // const [value, setValue] = React.useState(0);
+  // const classes = useStyles();
+  // const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
+  // const restaurantID = user.restaurantID
+  //const [refresh, updateRefresh] = useState(0);
+
+  // useEffect( () => {
+  //   // This is a useeffect that will pull all the tickets from the API/DB once the page loads/mounts
+  //   fetch(this.state.proxy_url + `https://autogarcon.live/api/restaurant/5/order`, {
+  //     method: 'GET',
+  //     mode: "cors",
+  //     headers: {
+  //       'Accept': '
+  //       'Access-Control-Allow-Origin' : '*',
+  //     }
+  //   }).then(res => res.json().then(data => {
+  //     data.map((ticket, index) => {
+  //       curTickets.push(ticket)
+  //     })
+  //     console.log(curTickets)
+  //     curTickets.map((ticket, index) => {
+  //       if(ticket.orderStatus == "OPEN") {
+  //         activeTickets.push(ticket)
+  //       } else {
+  //         resolvedTickets.push(ticket)
+  //       }
+  //     })
+  //   }).catch(err => console.error(err)))
+  //     .catch(err => console.log(err));
+  // }, [refresh]);
+
+  // const resolveActiveTicket = (index) => {
+  //     console.log(index)
+  //     //setActiveTickets(activeTickets.filter(event => event !== ticket))
+  //     //setResolvedTickets(resolvedTickets.filter(e=> e !== ticket))
+  // }
+
+  // const resolveServiceTicket = (event, ticket) => {
+  //   setResolvedTickets(resolvedTickets => [...resolvedTickets,1])
+  // }
+
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
+
+  // const onRefresh = () => {
+  //   updateRefresh(refresh => refresh + 1)
+  //   console.log(refresh)
+  // }
+ */
+  render() {
+    return (
+      <div >
         <AppBar position="sticky" style={{ background: "#8d99ae"}}>
-          <Tabs value={value} onChange={handleChange}  centered indicatorColor="primary" >
+          <Tabs value={this.state.value} onChange={this.handleChange}  centered indicatorColor="primary" >
             <Tab label="Active" />
             <Tab label="Resolved" />
             <Tab label="Service"/>
           </Tabs>
         </AppBar>
+        <Button fullWidth className="Resolve-Button"
+					variant="contained" color="primary" onClick={this.onRefresh}>
+						Refresh
+					</Button>
+        
 
-        <TabPanel value={value} index={0}>
-          <TicketList tickets={activeTickets} onResolve={resolveActiveTicket}/>
+        <TabPanel value={this.state.value} index={0}>
+          <TicketList 
+            tickets={this.state.activeTickets} 
+            onResolve={this.resolveActiveTicket}
+            emptyMessage={"No orders :("}
+          />
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          <TicketList tickets={resolvedTickets} />
+        <TabPanel value={this.state.value} index={1}>
+          <TicketList 
+            tickets={this.state.resolvedTickets} 
+            emptyMessage={"No complete orders :("}
+          />
         </TabPanel>
-        <TabPanel value={value} index={2}>
-          <TicketList tickets={serviceTickets} onResolve={resolveServiceTicket}/>
+        <TabPanel value={this.state.value} index={2}>
+          <TicketList 
+            tickets={this.state.serviceTickets} 
+            onResolve={this.resolveServiceTicket}
+            emptyMessage={"Everything is running smooth :)"}
+          />
         </TabPanel>
       </div>
   );
+  }
+  
 }
 

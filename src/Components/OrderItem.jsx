@@ -6,16 +6,16 @@ export default function OrderItem(props) {
         itemName,
         price,
         quantity,
-        orderID
+        orderID,
+        itemNum
     } = props;
 
     return (
         <div className="OrderItem-Container">
-            <h1>{comments}</h1>
-            <h1>{itemName}</h1>
-            <h1>{price}</h1>
-            <h1>{quantity}</h1>
-            <h1>{orderID}</h1>
+            <h3 className="OrderItemLabel" id="OrderID">OrderID: #{orderID}</h3>
+            <h3 className="OrderItemLabel" id="ItemName">Item: {itemName}</h3>
+            <h4 className="OrderItemLabel" id="ItemComments">Comments: {comments}</h4>
+            <h4 className="OrderItemLabel" id="ItemPrice">Price: ${price.toFixed(2)}</h4>
         </div>
     )
 }
