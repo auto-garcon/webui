@@ -26,7 +26,7 @@ export class Confirm extends Component {
   continue = e => {
   //  e.preventDefault();
     // PROCESS FORM //
-    console.log(this.props.numTables)
+    console.log(this.props.user.email)
     this.props.nextStep();
     storeManagerCookie();
   };
@@ -35,7 +35,7 @@ export class Confirm extends Component {
     super(props)
     this.state = {
       restid: null,
-      //email: this.props.user.email,
+      email: this.props.user.email,
      
     }
   }

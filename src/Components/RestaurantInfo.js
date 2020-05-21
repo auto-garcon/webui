@@ -37,26 +37,27 @@ export class RestaurantInfo extends Component {
     this.props.nextStep();
   };
   state = {
-    selectedFile: null
+    image: null,
   }
-  fileChangedHandler = event => {
-    this.setState({ selectedFile: event.target.files[0] })
-  }
+
+  handleImageChange = (e) => {
+    this.setState({
+      image: e.target.files[0]
+    })
+  };
 
   //post request image upload logo
   uploadHandler = () => {
     const fd = new FormData();
-    fd.append('uploaded_file',this.state.selectedFile, this.state.selectedFile.name)
+    fd.append('image',this.state.image, this.state.selectedFile.name)
     axios.post('https://vast-wildwood-24669.herokuapp.com'+'https://autogarcon.live/api/image/:filename',fd, {
-        mode: 'cors',
+    
         headers: {
-        enctype : 'multipart/form-data',
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+        "content-type": 'multipart/form-data',
 
       }
     }).then(res => {
-      console.log(err => console.log(err))
+      console.log(res.data)
     }).catch(err =>
       console.log(err))
   }
@@ -82,11 +83,14 @@ export class RestaurantInfo extends Component {
                 <b>Restaurant Display Information</b>
             </Typography>
             <div>
-            <b style = {{color: "#2B2d42"}}>Upload Restaurant Logo Image</b>
-            <div>
-             <input encType = "multipart/form-data" type = "file" onChange = {this.fileChangedHandler}/>
+            <p style = {{color: "#2B2d42"}}>Upload Restaurant Logo Image</p>
+             <input type = "file" 
+                    id = "image"
+                    accept = "image/png, image/jpeg"
+                    onChange = {this.handleImageChange}
+              />
             <button style ={{background: "#edf2f4"}} onClick = {this.uploadHandler} >Upload</button>
-            </div>
+       
             </div>
             <br></br>
             <div>
