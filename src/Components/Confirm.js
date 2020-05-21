@@ -30,10 +30,11 @@ export class Confirm extends Component {
     //console.log(this.props.user.email)
     
     this.props.nextStep();
-    storeManagerCookie();
+   // storeManagerCookie();
   };
   
   constructor(props){
+    
     super(props)
     this.state = {
       restid: null,
@@ -43,6 +44,7 @@ export class Confirm extends Component {
   }
   submit = e => {
     e.preventDefault();
+    const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
     //add a restaurant 
     fetch ('https://autogarcon.live/api/restaurant/add', {
       method:"POST",
@@ -65,22 +67,20 @@ export class Confirm extends Component {
       })
     })
     .then(res => console.log(res))
-    .then( 
-      fetch('https://autogarcon.live/api/restaurant/add'), {
+    .then( //get restaurants []
+      fetch(proxy_url+'https://autogarcon.live/api/restaurant'), {
         method:"GET",
         mode: 'no-cors',
         headers: {
         'Accept': '*/*',
         'Content-Type': 'application/json',
         },
-      }).then(res => console.log(res+ "hello")  )
+      }).then(res => console.log(res))
     .catch(err => console.log("FAILED", err)
   
     
     );
-    //get restaurant
-  
-
+ 
       //find 
        /*for (var i =0; i<res.restaurants.length(); i++){
           if(res.restaurants[i].restaurantName == this.props.values.restaurantName){
@@ -93,22 +93,22 @@ export class Confirm extends Component {
  // .catch(err => console.log("FAILED", err));
 
   //add manager
-  //fetch ('https://autogarcon.live/api/users/addmanager', {
-  //  method:"POST",
-  //  mode: 'no-cors',
-  //  headers: {
-  //    'Accept': '*/*',
-  //    'Content-Type': 'application/json',
-  //  },
-  //  body: JSON.stringify({
-  //    restaurantID : restid,
-  //    email : this.props.user.email,
-  //  })
-  //})
-  //.then(res => console.log(res))
-  //.then(data => console.log(data))
-  //.catch(err => console.log("FAILED", err));
-    
+ // fetch ('https://autogarcon.live/api/users/addmanager', {
+ //   method:"POST",
+ //   mode: 'no-cors',
+ //   headers: {
+ //     'Accept': '*/*',
+ //     'Content-Type': 'application/json',
+ //   },
+ //   body: JSON.stringify({
+ //     restaurantID : 39,
+ //     email : 'summer@fizzu.com',
+ //   })
+ // })
+ // .then(res => console.log(res))
+ // .then(data => console.log(data))
+ // .catch(err => console.log("FAILED", err));
+ //   console.log("hi");
     this.continue();
   }
 
@@ -240,7 +240,7 @@ export class Confirm extends Component {
 
 export default Confirm;
 /** Trying to store some cookies about the manager so that managers logging in again don't have to logout and then log back in just to get authenticated. */
-export const storeManagerCookie = () => {
+/*export const storeManagerCookie = () => {
   Cookies.set('is_manager', true)
   window.location.reload(false)
-}
+}*/

@@ -46,7 +46,7 @@ export class RestaurantInfo extends Component {
   uploadHandler = () => {
     const fd = new FormData();
     fd.append("image",this.state.selectedFile)
-    axios.post('https://autogarcon.live/api/image/'+this.state.selectedFile.name,fd, {
+    axios.post('https://vast-wildwood-24669.herokuapp.com'+'https://autogarcon.live/api/image/'+this.state.selectedFile.name,fd, {
        // body: FormData,
         headers: {
         "content-type" : 'application/x-www-form-urlencoded',
@@ -79,7 +79,6 @@ export class RestaurantInfo extends Component {
             </Typography>
             <div>
             <p style = {{color: "#2B2d42"}}>Upload Restaurant Logo Image</p>
-
              <input type = "file" 
                     id = "image"
                     accept = "image/png, image/jpeg"
