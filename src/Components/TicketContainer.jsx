@@ -98,7 +98,7 @@ export default class TicketContainer extends React.Component {
       let orderID = index.orderID
 
       fetch(this.state.proxy_url+ `https://autogarcon.live/api/restaurant/5/order/${orderID}/complete`, {
-        method: 'GET',
+        method: 'POST',
         mode: "cors",
         headers: {
           'Accept': '*/*',
