@@ -3,8 +3,13 @@ import React from 'react';
  class MenuDisplay extends React.Component {
 
      constructor () {
-         super();
+         super(props);
          
+     }
+     render() {
+        <div className="menuDisplay">
+            
+        </div>
      }
 
  }

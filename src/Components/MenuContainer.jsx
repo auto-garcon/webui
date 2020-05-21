@@ -6,23 +6,23 @@
 
 import React, { useState, useEffect } from 'react'
 import './CSS/MenuContainer.css'
-import { AgGridReact } from 'ag-grid-react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import CardDeck from 'react-bootstrap/CardDeck';
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
 export default function MenuContainer(props) {
     const [ curMenus, setCurMenus ] = useState([]);
-    const tableHeaders = [{headerName: "Menu Name", field: "menuName", sortable: true, filter: true},
-                            {headerName: "Status", field: "status", sortable: true, filter: true}]
     const {user} = props;
     const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
-    //TODO: This is where I will make my get calls to retrieve previously made menus. This is just dummy data for now.
+
     useEffect( () => {
         console.log(user);
-        fetch(proxy_url + `https://autogarcon.live/api/restaurant/${user.restaurantID}/withmenus`, {
+        fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu`, {
         method: 'GET',
         mode: "cors",
         headers: {
@@ -30,25 +30,69 @@ export default function MenuContainer(props) {
         'Access-Control-Allow-Origin' : '*',
        }
      }).then(res => res.json())
-       .then(data => setCurMenus(data.menus))
+       .then(data => setCurMenus(data))
        .catch(err => console.log(err));
      console.log(curMenus);  
     }, []);
 
+    var getFormattedTime = function (fourDigitTime){
+        if (fourDigitTime.length === 2) {
+            return "12:00 am"
+        }
+        var hours24 = parseInt(fourDigitTime.substring(0,2));
+        var hours = ((hours24 + 11) % 12) + 1;
+        var amPm = hours24 > 11 ? 'pm' : 'am';
+        var minutes = fourDigitTime.substring(2);
+    
+        return hours + ':' + minutes + amPm;
+    };
+    
+
     //this renders the AgGrid containing the menus and it renders the create new menu button
-    //THIS IS A WIP
     return (
         <div className="menu-container">
             <h1 className="tickets-title" style={{textAlign:"center"}}>Menus</h1>
             <Link to="/createmenu">
                 <Button className="create-button" >⊕ Create new menu</Button>
             </Link>
-            <div className="ag-theme-balham">
-                <AgGridReact
-                    columnDefs={tableHeaders}
-                    rowData={curMenus}>
-                </AgGridReact>
-            </div>
+            <br></br>
+            <CardDeck style={{display: 'flex', flexDirection: 'row'}}>
+                {curMenus.map((curMenu) => {
+                    console.log(curMenu);
+                    return(
+                        <Card className="card" key={curMenu.menuID}>
+                            {/*<Card.Img variant="top" src="holder.js/100px180?text=Image cap" />*/}
+                            <Card.Body className="card-body">
+                                <Card.Title>{curMenu.menuName}</Card.Title>
+                                <Card.Text>
+                                {curMenu.status}
+                                </Card.Text>
+                            </Card.Body>
+                            <ListGroup className="list-group-flush">
+                                {curMenu.timeRanges.map((time) => {
+                                    var startStr = time.startTime.toString();
+                                    var endStr = time.endTime.toString();
+                                    if(startStr.length < 4) {
+                                        startStr = "0" + startStr;
+                                    }
+                                    if(endStr.length < 4) {
+                                        endStr = "0" + endStr;
+                                    }
+                                    return(
+                                        <ListGroup.Item>{getFormattedTime(startStr)}-{getFormattedTime(endStr)}</ListGroup.Item>
+                                    );
+                                })}
+                                
+                            </ListGroup>
+                            <Card.Body>
+                            <Link to={{pathname: "/editmenu", containerProps:{menu: curMenu}}}>
+                                <Button className="edit-button">Edit Menu</Button>
+                            </Link>
+                            </Card.Body>
+                        </Card>
+                    );
+                })}
+            </CardDeck>
         </div>
     )
 }

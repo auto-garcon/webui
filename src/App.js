@@ -13,6 +13,7 @@ import LogoLarge from './Components/Images/AutoGarcon-Logo-Large.png';
 import Settings from './Components/Settings';
 import Footer from './Components/StickyFooter'
 import CreateMenu from './Components/CreateMenu';
+import EditMenu from './Components/EditMenu';
 import Loader from './Components/Loader';
 import LoginVid from './Components/Images/Login-VID.mp4';
 import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
@@ -207,6 +208,7 @@ export default class App extends React.Component {
                 <Settings user={this.state.user} tables={this.state.tables}/>
               </Route>
               <Route path="/createmenu" component={CreateMenu}/>
+              <Route path="/editmenu" component={EditMenu}/>
               <Footer />
             </Router>
           ) : (
