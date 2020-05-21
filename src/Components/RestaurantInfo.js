@@ -14,8 +14,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { MDBCloseIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 import Display from './Display';
-import axios from 'axios'
-import {ChromePicker} from 'react-color'
+import axios from 'axios';
 //import {primaryColor} from './Display';
 
 
@@ -37,27 +36,23 @@ export class RestaurantInfo extends Component {
     this.props.nextStep();
   };
   state = {
-    image: null,
+    selectedFile: null
   }
-
-  handleImageChange = (e) => {
-    this.setState({
-      image: e.target.files[0]
-    })
-  };
+  fileChangedHandler = event => {
+    this.setState({ selectedFile: event.target.files[0] })
+  }
 
   //post request image upload logo
   uploadHandler = () => {
     const fd = new FormData();
-    fd.append('image',this.state.image, this.state.selectedFile.name)
-    axios.post('https://vast-wildwood-24669.herokuapp.com'+'https://autogarcon.live/api/image/:filename',fd, {
-    
+    fd.append("image",this.state.selectedFile)
+    axios.post('https://autogarcon.live/api/image/'+this.state.selectedFile.name,fd, {
+       // body: FormData,
         headers: {
-        "content-type": 'multipart/form-data',
-
+        "content-type" : 'application/x-www-form-urlencoded',
       }
     }).then(res => {
-      console.log(res.data)
+      console.log(err => console.log(err))
     }).catch(err =>
       console.log(err))
   }
@@ -84,24 +79,24 @@ export class RestaurantInfo extends Component {
             </Typography>
             <div>
             <p style = {{color: "#2B2d42"}}>Upload Restaurant Logo Image</p>
+
              <input type = "file" 
                     id = "image"
                     accept = "image/png, image/jpeg"
-                    onChange = {this.handleImageChange}
+                    onChange = {this.fileChangedHandler}
               />
             <button style ={{background: "#edf2f4"}} onClick = {this.uploadHandler} >Upload</button>
-       
+
             </div>
-            <br></br>
             <div>
             
             <Display/>
 
             </div>
-            <b style = {{color: "#2B2d42"}}>Enter Colors Selected</b>
-     
+            <p style = {{color: "#2B2d42"}}>Enter Colors Selected</p>
+            <br />
           <TextField
-            placeholder="Primary Color (example: fffff)"
+            placeholder="Primary Color (example: #fffff)"
             label="Primary Color"
             onChange={handleChange('primaryColor')}
             defaultValue={values.primaryColor}
@@ -111,10 +106,10 @@ export class RestaurantInfo extends Component {
               maxLength : "30",
             }}
           />
-    
-   
+          <br />
+          <br />
           <TextField
-            placeholder="Secondary Color (example: fffff)"
+            placeholder="Secondary Color (example: #fffff)"
             label="Secondary Color"
             onChange={handleChange('secondaryColor')}
             defaultValue={values.secondaryColor}
@@ -124,7 +119,7 @@ export class RestaurantInfo extends Component {
               maxLength : "30",
             }}
           />
-  
+          <br />
             <Button
               color="#EDF2F4"
               variant="contained"

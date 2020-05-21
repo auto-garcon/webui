@@ -14,6 +14,7 @@ import { MDBCloseIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 import Popup from './Popup';
 import Cookies from 'js-cookie';
+import Settings from './Settings';
 
 
 const theme = createMuiTheme({
@@ -26,7 +27,8 @@ export class Confirm extends Component {
   continue = e => {
   //  e.preventDefault();
     // PROCESS FORM //
-    console.log(this.props.user.email)
+    //console.log(this.props.user.email)
+    
     this.props.nextStep();
     storeManagerCookie();
   };
@@ -35,14 +37,12 @@ export class Confirm extends Component {
     super(props)
     this.state = {
       restid: null,
-      email: this.props.user.email,
+      //email: this.props.user.email,
      
     }
   }
   submit = e => {
- 
     e.preventDefault();
-
     //add a restaurant 
     fetch ('https://autogarcon.live/api/restaurant/add', {
       method:"POST",
@@ -65,20 +65,21 @@ export class Confirm extends Component {
       })
     })
     .then(res => console.log(res))
-    .then(data => console.log(data))
-    .catch(err => console.log("FAILED", err));
-
-    //Get restaurants
-  //  fetch('https://autogarcon.live/api/restaurant/add'), {
-   //   method:"GET",
-    //  mode: 'no-cors',
-   //   headers: {
-   //     'Accept': '*/*',
-   //     'Content-Type': 'application/json',
-    //},
- // }
-//  .then(res =>  console.log(res))
-    //res.json().then(data => {
+    .then( 
+      fetch('https://autogarcon.live/api/restaurant/add'), {
+        method:"GET",
+        mode: 'no-cors',
+        headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        },
+      }).then(res => console.log(res+ "hello")  )
+    .catch(err => console.log("FAILED", err)
+  
+    
+    );
+    //get restaurant
+  
 
       //find 
        /*for (var i =0; i<res.restaurants.length(); i++){
@@ -107,9 +108,26 @@ export class Confirm extends Component {
   //.then(res => console.log(res))
   //.then(data => console.log(data))
   //.catch(err => console.log("FAILED", err));
-
+    
     this.continue();
   }
+
+  /*getRestaurant = e =>{
+
+      //Get restaurants
+      fetch('https://autogarcon.live/api/restaurant/add'), {
+      method:"GET",
+      mode: 'no-cors',
+      headers: {
+      'Accept': '*///*',
+  /*    'Content-Type': 'application/json',
+      },
+    }
+    .then(res =>  console.log(res))
+    .then(data => console.log(data))
+    .catch(err => console.log("FAILED",err));*/
+  //}
+
   back = e => {
     e.preventDefault();
     this.props.prevStep();

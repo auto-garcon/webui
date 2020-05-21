@@ -10,6 +10,7 @@ import AppBar from '@material-ui/core/AppBar';
 
 
 export class UserForm extends Component {
+
   state = {
     step: 1,
     restaurantName: '',
@@ -75,6 +76,7 @@ export class UserForm extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             values={values}
+            
           />
         );
       case 4:
