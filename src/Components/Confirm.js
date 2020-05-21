@@ -66,21 +66,42 @@ export class Confirm extends Component {
         secondaryColor : this.props.values.secondaryColor
       })
     })
-    .then(res => console.log(res))
-    .then( //get restaurants []
-      fetch(proxy_url+'https://autogarcon.live/api/restaurant'), {
+     .then(res => console.log(res))
+     .then(data => console.log(data))
+      .catch(err => console.log("FAILED", err));
+
+      fetch(proxy_url+'https://autogarcon.live/api/restaurant', {
         method:"GET",
         mode: 'no-cors',
         headers: {
         'Accept': '*/*',
         'Content-Type': 'application/json',
         },
-      }).then(res => console.log(res))
-    .catch(err => console.log("FAILED", err)
-  
-    
-    );
+      })
+      .then(res => console.log(res))
+      .then(data => console.log(data))
+      .catch(err => console.log("FAILED", err));
  
+  //add manager
+ fetch ('https://autogarcon.live/api/users/addmanager', {
+   method:"POST",
+   mode: 'no-cors',
+   headers: {
+     'Accept': '*/*',
+     'Content-Type': 'application/json',
+   },
+   body: JSON.stringify({
+     restaurantID : 39,
+     email : 'summer@fizzu.com',
+   })
+ })
+ .then(res => console.log(res))
+ .then(data => console.log(data))
+ .catch(err => console.log("FAILED", err));
+   console.log("hi");
+    this.continue();
+  }
+
       //find 
        /*for (var i =0; i<res.restaurants.length(); i++){
           if(res.restaurants[i].restaurantName == this.props.values.restaurantName){
@@ -91,27 +112,6 @@ export class Confirm extends Component {
 
  // .then(data => console.log(data))
  // .catch(err => console.log("FAILED", err));
-
-  //add manager
- // fetch ('https://autogarcon.live/api/users/addmanager', {
- //   method:"POST",
- //   mode: 'no-cors',
- //   headers: {
- //     'Accept': '*/*',
- //     'Content-Type': 'application/json',
- //   },
- //   body: JSON.stringify({
- //     restaurantID : 39,
- //     email : 'summer@fizzu.com',
- //   })
- // })
- // .then(res => console.log(res))
- // .then(data => console.log(data))
- // .catch(err => console.log("FAILED", err));
- //   console.log("hi");
-    this.continue();
-  }
-
   /*getRestaurant = e =>{
 
       //Get restaurants
