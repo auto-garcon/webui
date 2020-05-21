@@ -26,33 +26,24 @@ export class Confirm extends Component {
   continue = e => {
   //  e.preventDefault();
     // PROCESS FORM //
-    console.log(this.props.numTables)
+    console.log(this.props.user.email)
     this.props.nextStep();
     storeManagerCookie();
   };
   
+  constructor(props){
+    super(props)
+    this.state = {
+      restid: null,
+      email: this.props.user.email,
+     
+    }
+  }
   submit = e => {
  
     e.preventDefault();
-    //User information post 
-    //fetch ('https://autogarcon.live/api/users/newuser', {
-    //  method:"POST",
-    //  headers: {
-    //    'Accept': '*/*',
-    //    'Content-Type': 'application/json',
-    //    'Access-Control-Allow-Origin' : '*'
-    //  },
-    //  body: JSON.stringify({
-    //    firstName : this.props.values.firstName,
-    //    lastName : this.props.values.lastName,
-    //    email : this.props.values.email
-    //  })
-    //})
-    //.then(res => console.log(res))
-    //.then(data => console.log(data))
-    //.catch(err => console.log("FAILED", err));
-//
-   // Restaurant infromation post 
+
+    //add a restaurant 
     fetch ('https://autogarcon.live/api/restaurant/add', {
       method:"POST",
       mode: 'no-cors',
@@ -76,6 +67,47 @@ export class Confirm extends Component {
     .then(res => console.log(res))
     .then(data => console.log(data))
     .catch(err => console.log("FAILED", err));
+
+    //Get restaurants
+  //  fetch('https://autogarcon.live/api/restaurant/add'), {
+   //   method:"GET",
+    //  mode: 'no-cors',
+   //   headers: {
+   //     'Accept': '*/*',
+   //     'Content-Type': 'application/json',
+    //},
+ // }
+//  .then(res =>  console.log(res))
+    //res.json().then(data => {
+
+      //find 
+       /*for (var i =0; i<res.restaurants.length(); i++){
+          if(res.restaurants[i].restaurantName == this.props.values.restaurantName){
+            restid = res.restuarants[i].restaurantID;
+          } 
+        }*/
+    //})
+
+ // .then(data => console.log(data))
+ // .catch(err => console.log("FAILED", err));
+
+  //add manager
+  //fetch ('https://autogarcon.live/api/users/addmanager', {
+  //  method:"POST",
+  //  mode: 'no-cors',
+  //  headers: {
+  //    'Accept': '*/*',
+  //    'Content-Type': 'application/json',
+  //  },
+  //  body: JSON.stringify({
+  //    restaurantID : restid,
+  //    email : this.props.user.email,
+  //  })
+  //})
+  //.then(res => console.log(res))
+  //.then(data => console.log(data))
+  //.catch(err => console.log("FAILED", err));
+
     this.continue();
   }
   back = e => {
@@ -92,6 +124,11 @@ export class Confirm extends Component {
     });
   };
 
+  replace = () =>{
+    if (this.props.values.primaryColor.includes("#")){
+      this.props.values.primaryColor.replace("#","");
+    }
+  }
 
   render() {
     const {
