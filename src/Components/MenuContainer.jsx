@@ -22,7 +22,7 @@ export default function MenuContainer(props) {
 
     useEffect( () => {
         console.log(user);
-        fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu`, {
+        fetch(proxy_url + `https://autogarcon.live/api/restaurant/38/menu`, {
         method: 'GET',
         mode: "cors",
         headers: {
