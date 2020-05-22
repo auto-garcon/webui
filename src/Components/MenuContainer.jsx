@@ -65,11 +65,9 @@ export default function MenuContainer(props) {
                             {/*<Card.Img variant="top" src="holder.js/100px180?text=Image cap" />*/}
                             <Card.Body className="card-body">
                                 <Card.Title>{curMenu.menuName}</Card.Title>
-                                <Card.Text>
-                                {curMenu.status}
-                                </Card.Text>
                             </Card.Body>
                             <ListGroup className="list-group-flush">
+                                <ListGroup.Item>{curMenu.menuStatus}</ListGroup.Item>
                                 {curMenu.timeRanges.map((time) => {
                                     var startStr = time.startTime.toString();
                                     var endStr = time.endTime.toString();
