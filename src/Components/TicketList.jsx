@@ -37,26 +37,34 @@ export default class TicketList extends React.Component {
             <div className="TicketList-Container">
                 {this.state.tableIDs.length > 0 ? (this.state.tableIDs.map((tableID, index) =>(
                     <div key={index} className="TicketList">
+                        <h1 style={{"textAlign": "center", "backgroundColor": "#2b2d42", "color": "#edf2f4"}}>TABLE: {tableID}</h1>
                         {this.state.tickets.map((ticket, index) => (
                             <>
-                                <Ticket
-                                    name={index}
-                                    key={index} 
-                                    orders={ticket.orderItems}
-                                />
-                                {!!this.props.onResolve ? (
-                                    <div className="Resolve-Button">
-                                        <Button 
-                                            fullWidth
-                                            variant="contained" 
-                                            color="primary" 
-                                            onClick={() => this.onResolve(ticket)}
-                                        >
-                                            Resolve
-                                        </Button>
+                                {ticket.tableID === tableID ? (
+                                    <div className="Ticket-Container">
+                                        <Ticket
+                                            name={index}
+                                            key={index} 
+                                            orders={ticket.orderItems}
+                                            total={ticket.chargeAmount}
+                                            orderTime={ticket.orderTime}
+                                        />
+                                    
+                                        
+                                        {!!this.props.onResolve ? (
+                                            <div key={index} className="Resolve-Button">
+                                                <Button 
+                                                    fullWidth
+                                                    variant="contained" 
+                                                    color="primary" 
+                                                    onClick={() => this.onResolve(ticket)}
+                                                >
+                                                    Resolve
+                                                </Button>
+                                            </div>
+                                        ) : (null)}
                                     </div>
-                                ) : (null)}
-                                
+                            ) : ( null )}
                             </>
                         ))}
                     </div>

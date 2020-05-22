@@ -5,10 +5,17 @@ import AppBar from '@material-ui/core/AppBar';
 
 
 export default function Ticket(props) {
-	const { name, orders} = props;
+	const { name, orders, total, orderTime} = props;
     return (
-		<div className="Ticket-Container">
-			<h1>TICKET {name + 1}</h1>
+		<>
+			<h1 className="TicketHeader">TICKET {name + 1}</h1>
+			<h5 className="TicketPrice-Label">
+				Total: ${total.toFixed(2)}
+			</h5>
+			<h5 className="TicketOrderTime-Label">
+				OrderTime: {orderTime}
+			</h5>
+			
 			{orders.map((order, index) => (
 				<OrderItem
 					comments={order.comments}
@@ -19,7 +26,7 @@ export default function Ticket(props) {
 					key={index}
 				/>	 
 			))}
-		</div>
+		</>
 			
     )
 }
