@@ -95,7 +95,7 @@ export class RestaurantInfo extends Component {
             <p style = {{color: "#2B2d42"}}>Enter Colors Selected</p>
             <br />
           <TextField
-            placeholder="Primary Color (example: #fffff)"
+            placeholder="Primary Color (example: fffff)"
             label="Primary Color"
             onChange={handleChange('primaryColor')}
             defaultValue={values.primaryColor}
@@ -108,7 +108,7 @@ export class RestaurantInfo extends Component {
           <br />
           <br />
           <TextField
-            placeholder="Secondary Color (example: #fffff)"
+            placeholder="Secondary Color (example: fffff)"
             label="Secondary Color"
             onChange={handleChange('secondaryColor')}
             defaultValue={values.secondaryColor}
