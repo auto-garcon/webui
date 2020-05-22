@@ -34,7 +34,6 @@ export class Confirm extends Component {
   };
   
   constructor(props){
-    
     super(props)
     this.state = {
       restid: null,
@@ -70,44 +69,50 @@ export class Confirm extends Component {
      .then(data => console.log(data))
       .catch(err => console.log("FAILED", err));
 
+      //get restaurant 
       fetch(proxy_url+'https://autogarcon.live/api/restaurant', {
         method:"GET",
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
         'Accept': '*/*',
-        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin' : '*',
         },
       })
       .then(res => console.log(res))
+      .then(res => {
+        
+       for (var i =0; i<res.restaurants.length(); i++){
+        if(res.restaurants[i].restaurantName == this.props.values.restaurantName){
+          this.props.restid = res.restuarants[i].restaurantID;
+        } 
+        console.log(this.props.restID)
+      }
+     })
       .then(data => console.log(data))
       .catch(err => console.log("FAILED", err));
  
-  //add manager
- fetch ('https://autogarcon.live/api/users/addmanager', {
-   method:"POST",
-   mode: 'no-cors',
-   headers: {
-     'Accept': '*/*',
-     'Content-Type': 'application/json',
-   },
-   body: JSON.stringify({
-     restaurantID : 39,
-     email : 'summer@fizzu.com',
-   })
- })
- .then(res => console.log(res))
- .then(data => console.log(data))
- .catch(err => console.log("FAILED", err));
-   console.log("hi");
-    this.continue();
+      //add manager
+    /*fetch ('https://autogarcon.live/api/users/addmanager', {
+      method:"POST",
+      mode: 'no-cors',
+      headers: {
+        'Accept': '*//*',
+    //    'Content-Type': 'application/json',
+    //  },
+    //  body: JSON.stringify({
+    //    restaurantID : 39,
+    //    email : 'summer@fizzu.com',
+    //  })
+    // })
+    // .then(res => console.log(res))
+    // .then(data => console.log(data))
+    // .catch(err => console.log("FAILED", err));
+    //  console.log("hi");
+        this.continue();*/
   }
 
       //find 
-       /*for (var i =0; i<res.restaurants.length(); i++){
-          if(res.restaurants[i].restaurantName == this.props.values.restaurantName){
-            restid = res.restuarants[i].restaurantID;
-          } 
-        }*/
+      
     //})
 
  // .then(data => console.log(data))
