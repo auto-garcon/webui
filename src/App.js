@@ -77,19 +77,21 @@ export default class App extends React.Component {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            firstName: "John",
-            lastName: "Smith",
-            email: "john.smith@internet.web"
+            firstName: "Bob",
+            lastName: "Jones",
+            email: "bob@jones.com"
           })
         })
         .then(res => {
-          res.json().then(data => this.state.updateUser({
+          res.json().then(data => {
+            this.state.updateUser({
               firstName: data.firstName,
               lastName: data.lastName,
               email: data.email,
               userID: data.userID,
               restaurantID: data.restaurantID
-          }))
+          })})
+          
 
           fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/38/tables`, {
             method: "GET",
@@ -111,7 +113,6 @@ export default class App extends React.Component {
       updateUser: (user) => {
         if(user.restaurantID) {
           this.setState({user: user})
-          console.log(this.state.user.restaurantID)
           this.state.updateManager(user)
         }
       },
@@ -128,7 +129,6 @@ export default class App extends React.Component {
           this.setState({tables: tables})
           return true
         }
-        console.log("TABLES",this.state.tables)
         return false
       }
     }
