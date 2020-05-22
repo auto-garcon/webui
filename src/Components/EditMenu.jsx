@@ -187,12 +187,12 @@ class EditMenu extends React.Component {
         menuStatus: this.state.status.toUpperCase(),
         menuName: this.state.menuName,
         menuItems: menuItems,
-        restaurantID: 5,
+        restaurantID: 38,
       }
 
       //delete menu first
       
-      fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu/${this.props.location.containerProps.menu.menuID}/remove`, {
+      fetch(proxy_url + `https://autogarcon.live/api/restaurant/38/menu/${this.props.location.containerProps.menu.menuID}/remove`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -205,7 +205,7 @@ class EditMenu extends React.Component {
       .catch(err => console.log("FAILED", err));
       //TODO: need to get the restaurant ID to send menu
       console.log(JSON.stringify(menu));
-      fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu/add`, {
+      fetch(proxy_url + `https://autogarcon.live/api/restaurant/38/menu/add`, {
         method: 'POST',
         mode: 'cors',
         headers: {
