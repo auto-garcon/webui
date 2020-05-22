@@ -1,26 +1,22 @@
-/*
-  CreateMenu Component: This component is the base for the create menu page.
-  It is split up in displaying the Menu Information (name, time ranges, status) 
-  and the Menu Content (categories with menu items).
-*/
 import React from 'react';
 import TimeRangeInputs from './TimeRangeInputs';
 import './CSS/CreateMenu.css';
 import MenuContent from './MenuContent';
 import { Link } from 'react-router-dom';
 
-class CreateMenu extends React.Component {
+class EditMenu extends React.Component {
   constructor(props) {
     super(props);
-    //this state will be passed to the backend after some manipulation
+    var incoming_menu = props.location.containerProps.menu;
+    console.log(incoming_menu);
     this.state = {
-      restaurantID: this.props.location.userProps.restaurantID,
-      menuName: "",
-      status: "",
+      menuName: incoming_menu.menuName,
+      status: incoming_menu.menuStatus,
       timeRanges: [{startTime: "", endTime: ""}],
       categories: [{categoryName: "", menuItems: {}}]
     }
-    console.log(this.state.restaurantID);
+
+    
     this.addMenuItem = this.addMenuItem.bind(this);
     this.updateMenuItem = this.updateMenuItem.bind(this);
     this.removeMenuItem = this.removeMenuItem.bind(this);
@@ -33,7 +29,54 @@ class CreateMenu extends React.Component {
     this.getMenuItems = this.getMenuItems.bind(this);
     this.findAllergens = this.findAllergens.bind(this);
     this.formatTimeRanges = this.formatTimeRanges.bind(this);
+    this.getTimeRanges = this.getTimeRanges.bind(this);
+    this.convertToTimeFormat = this.convertToTimeFormat.bind(this);
+    this.getAllCategories = this.getAllCategories.bind(this);
+
+    var times = this.getTimeRanges(incoming_menu.timeRanges);
+    this.state.timeRanges = times;
+    
+    var categoriesFormatted = this.getAllCategories(incoming_menu.menuItems);
+    this.state.categories = categoriesFormatted;
+    console.log(this.state);
   }
+
+  getAllCategories(menuItems) {
+    var result = [];
+    var categories = menuItems.map((menuItem) => menuItem.category).filter((value, index, self) => self.indexOf(value) === index);
+    var i = 0;
+    categories.forEach((category) => {
+        var items = menuItems.map((menuItem)=> {
+            if (menuItem.category === category) {
+                menuItem.idx = i;
+                return menuItem;
+            }
+        });
+        items = Object.assign({}, items);
+        Object.keys(items).forEach(key => items[key] === undefined && delete items[key]);
+        result.push({categoryName: category, menuItems: items});
+        i++;
+    });
+    console.log(result);
+    return result;
+  }
+
+    getTimeRanges(timeRanges) {
+        timeRanges.forEach(time => {
+            
+            time.startTime = this.convertToTimeFormat(time.startTime.toString());
+            time.endTime = this.convertToTimeFormat(time.endTime.toString());
+        });
+        console.log(timeRanges);
+        return timeRanges;
+    }
+
+    convertToTimeFormat(timeStr) {
+        while(timeStr.length < 4) {
+            timeStr = "0" + timeStr;
+        }
+        return timeStr.slice(0,2) + ":" + timeStr.slice(2);
+    }
 
   /*
     Function: addMenuItem
@@ -57,6 +100,7 @@ class CreateMenu extends React.Component {
       menuItem: the menuItem to be updated
   */
   updateMenuItem(key, menuItem) {
+    console.log("update", this.state, menuItem)
     var category = this.state.categories[menuItem.idx].menuItems;
     category[key] = menuItem;
     this.setState({ category }, () => console.log(this.state));
@@ -145,6 +189,20 @@ class CreateMenu extends React.Component {
         menuItems: menuItems,
         restaurantID: 5,
       }
+
+      //delete menu first
+      
+      fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu/${this.props.location.containerProps.menu.menuID}/remove`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*',
+        },
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log("FAILED", err));
       //TODO: need to get the restaurant ID to send menu
       console.log(JSON.stringify(menu));
       fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu/add`, {
@@ -248,12 +306,12 @@ class CreateMenu extends React.Component {
     Function: render
       This function renders the menu info and menu content to the page.
   */
-  render() {
+ render() {
     let {menuName, status, timeRanges, categories} = this.state;
     return (
     <div className="createMenu">
       <div>
-        <h1 style= {{color: "#edf2f4"}}>Create Menu</h1>
+        <h1 style= {{color: "#edf2f4"}}>Edit Menu</h1>
       </div>
       <div>
         
@@ -265,8 +323,8 @@ class CreateMenu extends React.Component {
         <h3 htmlFor="status">Menu Status</h3>
         <select id="status" name="status" className="status" defaultValue={status} required>
             <option disabled selected value> -- select an status -- </option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
+            <option value="ACTIVE">Active</option>
+            <option value="INACTIVE">Inactive</option>
         </select>
         <h3>Time Ranges</h3>
         <button id="add-button" onClick={this.addTimeRange} type="button">Add new time range</button>
@@ -290,4 +348,4 @@ class CreateMenu extends React.Component {
     );
   }
 }
-export default CreateMenu;
+export default EditMenu;
