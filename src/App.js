@@ -22,7 +22,7 @@ import Cookies from 'js-cookie';
 
 /** Test Google login keys and API links */
 const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
-// const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
+const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
 // const PRODAPI = "https://autogarcon.live/api/users/newuser"
 // const DEVAPI = "http://localhost/api/users/newuser"
 
@@ -43,24 +43,6 @@ export default class App extends React.Component {
       tables: 0,
       proxy_url: "https://fierce-tundra-17132.herokuapp.com/",
       responseGoogle: (response, e) => {
-        // fetch(DEVAPI, {
-        //   method: 'POST',
-        //   mode: 'no-cors',
-        //   headers: {
-        //     'Accept': '*/*',
-        //     'Content-Type': 'application/json',
-        //     'Access-Control-Allow-Origin' : '*'
-        //   },
-        //   body: JSON.stringify(response)
-        // })
-        // .then(res => console.log(res))
-        //  .then(data => {
-        //   console.log(data)
-        //   const expires = ( 60 * 60) * 1000
-        //   const inOneHour = new Date(new Date().getTime() + expires)
-        //   Cookies.set('access_token_autog', response.tokenObj.access_token, { expires: inOneHour });
-        // })
-        // .catch(err => console.log("FAILED", err));
         const expires = ( 60 * 60) * 1000
         const inOneHour = new Date(new Date().getTime() + expires)
         Cookies.set('access_token_autog', response.tokenObj.access_token, { expires: inOneHour });
@@ -96,23 +78,21 @@ export default class App extends React.Component {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            firstName: "Bob",
-            lastName: "Jones",
-            email: "bob@jones.com"
+            firstName: "John",
+            lastName: "Smith",
+            email: "john.smith@internet.web"
           })
         })
-        .then(data => {
-          // TRIGGER GET TABLES -> SETTINGS
-          /** GET TABLES FETCH */
-          data.json().then(res => this.state.updateUser({
-              firstName: res.firstName,
-              lastName: res.lastName,
-              email: res.email,
-              userID: res.userID,
-              restaurantID: res.restaurantID
+        .then(res => {
+          res.json().then(data => this.state.updateUser({
+              firstName: data.firstName,
+              lastName: data.lastName,
+              email: data.email,
+              userID: data.userID,
+              restaurantID: data.restaurantID
           }))
 
-          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/${5}/tables`, {
+          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/38/tables`, {
             method: "GET",
             mode: "cors",
             headers: {
@@ -121,7 +101,6 @@ export default class App extends React.Component {
           })
           .then(res => {
             res.json().then(data => {
-              console.log(data.numTables)
               let tables = data.numTables
               this.state.updateTables(tables)
             })
@@ -133,6 +112,7 @@ export default class App extends React.Component {
       updateUser: (user) => {
         if(user.restaurantID) {
           this.setState({user: user})
+          console.log(this.state.user.restaurantID)
           this.state.updateManager(user)
         }
       },
@@ -145,17 +125,17 @@ export default class App extends React.Component {
         }
       },
       updateTables: (tables) => {
-        if(!tables == undefined) {
+        if(tables >= 0) {
           this.setState({tables: tables})
-          console.log(this.state.tables)
+          return true
         }
-        console.log(this.state.tables)
+        console.log("TABLES",this.state.tables)
         return false
       }
     }
   }
 
-  componentWillMount() { // Checks for auth when the page loads
+  componentDidMount() { // Checks for auth when the page loads
     authenticate().then(isAuthenticated => {
       this.setState({ isAuthed: isAuthenticated })
     })
@@ -188,7 +168,7 @@ export default class App extends React.Component {
                       buttonText="Continue with Google"
                       onSuccess={this.state.responseGoogle}
                       onFailure={this.state.responseGoogle}
-                      clientId={DEV}
+                      clientId={PROD}
                   />
                 </div>
               </div>

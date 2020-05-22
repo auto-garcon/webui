@@ -68,6 +68,50 @@ html{
   pointer-events: none;
 }
 
+.TicketList-Container {
+  width: 100%;
+  overflow-x: scroll;
+  padding: 10px;
+  
+}
+
+.Ticket-Container {
+  display: inline-block;
+  margin: 2px;
+  padding: 10px;
+  border-radius: .25em;
+  border: .5px solid #2b2d42;
+  vertical-align: top;  
+  max-height: 400px;
+  min-height: 400px;
+  overflow-y: scroll;
+  background-color: #edf2f4;
+}
+
+.Ticket-Container .Empty-List {
+  text-align: center;
+}
+
+.TicketHeader {
+  position: sticky;
+}
+
+.OrderItem-Container {
+  background-color: #c7c7c7 ;
+  word-wrap: break-word;
+  max-width: 200px;
+}
+
+.Resolve-Button{
+  display: inline-block;
+  width: 100%;
+  position: relative;
+}
+
+.Empty-List {
+  text-align: center;
+}
+
 #CopyRight {
   float: left;
 }

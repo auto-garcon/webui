@@ -10,6 +10,7 @@ import AppBar from '@material-ui/core/AppBar';
 
 
 export class UserForm extends Component {
+
   state = {
     step: 1,
     restaurantName: '',
@@ -45,6 +46,23 @@ export class UserForm extends Component {
     this.setState({ [input]: e.target.value });
   };
 
+
+  componentWillMount () {
+    this.setState ({
+            restaurantName: this.props.restaurant.restaurantName,
+            description:    this.props.restaurant.description,
+            address:        this.props.restaurant.address,
+            city:           this.props.restaurant.city,
+            zipcode:        this.props.restaurant.zipcode,
+            state:          this.props.restaurant.state,
+            country:        this.props.restaurant.country,
+            numTables:      this.props.restaurant.numTables  ,
+            primaryColor:   this.props.restaurant.primaryColor,
+            secondaryColor: this.props.restaurant.secondaryColor
+          })
+    
+    }
+  
   render() {
     const { step } = this.state;
     const { restaurantName, description, address, city, zipcode, state, country, numTables, primaryColor, secondaryColor} = this.state;
@@ -55,14 +73,18 @@ export class UserForm extends Component {
         return (
             
           <RestaurantOwnerInfo
+            
+            user = {this.props.user}
             nextStep={this.nextStep}
             handleChange={this.handleChange}
             values={values}
+           
           />
         );
       case 2:
         return (
           <RestaurantInfo
+            user = {this.props.user}
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
@@ -72,9 +94,11 @@ export class UserForm extends Component {
       case 3:
         return (
           <Confirm
+            user = {this.props.user}
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             values={values}
+            
           />
         );
       case 4:

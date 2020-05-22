@@ -30,6 +30,7 @@
     "react-images-upload": "^1.2.8",
     "react-images-uploader": "^1.2.0-rc1",
     "react-native-color-picker": "^0.5.2",
+    "react-numeric-input": "^2.2.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "styled-components": "^5.0.1"
