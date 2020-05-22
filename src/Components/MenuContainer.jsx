@@ -56,11 +56,12 @@ export default function MenuContainer(props) {
                 <Button className="create-button" >⊕ Create new menu</Button>
             </Link>
             <br></br>
-            <CardDeck style={{display: 'flex', flexDirection: 'row'}}>
+            <br></br>
+            <CardDeck >
                 {curMenus.map((curMenu) => {
                     console.log(curMenu);
                     return(
-                        <Card className="card" key={curMenu.menuID}>
+                        <Card className="card" key={curMenu.menuID} style={{border: 'solid'}}>
                             {/*<Card.Img variant="top" src="holder.js/100px180?text=Image cap" />*/}
                             <Card.Body className="card-body">
                                 <Card.Title>{curMenu.menuName}</Card.Title>

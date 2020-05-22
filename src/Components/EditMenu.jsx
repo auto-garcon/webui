@@ -53,6 +53,7 @@ class EditMenu extends React.Component {
             }
         });
         items = Object.assign({}, items);
+        Object.keys(items).forEach(key => items[key] === undefined && delete items[key]);
         result.push({categoryName: category, menuItems: items});
         i++;
     });
@@ -310,7 +311,7 @@ class EditMenu extends React.Component {
     return (
     <div className="createMenu">
       <div>
-        <h1 style= {{color: "#edf2f4"}}>Create Menu</h1>
+        <h1 style= {{color: "#edf2f4"}}>Edit Menu</h1>
       </div>
       <div>
         
