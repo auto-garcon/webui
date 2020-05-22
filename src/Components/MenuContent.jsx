@@ -70,7 +70,7 @@ class MenuContent extends React.Component {
                 <textarea placeholder='Menu Item Description' name='description' value={menuItem.description}
                     onChange={(e) => this.handleChange(e, key)} required/>
                 <input type='file' name='uploaded_file' accept='.png' />
-                <button onClick = {() => this.props.removeMenuItem(key, menuItem)}>Remove Menu Item</button>
+                <button onClick = {() => this.props.removeMenuItem(key, menuItem)} type="button">Remove Menu Item</button>
             </div>
         );
     }

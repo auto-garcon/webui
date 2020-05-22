@@ -10,16 +10,17 @@ import MenuContent from './MenuContent';
 import { Link } from 'react-router-dom';
 
 class CreateMenu extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     //this state will be passed to the backend after some manipulation
     this.state = {
+      restaurantID: this.props.location.userProps.restaurantID,
       menuName: "",
       status: "",
       timeRanges: [{startTime: "", endTime: ""}],
       categories: [{categoryName: "", menuItems: {}}]
     }
-
+    console.log(this.state.restaurantID);
     this.addMenuItem = this.addMenuItem.bind(this);
     this.updateMenuItem = this.updateMenuItem.bind(this);
     this.removeMenuItem = this.removeMenuItem.bind(this);
@@ -135,21 +136,30 @@ class CreateMenu extends React.Component {
       e.preventDefault();
       var menuItems = this.getMenuItems();
       var formattedTimeRanges = this.formatTimeRanges();
-      //
+      const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
       //make post call for menu items and images
       const menu = {
         timeRanges: formattedTimeRanges,
-        menuStatus: this.state.menuStatus,
+        menuStatus: this.state.status.toUpperCase(),
         menuName: this.state.menuName,
         menuItems: menuItems,
+        restaurantID: 5,
       }
       //TODO: need to get the restaurant ID to send menu
-      /*
-      fetch('/restaurant/:restaurantid/menu/add', {
+      console.log(JSON.stringify(menu));
+      fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu/add`, {
         method: 'POST',
-        body: menu,
-      });
-
+        mode: 'cors',
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*',
+        },
+        body:  JSON.stringify(menu),
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log("FAILED", err));
+      /*
       //call for sending images to the backend
       loop to go through each of the images
         fetch('/api/image/:filename', {
@@ -177,15 +187,15 @@ class CreateMenu extends React.Component {
           menuItems.push(item);
       }
     });
-    console.log(menuItems);
+    return menuItems;
   }
 
   formatTimeRanges() {
     var timeRanges = [];
     this.state.timeRanges.forEach((timeRange) => {
       var tr = {
-        startTime: parseInt(timeRange.startTime),
-        endTime: parseInt(timeRange.endTime)
+        startTime: parseInt(timeRange.startTime.replace(":", "")),
+        endTime: parseInt(timeRange.endTime.replace(":", ""))
       }
       timeRanges.push(tr);
     });
@@ -256,13 +266,13 @@ class CreateMenu extends React.Component {
         <select id="status" name="status" className="status" defaultValue={status} required>
             <option disabled selected value> -- select an status -- </option>
             <option value="active">Active</option>
-            <option value="draft">Draft</option>
+            <option value="inactive">Inactive</option>
         </select>
         <h3>Time Ranges</h3>
-        <button id="add-button" onClick={this.addTimeRange}>Add new time range</button>
+        <button id="add-button" onClick={this.addTimeRange} type="button">Add new time range</button>
         <TimeRangeInputs timeRanges={timeRanges} removeTimeRange={this.removeTimeRange} />
         <h2>Menu Content</h2>
-        <button id="add-button" onClick={this.addCategory}>Add new category</button>
+        <button id="add-button" onClick={this.addCategory} type="button">Add new category</button>
         {Object.keys(categories).map(this.renderMenu)}
         {/*TODO: FUNCTIONALITY FOR BUTTONS */}
         <div className="save-buttons">
@@ -273,7 +283,7 @@ class CreateMenu extends React.Component {
         </div>
       </form>
       <Link to="/">
-        <button id="cancel-button">Cancel</button>
+        <button id="cancel-button" type="button">Cancel</button>
       </Link>
       
     </div>     

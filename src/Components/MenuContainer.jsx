@@ -4,8 +4,8 @@
     The user will have the option to create a new menu.
 */
 
-import React, { useState, useEffect } from 'react'
-import './CSS/MenuContainer.css'
+import React, { useState, useEffect } from 'react';
+import './CSS/MenuContainer.css';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import CardDeck from 'react-bootstrap/CardDeck';
@@ -52,7 +52,7 @@ export default function MenuContainer(props) {
     return (
         <div className="menu-container">
             <h1 className="tickets-title" style={{textAlign:"center"}}>Menus</h1>
-            <Link to="/createmenu">
+            <Link to={{pathname: "/createmenu", userProps:{restaurantID: user.restaurantID}}}>
                 <Button className="create-button" >⊕ Create new menu</Button>
             </Link>
             <br></br>

@@ -85,7 +85,7 @@ import Checkbox from "./Checkbox";
                 <input type='file' name='uploaded_file' accept='.png' 
                     ref={(input) => {this.image = input}}/>
                 {/* This button will call createMenuItem */}
-                <button type="submit"> + Add Item </button>
+                <button type="button" onClick={(e) => this.createMenuItem(e)}> + Add Item </button>
             </form>
          )
      }

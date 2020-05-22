@@ -11,7 +11,7 @@ class EditMenu extends React.Component {
     console.log(incoming_menu);
     this.state = {
       menuName: incoming_menu.menuName,
-      status: incoming_menu.status,
+      status: incoming_menu.menuStatus,
       timeRanges: [{startTime: "", endTime: ""}],
       categories: [{categoryName: "", menuItems: {}}]
     }
@@ -37,11 +37,27 @@ class EditMenu extends React.Component {
     this.state.timeRanges = times;
     
     var categoriesFormatted = this.getAllCategories(incoming_menu.menuItems);
-
+    this.state.categories = categoriesFormatted;
+    console.log(this.state);
   }
 
   getAllCategories(menuItems) {
-
+    var result = [];
+    var categories = menuItems.map((menuItem) => menuItem.category).filter((value, index, self) => self.indexOf(value) === index);
+    var i = 0;
+    categories.forEach((category) => {
+        var items = menuItems.map((menuItem)=> {
+            if (menuItem.category === category) {
+                menuItem.idx = i;
+                return menuItem;
+            }
+        });
+        items = Object.assign({}, items);
+        result.push({categoryName: category, menuItems: items});
+        i++;
+    });
+    console.log(result);
+    return result;
   }
 
     getTimeRanges(timeRanges) {
@@ -83,6 +99,7 @@ class EditMenu extends React.Component {
       menuItem: the menuItem to be updated
   */
   updateMenuItem(key, menuItem) {
+    console.log("update", this.state, menuItem)
     var category = this.state.categories[menuItem.idx].menuItems;
     category[key] = menuItem;
     this.setState({ category }, () => console.log(this.state));
@@ -162,21 +179,44 @@ class EditMenu extends React.Component {
       e.preventDefault();
       var menuItems = this.getMenuItems();
       var formattedTimeRanges = this.formatTimeRanges();
-      //
+      const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
       //make post call for menu items and images
       const menu = {
         timeRanges: formattedTimeRanges,
-        menuStatus: this.state.menuStatus,
+        menuStatus: this.state.status.toUpperCase(),
         menuName: this.state.menuName,
         menuItems: menuItems,
+        restaurantID: 5,
       }
-      //TODO: need to get the restaurant ID to send menu
-      /*
-      fetch('/restaurant/:restaurantid/menu/add', {
-        method: 'POST',
-        body: menu,
-      });
 
+      //delete menu first
+      
+      fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu/${this.props.location.containerProps.menu.menuID}/remove`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*',
+        },
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log("FAILED", err));
+      //TODO: need to get the restaurant ID to send menu
+      console.log(JSON.stringify(menu));
+      fetch(proxy_url + `https://autogarcon.live/api/restaurant/5/menu/add`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Accept': '*/*',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*',
+        },
+        body:  JSON.stringify(menu),
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log("FAILED", err));
+      /*
       //call for sending images to the backend
       loop to go through each of the images
         fetch('/api/image/:filename', {
@@ -204,15 +244,15 @@ class EditMenu extends React.Component {
           menuItems.push(item);
       }
     });
-    console.log(menuItems);
+    return menuItems;
   }
 
   formatTimeRanges() {
     var timeRanges = [];
     this.state.timeRanges.forEach((timeRange) => {
       var tr = {
-        startTime: parseInt(timeRange.startTime),
-        endTime: parseInt(timeRange.endTime)
+        startTime: parseInt(timeRange.startTime.replace(":", "")),
+        endTime: parseInt(timeRange.endTime.replace(":", ""))
       }
       timeRanges.push(tr);
     });
@@ -265,7 +305,7 @@ class EditMenu extends React.Component {
     Function: render
       This function renders the menu info and menu content to the page.
   */
-  render() {
+ render() {
     let {menuName, status, timeRanges, categories} = this.state;
     return (
     <div className="createMenu">
@@ -282,14 +322,14 @@ class EditMenu extends React.Component {
         <h3 htmlFor="status">Menu Status</h3>
         <select id="status" name="status" className="status" defaultValue={status} required>
             <option disabled selected value> -- select an status -- </option>
-            <option value="active">Active</option>
-            <option value="draft">Draft</option>
+            <option value="ACTIVE">Active</option>
+            <option value="INACTIVE">Inactive</option>
         </select>
         <h3>Time Ranges</h3>
-        <button id="add-button" onClick={this.addTimeRange}>Add new time range</button>
+        <button id="add-button" onClick={this.addTimeRange} type="button">Add new time range</button>
         <TimeRangeInputs timeRanges={timeRanges} removeTimeRange={this.removeTimeRange} />
         <h2>Menu Content</h2>
-        <button id="add-button" onClick={this.addCategory}>Add new category</button>
+        <button id="add-button" onClick={this.addCategory} type="button">Add new category</button>
         {Object.keys(categories).map(this.renderMenu)}
         {/*TODO: FUNCTIONALITY FOR BUTTONS */}
         <div className="save-buttons">
@@ -300,7 +340,7 @@ class EditMenu extends React.Component {
         </div>
       </form>
       <Link to="/">
-        <button id="cancel-button">Cancel</button>
+        <button id="cancel-button" type="button">Cancel</button>
       </Link>
       
     </div>     
