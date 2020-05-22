@@ -22,7 +22,7 @@ export default function Settings(props) {
   const {user, tables} = props;
   const [restaurant, setRestaurant] = useState({});
   
-  useEffect (() => {
+  /*useEffect (() => {
    console.log(user);
 
    if(user.restaurantID){
@@ -32,16 +32,16 @@ export default function Settings(props) {
           method:"GET",
           mode: 'cors',
           headers: {
-          'Accept': '*/*',
-          'Access-Control-Allow-Origin' : '*',
-          },
-        })
-        .then(res => res.json().then(data => {setRestaurant(data)}))
-        .catch(err =>console.log(err));
+          'Accept': '*//*',
+        //  'Access-Control-Allow-Origin' : '*',
+      //    },
+      //  })
+       // .then(res => res.json().then(data => {setRestaurant(data)}))
+       // .catch(err =>console.log(err));
     
-      }
+      //}
     
-  }, [])
+  //}, [])*/
     return (
       <>
       

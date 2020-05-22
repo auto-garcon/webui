@@ -109,7 +109,7 @@ export default class App extends React.Component {
               restaurantID: data.restaurantID
           }))
 
-          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/0/tables`, {
+          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/5/tables`, {
             method: "GET",
             mode: "cors",
             headers: {

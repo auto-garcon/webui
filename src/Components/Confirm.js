@@ -30,14 +30,14 @@ export class Confirm extends Component {
     //console.log(this.props.user.email)
     
     this.props.nextStep();
-   // storeManagerCookie();
+    storeManagerCookie();
   };
   
   constructor(props){
     super(props)
     this.state = {
       restid: null,
-      email: this.props.user.email,
+      //email: this.props.user.email,
     }
   }
   submit = e => {
@@ -99,8 +99,8 @@ export class Confirm extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        restaurantID : this.state.restID,
-        email : this.state.email
+        restaurantID : 5,
+        email : 'bob@smith.com',
       })
      })
      .then(res => console.log(res))
@@ -244,7 +244,7 @@ export class Confirm extends Component {
 
 export default Confirm;
 /** Trying to store some cookies about the manager so that managers logging in again don't have to logout and then log back in just to get authenticated. */
-/*export const storeManagerCookie = () => {
+export const storeManagerCookie = () => {
   Cookies.set('is_manager', true)
   window.location.reload(false)
-}*/
+}
