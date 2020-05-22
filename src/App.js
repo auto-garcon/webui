@@ -167,7 +167,7 @@ export default class App extends React.Component {
                       buttonText="Continue with Google"
                       onSuccess={this.state.responseGoogle}
                       onFailure={this.state.responseGoogle}
-                      clientId={PROD}
+                      clientId={DEV}
                   />
                 </div>
               </div>
