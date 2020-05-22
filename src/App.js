@@ -78,9 +78,9 @@ export default class App extends React.Component {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            firstName: "Bob",
-            lastName: "Jones",
-            email: "bob@jones.com"
+            firstName: "John",
+            lastName: "Smith",
+            email: "john.smith@internet.web"
           })
         })
         .then(res => {
