@@ -17,9 +17,8 @@ export default class QR extends React.Component {
   }
 
   render () {
-    console.log("hello")
-    for(var i = 0; i < this.state.tables; i++){
-      this.state.codes.push(`https://autogarcon.live/api/restaurant/${this.state.user.restaurantID}/table/${i}/sitdown`)
+    for(var i = 0; i < 10; i++){
+      this.state.codes.push(`https://autogarcon.live/api/restaurant/42/table/${i}/sitdown`)
     }
     
     return (

@@ -14,6 +14,7 @@ import { MDBCloseIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 import Popup from './Popup';
 import Cookies from 'js-cookie';
+import Settings from './Settings';
 
 
 const theme = createMuiTheme({
@@ -26,7 +27,8 @@ export class Confirm extends Component {
   continue = e => {
   //  e.preventDefault();
     // PROCESS FORM //
-    console.log(this.props.user.email)
+    //console.log(this.props.user.email)
+    
     this.props.nextStep();
     storeManagerCookie();
   };
@@ -35,14 +37,12 @@ export class Confirm extends Component {
     super(props)
     this.state = {
       restid: null,
-      email: this.props.user.email,
-     
+      //email: this.props.user.email,
     }
   }
   submit = e => {
- 
     e.preventDefault();
-
+    const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
     //add a restaurant 
     fetch ('https://autogarcon.live/api/restaurant/add', {
       method:"POST",
@@ -64,52 +64,74 @@ export class Confirm extends Component {
         secondaryColor : this.props.values.secondaryColor
       })
     })
-    .then(res => console.log(res))
-    .then(data => console.log(data))
-    .catch(err => console.log("FAILED", err));
+     .then(res => console.log(res))
+     .then(data => console.log(data))
+      .catch(err => console.log("FAILED", err));
 
-    //Get restaurants
-  //  fetch('https://autogarcon.live/api/restaurant/add'), {
-   //   method:"GET",
-    //  mode: 'no-cors',
-   //   headers: {
-   //     'Accept': '*/*',
-   //     'Content-Type': 'application/json',
-    //},
- // }
-//  .then(res =>  console.log(res))
-    //res.json().then(data => {
+      //get restaurant 
+      fetch(proxy_url+'https://autogarcon.live/api/restaurant', {
+        method:"GET",
+        mode: 'cors',
+        headers: {
+        'Accept': '*/*',
+        'Access-Control-Allow-Origin' : '*',
+        },
+      })
+      .then(res => console.log(res))
+      .then(res => {
+        
+       for (var i =0; i<res.restaurants.length(); i++){
+        if(res.restaurants[i].restaurantName == this.props.values.restaurantName){
+          this.state.restID = res.restuarants[i].restaurantID;
+        } 
+        console.log(this.props.restID)
+      }
+     })
+      .then(data => console.log(data))
+      .catch(err => console.log("FAILED", err));
+ 
+      //add manager
+      fetch ('https://autogarcon.live/api/users/addmanager', {
+      method:"POST",
+      mode: 'no-cors',
+      headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        restaurantID : 5,
+        email : 'bob@smith.com',
+      })
+     })
+     .then(res => console.log(res))
+     .then(data => console.log(data))
+     .catch(err => console.log("FAILED", err));
+      console.log("hi");
+        this.continue();
+  }
 
       //find 
-       /*for (var i =0; i<res.restaurants.length(); i++){
-          if(res.restaurants[i].restaurantName == this.props.values.restaurantName){
-            restid = res.restuarants[i].restaurantID;
-          } 
-        }*/
+      
     //})
 
  // .then(data => console.log(data))
  // .catch(err => console.log("FAILED", err));
+  /*getRestaurant = e =>{
 
-  //add manager
-  //fetch ('https://autogarcon.live/api/users/addmanager', {
-  //  method:"POST",
-  //  mode: 'no-cors',
-  //  headers: {
-  //    'Accept': '*/*',
-  //    'Content-Type': 'application/json',
-  //  },
-  //  body: JSON.stringify({
-  //    restaurantID : restid,
-  //    email : this.props.user.email,
-  //  })
-  //})
-  //.then(res => console.log(res))
-  //.then(data => console.log(data))
-  //.catch(err => console.log("FAILED", err));
+      //Get restaurants
+      fetch('https://autogarcon.live/api/restaurant/add'), {
+      method:"GET",
+      mode: 'no-cors',
+      headers: {
+      'Accept': '*///*',
+  /*    'Content-Type': 'application/json',
+      },
+    }
+    .then(res =>  console.log(res))
+    .then(data => console.log(data))
+    .catch(err => console.log("FAILED",err));*/
+  //}
 
-    this.continue();
-  }
   back = e => {
     e.preventDefault();
     this.props.prevStep();

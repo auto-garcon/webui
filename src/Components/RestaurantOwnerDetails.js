@@ -15,7 +15,7 @@ import { MDBCloseIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 import {SketchPicker} from 'react-color';
 import Display from './Display';
-
+import NumericInput from 'react-numeric-input';
 
 const theme = createMuiTheme({
   palette: {
@@ -111,13 +111,16 @@ export class RestaurantOwnerDetails extends Component {
             placeholder="Enter the Zipcode"
             label="Zipcode"
             type = "number"
+            InputProps = {{ 
+              inputProps: {
+                min:0,max:5
+              }
+            }}
             onChange={handleChange('zipcode')}
             defaultValue={values.zipcode}
             margin="normal"
             fullWidth="true"
-            inputProps = {{ 
-              maxLength : "30",
-            }}
+          
           />
            <br />
           <TextField
@@ -144,19 +147,22 @@ export class RestaurantOwnerDetails extends Component {
             }}
           />
           <br />
+         
           <TextField
-            placeholder="Enter the Number of Tables "
+            placeholder="Enter the Number of Tables (1-100) "
             label="Number of Tables"
             type = "number"
+            min = {1}
+            max = {100}
             onChange={handleChange('numTables')}
             defaultValue={values.numTables}
             margin="normal"
-            fullWidth="true"
-            inputProps = {{ 
-              maxLength : "10",
-            }}
+            inputProps= {{
+              maxLength: 5
+              
+            }}/>
 
-          />
+          
           <br />
             
             <Button
