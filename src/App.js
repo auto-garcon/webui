@@ -13,6 +13,7 @@ import LogoLarge from './Components/Images/AutoGarcon-Logo-Large.png';
 import Settings from './Components/Settings';
 import Footer from './Components/StickyFooter'
 import CreateMenu from './Components/CreateMenu';
+import EditMenu from './Components/EditMenu';
 import Loader from './Components/Loader';
 import LoginVid from './Components/Images/Login-VID.mp4';
 import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
@@ -21,7 +22,7 @@ import Cookies from 'js-cookie';
 
 /** Test Google login keys and API links */
 const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
-// const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
+const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
 // const PRODAPI = "https://autogarcon.live/api/users/newuser"
 // const DEVAPI = "http://localhost/api/users/newuser"
 
@@ -77,21 +78,23 @@ export default class App extends React.Component {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            firstName: "John",
-            lastName: "Smith",
-            email: "john.smith@internet.web"
+            firstName: "Bob",
+            lastName: "Jones",
+            email: "bob@jones.com"
           })
         })
         .then(res => {
-          res.json().then(data => this.state.updateUser({
+          res.json().then(data => {
+            this.state.updateUser({
               firstName: data.firstName,
               lastName: data.lastName,
               email: data.email,
               userID: data.userID,
               restaurantID: data.restaurantID
-          }))
+          })})
+          
 
-          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/5/tables`, {
+          fetch(this.state.proxy_url+`https://autogarcon.live/api/restaurant/38/tables`, {
             method: "GET",
             mode: "cors",
             headers: {
@@ -111,7 +114,6 @@ export default class App extends React.Component {
       updateUser: (user) => {
         if(user.restaurantID) {
           this.setState({user: user})
-          console.log(this.state.user.restaurantID)
           this.state.updateManager(user)
         }
       },
@@ -119,7 +121,6 @@ export default class App extends React.Component {
         if(user.restaurantID) {
           this.setState({isManager: true})
           Cookies.set('is_manager', true);
-          this.setState({isManager: !!Cookies.get('is_manager')})
           return true
         }
       },
@@ -128,7 +129,6 @@ export default class App extends React.Component {
           this.setState({tables: tables})
           return true
         }
-        console.log("TABLES",this.state.tables)
         return false
       }
     }
@@ -187,6 +187,7 @@ export default class App extends React.Component {
                 <Settings user={this.state.user} tables={this.state.tables}/>
               </Route>
               <Route path="/createmenu" component={CreateMenu}/>
+              <Route path="/editmenu" component={EditMenu}/>
               <Footer />
             </Router>
           ) : (

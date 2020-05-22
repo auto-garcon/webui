@@ -59,7 +59,7 @@ export default class TicketContainer extends React.Component {
   }
 
   pullTickets() {
-    fetch(this.state.proxy_url + `https://autogarcon.live/api/restaurant/5/order`, {
+    fetch(this.state.proxy_url + `https://autogarcon.live/api/restaurant/38/order`, {
       method: 'GET',
       mode: "cors",
       headers: {
@@ -73,10 +73,10 @@ export default class TicketContainer extends React.Component {
         resolvedTickets: [],
         serviceTickets: []
       })
+      console.log(data)
       data.map((ticket, index) => {
         this.state.curTickets.push(ticket)
       })
-      console.log(this.state.curTickets)
       this.state.curTickets.map((ticket, index) => {
         if(ticket.orderStatus == "OPEN") {
           this.state.activeTickets.push(ticket)
@@ -89,15 +89,14 @@ export default class TicketContainer extends React.Component {
   }
 
   resolveActiveTicket (index) {
-      console.log(index)
-      this.setState({
-        activeTickets: this.state.activeTickets.filter((ticket) => {
-          if(ticket != index) this.state.resolvedTickets.push(ticket)
-        })
-      })
+      this.setState(prevState => ({activeTickets: prevState.activeTickets.filter(ticket => {
+        if(ticket.orderID !== index.orderID){
+          return ticket;
+        }
+      })})
+      )
       let orderID = index.orderID
-
-      fetch(this.state.proxy_url+ `https://autogarcon.live/api/restaurant/5/order/${orderID}/complete`, {
+      fetch(this.state.proxy_url+ `https://autogarcon.live/api/restaurant/38/order/${orderID}/complete`, {
         method: 'POST',
         mode: "cors",
         headers: {
@@ -105,8 +104,6 @@ export default class TicketContainer extends React.Component {
           'Access-Control-Allow-Origin' : '*',
         }
       })
-      //setActiveTickets(activeTickets.filter(event => event !== ticket))
-      //setResolvedTickets(resolvedTickets.filter(e=> e !== ticket))
   }
 
   resolveServiceTicket = (event, ticket) => {
@@ -124,61 +121,7 @@ export default class TicketContainer extends React.Component {
   componentWillMount() {
     this.pullTickets()
   }
-/*
-  // const [curTickets, setCurTickets] = useState([]);
-  // const [activeTickets, setActiveTickets] = useState([]);
-  // const [resolvedTickets, setResolvedTickets] = useState([]);
-  // const [serviceTickets, setServiceTickets] = useState([]);
-  // const [value, setValue] = React.useState(0);
-  // const classes = useStyles();
-  // const proxy_url = "https://fierce-tundra-17132.herokuapp.com/";
-  // const restaurantID = user.restaurantID
-  //const [refresh, updateRefresh] = useState(0);
 
-  // useEffect( () => {
-  //   // This is a useeffect that will pull all the tickets from the API/DB once the page loads/mounts
-  //   fetch(this.state.proxy_url + `https://autogarcon.live/api/restaurant/5/order`, {
-  //     method: 'GET',
-  //     mode: "cors",
-  //     headers: {
-  //       'Accept': '
-  //       'Access-Control-Allow-Origin' : '*',
-  //     }
-  //   }).then(res => res.json().then(data => {
-  //     data.map((ticket, index) => {
-  //       curTickets.push(ticket)
-  //     })
-  //     console.log(curTickets)
-  //     curTickets.map((ticket, index) => {
-  //       if(ticket.orderStatus == "OPEN") {
-  //         activeTickets.push(ticket)
-  //       } else {
-  //         resolvedTickets.push(ticket)
-  //       }
-  //     })
-  //   }).catch(err => console.error(err)))
-  //     .catch(err => console.log(err));
-  // }, [refresh]);
-
-  // const resolveActiveTicket = (index) => {
-  //     console.log(index)
-  //     //setActiveTickets(activeTickets.filter(event => event !== ticket))
-  //     //setResolvedTickets(resolvedTickets.filter(e=> e !== ticket))
-  // }
-
-  // const resolveServiceTicket = (event, ticket) => {
-  //   setResolvedTickets(resolvedTickets => [...resolvedTickets,1])
-  // }
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
-
-  // const onRefresh = () => {
-  //   updateRefresh(refresh => refresh + 1)
-  //   console.log(refresh)
-  // }
- */
   render() {
     return (
       <div >
