@@ -21,7 +21,7 @@ import Cookies from 'js-cookie';
 
 /** Test Google login keys and API links */
 const DEV = "1020443801830-kjm2qo4ujk27smhn9n7l7j33ojlaecpt.apps.googleusercontent.com"
-// const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
+const PROD = "1020443801830-prp10hjgd1r8pc6pue3br9mkjphn1qic.apps.googleusercontent.com"
 // const PRODAPI = "https://autogarcon.live/api/users/newuser"
 // const DEVAPI = "http://localhost/api/users/newuser"
 
@@ -167,7 +167,7 @@ export default class App extends React.Component {
                       buttonText="Continue with Google"
                       onSuccess={this.state.responseGoogle}
                       onFailure={this.state.responseGoogle}
-                      clientId={DEV}
+                      clientId={PROD}
                   />
                 </div>
               </div>
