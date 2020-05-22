@@ -121,7 +121,6 @@ export default class App extends React.Component {
         if(user.restaurantID) {
           this.setState({isManager: true})
           Cookies.set('is_manager', true);
-          this.setState({isManager: true})
           return true
         }
       },
