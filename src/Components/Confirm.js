@@ -37,8 +37,7 @@ export class Confirm extends Component {
     super(props)
     this.state = {
       restid: null,
-      //email: this.props.user.email,
-     
+      email: this.props.user.email,
     }
   }
   submit = e => {
@@ -83,7 +82,7 @@ export class Confirm extends Component {
         
        for (var i =0; i<res.restaurants.length(); i++){
         if(res.restaurants[i].restaurantName == this.props.values.restaurantName){
-          this.props.restid = res.restuarants[i].restaurantID;
+          this.state.restID = res.restuarants[i].restaurantID;
         } 
         console.log(this.props.restID)
       }
@@ -92,23 +91,23 @@ export class Confirm extends Component {
       .catch(err => console.log("FAILED", err));
  
       //add manager
-    /*fetch ('https://autogarcon.live/api/users/addmanager', {
+      fetch ('https://autogarcon.live/api/users/addmanager', {
       method:"POST",
       mode: 'no-cors',
       headers: {
-        'Accept': '*//*',
-    //    'Content-Type': 'application/json',
-    //  },
-    //  body: JSON.stringify({
-    //    restaurantID : 39,
-    //    email : 'summer@fizzu.com',
-    //  })
-    // })
-    // .then(res => console.log(res))
-    // .then(data => console.log(data))
-    // .catch(err => console.log("FAILED", err));
-    //  console.log("hi");
-        this.continue();*/
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        restaurantID : this.state.restID,
+        email : this.state.email
+      })
+     })
+     .then(res => console.log(res))
+     .then(data => console.log(data))
+     .catch(err => console.log("FAILED", err));
+      console.log("hi");
+        this.continue();
   }
 
       //find 
